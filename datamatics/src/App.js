@@ -74,15 +74,22 @@ function App() {
         <div className="button-container">
           <input type="submit" />
         </div>
+        <div className="forgot_pass">
+          <p>Forgot password?</p>
+        </div>
       </form>
     </div>
   );
 
+  const successfull = {
+    color: 'white',
+  };
+
   return (
     <div className="App">
       <div className="login-form">
-        <div className="title">Sign In</div>
-        {isSubmitted ? <div>User is successfully logged in</div> : renderForm}
+        <div className="title">Welcome, please sign in</div>
+        {isSubmitted ? <div style={successfull}>User is successfully logged in</div> : renderForm}
       </div>
     </div>
   );

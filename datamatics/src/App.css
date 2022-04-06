@@ -7,7 +7,7 @@
   gap: 20px;
   height: 100vh;
   font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
-  background-color: #101011;
+  background-image: url(../public/images/background_login.jpg);
 }
 
 input[type="text"],
@@ -20,14 +20,14 @@ input[type="submit"] {
   margin-top: 10px;
   cursor: pointer;
   font-size: 15px;
-  background: #01bad2;
-  border: 1px solid #01bad2;
+  background: #ff9a00;
+  border: 1px solid #ff9a00;
   color: rgb(0, 0, 0);
   padding: 10px 20px;
 }
 
 input[type="submit"]:hover {
-  background: #01d2c8;
+  background: #ffbb55;
 }
 
 .button-container {
@@ -35,10 +35,20 @@ input[type="submit"]:hover {
   justify-content: center;
 }
 
+.forgot_pass {
+  display: flex;
+  color: rgb(182, 182, 182);
+  font: 25px;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.forgot_pass:hover {
+  text-decoration: underline;
+}
+
 .login-form {
-  background-color: white;
-  width: 600px;
-  padding: 3rem;
+  width: 400px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -48,13 +58,14 @@ input[type="submit"]:hover {
 }
 
 .error {
-  color: red;
+  color: rgb(255, 225, 190);
   font-size: 12px;
 }
 
 .title {
   font-size: 25px;
   margin-bottom: 20px;
+  color: white;
 }
 
 .input-container {
@@ -62,4 +73,5 @@ input[type="submit"]:hover {
   flex-direction: column;
   gap: 8px;
   margin: 10px;
+  color: white;
 }
