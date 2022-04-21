@@ -73,10 +73,6 @@ function Login() {
     return (       
     <Router> 
         <div className="login">
-            <Switch>
-                <Route exact path="/admin"/> <AdminDash /> <Route/>
-            </Switch>
-
             <div className="login-form">
                 <div className="title_login">Welcome, please sign in</div>
                 <div className="form">
@@ -92,6 +88,9 @@ function Login() {
                             {renderErrorMessage("pass")}
                         </div>
                         <div>
+                            <Switch>
+                                <Route exact path="/admin"/> <AdminDash /> <Route/>
+                            </Switch>
                             <Link to="/admin">Submit</Link>
                         </div>
                     </form>
