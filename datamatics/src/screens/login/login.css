@@ -16,14 +16,14 @@ input[type="password"] {
     border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-input[type="submit"] {
-    margin-top: 10px;
+Link[type="submit"] {
+    margin-top: 12px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     background: #ff9a00;
     border: 1px solid #ff9a00;
     color: rgb(0, 0, 0);
-    padding: 10px 20px;
+    padding: 7px 20px;
 }
 
 input[type="submit"]:hover {
@@ -62,7 +62,7 @@ input[type="submit"]:hover {
     font-size: 12px;
 }
 
-.title {
+.title_login {
     font-size: 25px;
     margin-bottom: 20px;
     color: white;
