@@ -1,0 +1,15 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-datamatics-dev-174249-authRole",
+      "UnauthRoleArn": "arn:aws:iam::688487247453:role/amplify-datamatics-dev-174249-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::688487247453:role/amplify-datamatics-dev-174249-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-datamatics-dev-174249-deployment",
+      "UnauthRoleName": "amplify-datamatics-dev-174249-unauthRole",
+      "StackName": "amplify-datamatics-dev-174249",
+      "StackId": "arn:aws:cloudformation:us-east-1:688487247453:stack/amplify-datamatics-dev-174249/8ae7d830-c28d-11ec-9d47-0e3c98e29837",
+      "AmplifyAppId": "di1clgbnufhst"
+    }
+  }
+}
