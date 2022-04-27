@@ -5,15 +5,22 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
+import HomeIcon from "@mui/icons-material/Home";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
+import LeaderboardIcon from "@mui/icons-material/Leaderboard";
+import StarIcon from "@mui/icons-material/Star";
 import MenuIcon from "@mui/icons-material/Menu";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
+import { Switch, Route, NavLink } from "react-router-dom";
+
+import Home from "./Home";
+import Leaderboard from "./Leaderboard";
+import Training from "./Training";
+import classes from "./ResponsiveDrawer.module.css";
 
 const drawerWidth = 240;
 
@@ -25,16 +32,22 @@ function ResponsiveDrawer(props) {
     setMobileOpen(!mobileOpen);
   };
 
+  const icons = [<HomeIcon />, <LeaderboardIcon />, <StarIcon />];
+
   const drawer = (
     <div>
       <Toolbar />
       <Divider />
       <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem button key={text}>
-            <ListItemIcon>
-              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-            </ListItemIcon>
+        {["Home", "Leaderboard", "Training"].map((text, index) => (
+          <ListItem
+            button
+            component={NavLink}
+            activeClassName={classes.active}
+            to={`/${text}`.toLowerCase()}
+            key={text}
+          >
+            <ListItemIcon>{icons[index]}</ListItemIcon>
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -117,11 +130,20 @@ function ResponsiveDrawer(props) {
         }}
       >
         <Toolbar />
-        <Typography paragraph>
-          <h1>Hello {user.username}</h1>
-          <p>Email: {user.attributes.email}</p>
-          <button onClick={signOut}>Sign out</button>
-        </Typography>
+        <Switch>
+          <Route path="/home" exact>
+            <Home />
+            <h1>Hello {user.username}</h1>
+            <p>Email: {user.attributes.email}</p>
+            <button onClick={signOut}>Sign out</button>
+          </Route>
+          <Route path="/leaderboard" exact>
+            <Leaderboard />
+          </Route>
+          <Route path="/training" exact>
+            <Training />
+          </Route>
+        </Switch>
       </Box>
     </Box>
   );
