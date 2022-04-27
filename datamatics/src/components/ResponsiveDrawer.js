@@ -25,7 +25,7 @@ import classes from "./ResponsiveDrawer.module.css";
 const drawerWidth = 240;
 
 function ResponsiveDrawer(props) {
-  const { window, user, signOut } = props;
+  const { window, children } = props;
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
   const handleDrawerToggle = () => {
@@ -130,20 +130,7 @@ function ResponsiveDrawer(props) {
         }}
       >
         <Toolbar />
-        <Switch>
-          <Route path="/home" exact>
-            <Home />
-            <h1>Hello {user.username}</h1>
-            <p>Email: {user.attributes.email}</p>
-            <button onClick={signOut}>Sign out</button>
-          </Route>
-          <Route path="/leaderboard" exact>
-            <Leaderboard />
-          </Route>
-          <Route path="/training" exact>
-            <Training />
-          </Route>
-        </Switch>
+        {children}
       </Box>
     </Box>
   );
