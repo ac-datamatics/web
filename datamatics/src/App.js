@@ -4,10 +4,10 @@ import "@aws-amplify/ui-react/styles.css";
 import awsExports from "./aws-exports";
 import Sidebar from "./components/ResponsiveDrawer";
 import { Switch, Route, Redirect } from "react-router-dom";
-import Home from "./components/Home";
-import Leaderboard from "./components/Leaderboard"
-import Training from "./components/Training"
-import ScreenRecording from "./components/ScreenRecording"
+import Home from "./components/Tabs/Home";
+import Leaderboard from "./components/Tabs/Leaderboard";
+import Training from "./components/Tabs/Training/Training";
+import ScreenRecording from "./components/Tabs/ScreenRecording";
 // Amplify.configure(awsExports);
 
 function App(/*{ signOut, user }*/) {
@@ -31,7 +31,7 @@ function App(/*{ signOut, user }*/) {
           <ScreenRecording />
         </Route>
         {/* </Switch> */}
-      </ Sidebar>
+      </Sidebar>
     </>
   );
 }
