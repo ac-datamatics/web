@@ -1,37 +1,76 @@
-import ReactPlayer from "react-player"
-import { useRef } from "react";
-import { ClassNames } from "@emotion/react";
+import ReactPlayer from "react-player";
 
-import classes from "./Training.module.css"
+import ThumbCard from "./ThumbCard";
+import classes from "./Training.module.css";
 
 const Training = () => {
-
-  let videoRef = useRef();
-
-  const listOfVideosPaths = ["/Videos/Rec1.mp4", "/Videos/Rec1.mp4", "/Videos/Rec1.mp4", "/Videos/Rec1.mp4", "/Videos/Rec1.mp4", "/Videos/Rec1.mp4", "/Videos/Rec1.mp4", "/Videos/Rec1.mp4", "/Videos/Rec1.mp4"]
+  const videoInfo = [
+    {
+      thumbnailUrl: "/Images/logo.png",
+      supervisorName: "Juan",
+      videoTopic: "Account Recovery",
+      assignedDate: "16/05/2022",
+    },
+    {
+      thumbnailUrl: "/Images/logo.png",
+      supervisorName: "Juan",
+      videoTopic: "Account Recovery",
+      assignedDate: "16/05/2022",
+    },
+    {
+      thumbnailUrl: "/Images/logo.png",
+      supervisorName: "Juan",
+      videoTopic: "Account Recovery",
+      assignedDate: "16/05/2022",
+    },
+    {
+      thumbnailUrl: "/Images/logo.png",
+      supervisorName: "Juan",
+      videoTopic: "Account Recovery",
+      assignedDate: "16/05/2022",
+    },
+    {
+      thumbnailUrl: "/Images/logo.png",
+      supervisorName: "Juan",
+      videoTopic: "Account Recovery",
+      assignedDate: "16/05/2022",
+    },
+    {
+      thumbnailUrl: "/Images/logo.png",
+      supervisorName: "Juan",
+      videoTopic: "Account Recovery",
+      assignedDate: "16/05/2022",
+    },
+  ];
 
   return (
     <div>
-      <h1>Training Page!</h1>
-      <div className={classes.container}>
-        {listOfVideosPaths.map((video, key) => {
+      <h1 className={classes.titleColor}>Training</h1>
+      <div className={classes.thumbnailCard}>
+        {videoInfo.map((video, key) => {
           return (
-            <div className='player-wrapper' >
-              <ReactPlayer
-                ref={videoRef}
-                url={video}
-                width="100%"
-                pip={true}
-                controls={true}
-                light={"/Images/logo.png"}
-
-              />
-            </ div>
-          )
+            <ThumbCard
+              thumbnailUrl={video.thumbnailUrl}
+              supervisorName={video.supervisorName}
+              videoTopic={video.videoTopic}
+              assignedDate={video.assignedDate}
+              key={key}
+            />
+          );
         })}
       </div>
-    </div >
-  )
+    </div>
+  );
 };
 
 export default Training;
+
+const temp = (
+  <ReactPlayer
+    url={""}
+    width="100%"
+    pip={true}
+    controls={true}
+    light={"/Images/logo.png"}
+  />
+);

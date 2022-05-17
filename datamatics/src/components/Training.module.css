@@ -1,8 +1,10 @@
-.container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 25%));
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    justify-items: stretch;
-    align-items: stretch;
+.thumbnailCard {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.titleColor {
+  color: #232f3e;
+  font-family: "Rubik";
 }

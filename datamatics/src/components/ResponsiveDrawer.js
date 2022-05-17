@@ -17,15 +17,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MenuItem from "@mui/material/MenuItem";
-import VideocamIcon from '@mui/icons-material/Videocam';
+import VideocamIcon from "@mui/icons-material/Videocam";
 import Menu from "@mui/material/Menu";
 import HomeIcon from "@mui/icons-material/Home";
 import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import StarIcon from "@mui/icons-material/Star";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 import "@aws-amplify/ui-react/styles.css";
-
+import classes from "./ResponsiveDrawer.module.css";
 
 const drawerWidth = 240;
 
@@ -122,9 +122,14 @@ function Sidebar({ children }) {
     setOpen(false);
   };
 
-  const icons = [<HomeIcon />, <LeaderboardIcon />, <StarIcon />, <VideocamIcon />];
-  const tabLabels = ['Home', 'Leaderboard', 'Training', 'Screen Recording']
-  const paths = ["home", "leaderboard", "training", "screen-recording"]
+  const icons = [
+    <HomeIcon />,
+    <LeaderboardIcon />,
+    <StarIcon />,
+    <VideocamIcon />,
+  ];
+  const tabLabels = ["Home", "Leaderboard", "Training", "Screen Recording"];
+  const paths = ["home", "leaderboard", "training", "screen-recording"];
 
   const sideBarTabs = (
     <div>
@@ -133,15 +138,15 @@ function Sidebar({ children }) {
       <List>
         {tabLabels.map((text, index) => (
           <ListItem
+            className={classes.onHoverListItems}
             button
-            component={Link}
+            component={NavLink}
             to={paths[index]}
             type="button"
+            activeClassName={classes.icon}
           >
-            <ListItemIcon>
-              {icons[index]}
-            </ListItemIcon>
-            <ListItemText primary={text} />
+            <ListItemIcon>{icons[index]}</ListItemIcon>
+            <ListItemText className={classes.listFonts} primary={text} />
           </ListItem>
         ))}
       </List>
@@ -152,7 +157,7 @@ function Sidebar({ children }) {
     <Box sx={{ display: "flex" }}>
       <CssBaseline />
       <AppBar position="fixed" open={open}>
-        <Toolbar>
+        <Toolbar className={classes.toolbarColor}>
           <IconButton
             color="inherit"
             aria-label="open drawer"

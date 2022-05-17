@@ -1,3 +1,14 @@
-.active {
-  background-color: aqua !important;
+.toolbarColor {
+  background-color: #232f3e;
+}
+
+.onHoverListItems:hover,
+.onHoverListItems:hover > *,
+.icon > * {
+  color: #f8991d !important;
+}
+
+.listFonts > * {
+  font-family: "Rubik" !important;
+  font-weight: 300 !important;
 }

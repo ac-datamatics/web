@@ -1,0 +1,18 @@
+.root {
+  min-width: 345px;
+  margin: 50px;
+}
+.media {
+  height: 180px;
+  aspect-ratio: 105/59;
+}
+
+.description {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  background-color: #232f3e;
+  color: #ddd;
+}
