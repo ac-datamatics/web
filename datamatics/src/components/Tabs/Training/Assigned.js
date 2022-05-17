@@ -47,10 +47,7 @@ const Assigned = () => {
       {videoInfo.map((video, key) => {
         return (
           <ThumbCard
-            thumbnailUrl={video.thumbnailUrl}
-            supervisorName={video.supervisorName}
-            videoTopic={video.videoTopic}
-            assignedDate={video.assignedDate}
+            video={video}
             key={key}
           />
         );

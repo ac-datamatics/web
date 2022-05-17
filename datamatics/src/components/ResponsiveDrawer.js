@@ -116,10 +116,12 @@ function Sidebar({ children }) {
   };
   const handleDrawerOpen = () => {
     setOpen(true);
+    // window.dispatchEvent(new CustomEvent('resize'))
   };
 
   const handleDrawerClose = () => {
     setOpen(false);
+    // window.dispatchEvent(new CustomEvent('resize'))
   };
 
   const icons = [

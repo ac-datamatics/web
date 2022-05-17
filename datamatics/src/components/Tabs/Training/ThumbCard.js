@@ -5,19 +5,22 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 
 import classes from "./ThumbCard.module.css";
+import VideoDetails from "./VideoDetails";
+import { useState } from "react";
 
 const ThumbCard = ({
-  thumbnailUrl,
-  supervisorName,
-  videoTopic,
-  assignedDate,
+  video
 }) => {
+
+  const [open, setOpen] = useState(false)
+
   return (
+    <>
     <Card className={classes.root} raised={true}>
       <CardActionArea>
         <CardMedia
           component="img"
-          image={thumbnailUrl}
+          image={video.thumbnailUrl}
           alt="Video Thumbnail"
           className={classes.media}
         />
@@ -28,25 +31,27 @@ const ThumbCard = ({
             variant="h5"
             component="div"
           >
-            {videoTopic}
+            {video.videoTopic}
           </Typography>
           <Typography
             className={classes.description}
             variant="body2"
             component="div"
           >
-            {supervisorName}
+            {video.supervisorName}
           </Typography>
           <Typography
             className={classes.description}
             variant="body2"
             component="div"
           >
-            {assignedDate}
+            {video.assignedDate}
           </Typography>
         </CardContent>
       </CardActionArea>
     </Card>
+    <VideoDetails open={open} handleClose={() => setOpen(false)} video={video} />
+    </>
   );
 };
 

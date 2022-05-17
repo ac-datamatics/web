@@ -4,6 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
+
 const StyledTabs = styled((props) => (
   <Tabs
     {...props}
@@ -53,7 +54,6 @@ export default function CustomizedTabs({ labels, children }) {
           value={value}
           onChange={handleChange}
           aria-label="styled tabs example"
-          centered
         >
           {labels.map((label, key) => {
             return <StyledTab label={label} key={key} />;
