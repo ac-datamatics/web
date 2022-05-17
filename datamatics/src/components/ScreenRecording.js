@@ -49,9 +49,9 @@ const ScreenRecording = () => {
         //     level: "public",
         // });
 
-        let blobs = await fetch(newfile).then((r) => r.blob());
-        setBlob(blobs);
-        invokeSaveAsDialog(blobs);
+        // let blobs = await fetch(newfile).then((r) => r.blob());
+        // setBlob(blobs);
+        // invokeSaveAsDialog(blobs);
     };
 
     useEffect(() => {

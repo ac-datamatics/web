@@ -14,23 +14,23 @@ function App(/*{ signOut, user }*/) {
   return (
     <>
       <Sidebar /*user={user} signOut={signOut}*/>
-        <Switch>
-          <Route path="/" exact>
-            <Redirect to="/home" />
-          </Route>
-          <Route path="/home" exact>
-            <Home /*user={user} signOut={signOut} */ />
-          </Route>
-          <Route path="/leaderboard" exact>
-            <Leaderboard />
-          </Route>
-          <Route path="/training" exact>
-            <Training />
-          </Route>
-          <Route path="/screen-recording" exact>
-            <ScreenRecording />
-          </Route>
-        </Switch>
+        {/* <Switch> */}
+        <Route path="/" exact>
+          <Redirect to="/home" />
+        </Route>
+        <Route path="/home" exact>
+          <Home /*user={user} signOut={signOut} */ />
+        </Route>
+        <Route path="/leaderboard" exact>
+          <Leaderboard />
+        </Route>
+        <Route path="/training" exact>
+          <Training />
+        </Route>
+        <Route path="/screen-recording" exact>
+          <ScreenRecording />
+        </Route>
+        {/* </Switch> */}
       </ Sidebar>
     </>
   );
