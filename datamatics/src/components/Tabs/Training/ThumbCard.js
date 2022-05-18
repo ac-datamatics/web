@@ -8,49 +8,54 @@ import classes from "./ThumbCard.module.css";
 import VideoDetails from "./VideoDetails";
 import { useState } from "react";
 
-const ThumbCard = ({
-  video
-}) => {
+const ThumbCard = ({ video }) => {
+  const [open, setOpen] = useState(false);
 
-  const [open, setOpen] = useState(false)
+  const handleModalOpen = () => {
+    setOpen(true);
+  };
 
   return (
     <>
-    <Card className={classes.root} raised={true}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          image={video.thumbnailUrl}
-          alt="Video Thumbnail"
-          className={classes.media}
-        />
-        <CardContent className={classes.content}>
-          <Typography
-            className={classes.description}
-            gutterBottom
-            variant="h5"
-            component="div"
-          >
-            {video.videoTopic}
-          </Typography>
-          <Typography
-            className={classes.description}
-            variant="body2"
-            component="div"
-          >
-            {video.supervisorName}
-          </Typography>
-          <Typography
-            className={classes.description}
-            variant="body2"
-            component="div"
-          >
-            {video.assignedDate}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-    </Card>
-    <VideoDetails open={open} handleClose={() => setOpen(false)} video={video} />
+      <Card className={classes.root} raised={true} onClick={handleModalOpen}>
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            image={video.thumbnailUrl}
+            alt="Video Thumbnail"
+            className={classes.media}
+          />
+          <CardContent className={classes.content}>
+            <Typography
+              className={classes.description}
+              gutterBottom
+              variant="h5"
+              component="div"
+            >
+              {video.videoTopic}
+            </Typography>
+            <Typography
+              className={classes.description}
+              variant="body2"
+              component="div"
+            >
+              {video.supervisorName}
+            </Typography>
+            <Typography
+              className={classes.description}
+              variant="body2"
+              component="div"
+            >
+              {video.assignedDate}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+      <VideoDetails
+        open={open}
+        handleClose={() => setOpen(false)}
+        video={video}
+      />
     </>
   );
 };

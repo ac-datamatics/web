@@ -14,13 +14,3 @@ const Training = () => {
 };
 
 export default Training;
-
-const temp = (
-  <ReactPlayer
-    url={""}
-    width="100%"
-    pip={true}
-    controls={true}
-    light={"/Images/logo.png"}
-  />
-);

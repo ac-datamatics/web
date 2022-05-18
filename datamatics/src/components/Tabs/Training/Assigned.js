@@ -6,36 +6,42 @@ const Assigned = () => {
   const videoInfo = [
     {
       thumbnailUrl: "/Images/logo.png",
+      videoUrl: "/Videos/Rec1.mp4",
       supervisorName: "Juan",
       videoTopic: "Account Recovery",
       assignedDate: "16/05/2022",
     },
     {
       thumbnailUrl: "/Images/logo.png",
+      videoUrl: "/Videos/Rec1.mp4",
+      supervisorName: "Juan",
+      videoTopic: "Password Change",
+      assignedDate: "16/05/2022",
+    },
+    {
+      thumbnailUrl: "/Images/logo.png",
+      videoUrl: "/Videos/Rec1.mp4",
       supervisorName: "Juan",
       videoTopic: "Account Recovery",
       assignedDate: "16/05/2022",
     },
     {
       thumbnailUrl: "/Images/logo.png",
+      videoUrl: "/Videos/Rec1.mp4",
       supervisorName: "Juan",
       videoTopic: "Account Recovery",
       assignedDate: "16/05/2022",
     },
     {
       thumbnailUrl: "/Images/logo.png",
+      videoUrl: "/Videos/Rec1.mp4",
       supervisorName: "Juan",
       videoTopic: "Account Recovery",
       assignedDate: "16/05/2022",
     },
     {
       thumbnailUrl: "/Images/logo.png",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo.png",
+      videoUrl: "/Videos/Rec1.mp4",
       supervisorName: "Juan",
       videoTopic: "Account Recovery",
       assignedDate: "16/05/2022",
@@ -45,12 +51,7 @@ const Assigned = () => {
   return (
     <div className={classes.thumbnailCard}>
       {videoInfo.map((video, key) => {
-        return (
-          <ThumbCard
-            video={video}
-            key={key}
-          />
-        );
+        return <ThumbCard video={video} key={key} />;
       })}
     </div>
   );
