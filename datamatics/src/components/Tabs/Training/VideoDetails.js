@@ -28,7 +28,10 @@ export default function VideoDetails({ open, handleClose, video }) {
               />
             </div>
             <div className={classes.videoDescription}>
-              <div>{video.supervisorName}</div>
+              <div>
+                <h3>{video.supervisorName} - {video.assignedDate}</h3>
+                <p>Description</p>
+              </div>
             </div>
           </div>
         </Card>
