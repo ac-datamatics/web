@@ -19,7 +19,7 @@ function Dashboard() {
         nav,
         .row,
         .row2
-    `,
+      `,
       {
         opacity: 0,
         interval: 100,
