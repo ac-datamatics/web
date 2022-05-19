@@ -4,7 +4,7 @@ import RightSidebar from "components/RightSidebar";
 import Dashboard from "components/Dashboard";
 import styled from "styled-components";
 import scrollreveal from "scrollreveal";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Redirect, Route } from "react-router-dom";
 export default function App() {
   useEffect(() => {
     const sr = scrollreveal({
