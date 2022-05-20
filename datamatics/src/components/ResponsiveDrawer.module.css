@@ -12,3 +12,8 @@
   font-family: "Rubik" !important;
   font-weight: 300 !important;
 }
+
+.main {
+  height: 100vh;
+  padding-right: 0 !important;
+}

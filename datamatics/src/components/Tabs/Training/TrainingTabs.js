@@ -4,6 +4,7 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 
+import classes from "./Training.module.css";
 
 const StyledTabs = styled((props) => (
   <Tabs
@@ -62,7 +63,11 @@ export default function CustomizedTabs({ labels, children }) {
       </Box>
       {React.Children.map(children, (child, key) => {
         return (
-          <div hidden={value !== key} id={key}>
+          <div
+            className={classes.parentContentWrap}
+            hidden={value !== key}
+            id={key}
+          >
             {child}
           </div>
         );

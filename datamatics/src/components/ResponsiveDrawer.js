@@ -128,14 +128,23 @@ function Sidebar({ children }) {
     <HomeIcon />,
     <LeaderboardIcon />,
     <StarIcon />,
-    <VideocamIcon />,
+    // <VideocamIcon />,
   ];
-  const tabLabels = ["Home", "Leaderboard", "Training", "Screen Recording"];
-  const paths = ["home", "leaderboard", "training", "screen-recording"];
+  const tabLabels = [
+    "Home",
+    "Leaderboard",
+    "Training",
+    // "Screen Recording"
+  ];
+  const paths = [
+    "home",
+    "leaderboard",
+    "training",
+    // "screen-recording"
+  ];
 
   const sideBarTabs = (
     <div>
-      {/* <Toolbar /> */}
       <Divider />
       <List>
         {tabLabels.map((text, index) => (
@@ -205,10 +214,8 @@ function Sidebar({ children }) {
               open={Boolean(anchorEl)}
               onClose={handleClose}
             >
-              <MenuItem onClick={handleProfile}>
-                {/* {user.attributes.email} */}
-              </MenuItem>
-              <MenuItem /*onClick={handleLogOut}*/>Logout</MenuItem>
+              <MenuItem onClick={handleProfile}></MenuItem>
+              <MenuItem>Logout</MenuItem>
             </Menu>
           </div>
         </Toolbar>
@@ -226,7 +233,7 @@ function Sidebar({ children }) {
         <Divider />
         {sideBarTabs}
       </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }} className={classes.main}>
         <DrawerHeader />
 
         {children}

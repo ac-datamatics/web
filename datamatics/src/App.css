@@ -1,0 +1,18 @@
+.root {
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  overflow: hidden;
+}
+
+.sideBarContainer {
+  position: relative;
+}
+
+/* .sideBar {
+  width: 75%;
+} */
+
+.amazonConnectContainer {
+  position: relative;
+  width: 100%;
+}
