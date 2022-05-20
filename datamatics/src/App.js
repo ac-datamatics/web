@@ -1,6 +1,6 @@
 import Sidebar from "./components/ResponsiveDrawer";
 import { Route, Redirect } from "react-router-dom";
-import Home from "./components/Tabs/Home";
+import Home from "./components/Tabs/Home/Home";
 import Leaderboard from "./components/Tabs/Leaderboard";
 import Training from "./components/Tabs/Training/Training";
 import ScreenRecording from "./components/Tabs/ScreenRecording";
