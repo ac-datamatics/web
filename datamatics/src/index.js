@@ -4,10 +4,14 @@ import "./index.css";
 import App from "./App";
 import { BrowserRouter } from "react-router-dom";
 
+import AuthFunction from "./functions/mainFunction.jsx";
+
+
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <App AuthFunction={AuthFunction} />
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
