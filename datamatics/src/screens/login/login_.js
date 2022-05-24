@@ -6,7 +6,7 @@ import {
   Link,
   Redirect,
   useHistory,
-  useLocation
+  useLocation,
 } from "react-router-dom";
 
 export default function AuthExample() {
@@ -51,18 +51,14 @@ const fakeAuth = {
   signout(cb) {
     fakeAuth.isAuthenticated = false;
     setTimeout(cb, 100);
-  }
+  },
 };
 
 const authContext = createContext();
 
 function ProvideAuth({ children }) {
   const auth = useProvideAuth();
-  return (
-    <authContext.Provider value={auth}>
-      {children}
-    </authContext.Provider>
-  );
+  return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 
 function useAuth() {
@@ -72,14 +68,14 @@ function useAuth() {
 function useProvideAuth() {
   const [user, setUser] = useState(null);
 
-  const signin = cb => {
+  const signin = (cb) => {
     return fakeAuth.signin(() => {
       setUser("user");
       cb();
     });
   };
 
-  const signout = cb => {
+  const signout = (cb) => {
     return fakeAuth.signout(() => {
       setUser(null);
       cb();
@@ -89,7 +85,7 @@ function useProvideAuth() {
   return {
     user,
     signin,
-    signout
+    signout,
   };
 }
 
@@ -127,7 +123,7 @@ function PrivateRoute({ children, ...rest }) {
           <Redirect
             to={{
               pathname: "/login",
-              state: { from: location }
+              state: { from: location },
             }}
           />
         )

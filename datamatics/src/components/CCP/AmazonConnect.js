@@ -4,7 +4,7 @@ import CCP from "./CCP";
 import classes from "./AmazonConnect.module.css";
 
 const AmazonConnect = (props) => {  
-  const { userActive, loging,setUserActive } = props;
+  const { userActive, loginWindow, loging, CloseWindow, setUserActive } = props;
   return (
     <div id={"ccp"} className={classes.ccpPosition}>
       {isBrowserCompatible() && (
@@ -12,6 +12,8 @@ const AmazonConnect = (props) => {
           userActive={userActive}
           loging={loging}
           setUserActive={setUserActive}
+          loginWindow={loginWindow}
+          CloseWindow={CloseWindow}
           instanceURL={"https://ac-datamatics.my.connect.aws/ccp-v2"}
         />
       )}

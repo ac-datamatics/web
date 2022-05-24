@@ -12,17 +12,20 @@ class CCP extends Component {
     this.instanceURL = props.instanceURL;
 
     this.loging = props.loging;
-    if (!this.userActive) {
-      props.loging();
-    }
+    // if (!this.userActive) {
+    //   props.loging();
+    // }
     this.state = {
       initialized: false,
     };
     // eslint-disable-next-line no-unused-expressions
-    this.__loginWindow;
   }
-
+  
   componentDidMount() {
+    console.log("userActive");
+    console.log(this.userActive);
+    console.log(this.props.userActive);
+
     if (!isBrowserCompatible) {
       document.getElementById("ccp").innerHTML =
         "Sorry, browser not supported. Please switch to one of the three latest versions of Chrome or Firefox.";
@@ -38,7 +41,7 @@ class CCP extends Component {
       ccpSynTimeout: 3000, //optional, defaults to 1000 (ms)
       ccpLoadTimeout: 10000, //optional, defaults to 5000 (ms)
       // LOGIN
-      loginPopup: true, // Show a popup window to authenticate
+      loginPopup: false, // Show a popup window to authenticate
       loginPopupAutoClose: true, // Auto close login popup after auth
       loginOptions: {
         autoClose: true,
@@ -73,7 +76,7 @@ class CCP extends Component {
       .subscribe(connect.EventType.UPDATE_CONNECTED_CCPS, () => {
         this.setState({ initialized: true });
         // Close login window
-        this.__loginWindow?.close();
+        this.props.CloseWindow();
         this.props.setUserActive();
         // Callback
         this.props.onInstanceConnected?.();

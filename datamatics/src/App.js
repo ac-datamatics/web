@@ -9,15 +9,19 @@ import "./App.css";
 import React from "react";
 
 function App(props) {
-  const { userActive, loging, setUserActive } = props.AuthFunction();
+  const { userActive, loginWindow, loging, CloseWindow, setUserActive } = props.AuthFunction();
 
-  if (!userActive) {
-    loging();
-  }
+  // if (!userActive) {
+  //   loging();
+  // }
 
   return (
     <div className="root">
-      <div hidden={userActive}>Loading....</div>
+      <div hidden={userActive}>
+        <p>Loading...</p>
+        <p>Pleas login in Amazon connect</p>
+        <button onClick={loging}> Login </button>
+      </div>
 
       <div className="sideBarContainer" hidden={!userActive}>
         <Sidebar className="sideBar">
@@ -43,6 +47,8 @@ function App(props) {
           setUserActive={setUserActive}
           userActive={userActive}
           loging={loging}
+          loginWindow={loginWindow}
+          CloseWindow={CloseWindow}
         />
       </div>
     </div>
