@@ -1,3 +1,5 @@
+/* eslint-disable default-case */
+/* eslint-disable no-undef */
 import { Component } from "react";
 import React from "react";
 import "amazon-connect-streams";
@@ -8,6 +10,16 @@ class CCP extends Component {
     super(props);
     this.containerDiv = React.createRef;
     this.instanceURL = props.instanceURL;
+
+    this.loging = props.loging;
+    if (!this.userActive) {
+      props.loging();
+    }
+    this.state = {
+      initialized: false,
+    };
+    // eslint-disable-next-line no-unused-expressions
+    this.__loginWindow;
   }
 
   componentDidMount() {
@@ -16,6 +28,8 @@ class CCP extends Component {
         "Sorry, browser not supported. Please switch to one of the three latest versions of Chrome or Firefox.";
       return;
     }
+
+    // eslint-disable-next-line no-undef
     connect.core.initCCP(document.getElementById("ccp"), {
       // CONNECT CONFIG
       ccpUrl: this.instanceURL, // Required
@@ -45,6 +59,81 @@ class CCP extends Component {
         enablePhoneTypeSettings: false, //optional, defaults to 'true'
       },
     });
+
+    // On ccp instance terminated
+    connect.core.getEventBus().subscribe(connect.EventType.TERMINATED, () => {
+      this.setState({ initialized: false });
+      // Callback
+      this.props.onInstanceTerminated?.();
+    });
+
+    // On connected to ccp
+    connect.core
+      .getEventBus()
+      .subscribe(connect.EventType.UPDATE_CONNECTED_CCPS, () => {
+        this.setState({ initialized: true });
+        // Close login window
+        this.__loginWindow?.close();
+        this.props.setUserActive();
+        // Callback
+        this.props.onInstanceConnected?.();
+        // Listen to agents
+        connect.agent((agent) => {
+          // Store agent
+          this.agent = agent;
+          // Callback
+          this.props.onAgent?.(agent);
+          // Listen to agent changes
+          agent.onStateChange((state) => {
+            // Avoid duplicate events
+            if (state.newState == state.oldState) return;
+            // Callback
+            this.props.onAgentStateChange?.(state);
+          });
+        });
+        // Listen to contacts
+        connect.contact((contact) => {
+          // Callback
+          this.props.onContact?.(contact);
+          // Store previous state
+          let previousState = contact.getState().type;
+          // Listen to contact changes
+          contact.onRefresh((contact) => {
+            if (contact.getState().type === previousState) return;
+            previousState = contact.getState().type;
+            switch (previousState) {
+              case connect.ContactStateType.INCOMING:
+              case connect.ContactStateType.CONNECTING:
+                return this.props.onIncomingContact?.(contact);
+              case connect.ContactStateType.PENDING:
+                return this.props.onPendingContact?.(contact);
+              case connect.ContactStateType.MISSED:
+                return this.props.onMissedContact?.(contact);
+              case connect.ContactStateType.CONNECTED:
+                return this.props.onConnectedContact?.(contact);
+              case connect.ContactStateType.ENDED:
+                return this.props.onEndedContact?.(contact);
+              case connect.ContactStateType.ERROR:
+                return this.props.onErrorContact?.(contact);
+              case connect.ContactStateType.REJECTED:
+                return this.props.onRejectedContact?.(contact);
+            }
+          });
+          // Listen to contact events
+          contact.onACW(() => {
+            if (previousState == "after-call-work") return;
+            previousState = "after-call-work";
+            this.props.onAfterCallWork?.();
+            alert(previousState);
+          });
+          contact.onDestroy(() => {
+            if (previousState == "destroy") return;
+            previousState = "destroy";
+            this.props.onDestroyContact?.(contact);
+            alert(previousState);
+          });
+        });
+      });
   }
 
   render() {
