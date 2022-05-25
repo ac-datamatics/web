@@ -3,10 +3,14 @@ import styled from "styled-components";
 import ActiveListeners from "./ActiveListeners";
 import Avatar from "./Avatar";
 import Player from "./Player";
+import AmazonConnect from "./CCP/AmazonConnect";
+
 function RightSidebar() {
   return (
     <Section id="rightSidebar">
-      <Avatar />
+      <div className="amazonConnectContainer">
+        <AmazonConnect />
+      </div>
     </Section>
   );
 }
@@ -15,11 +19,8 @@ const Section = styled.section`
   height: 100%;
   width: 100%;
   background-color: var(--dark-background-color);
-  padding: 0 3rem;
-  padding-top: 2rem;
-  @media screen and (min-width: 280px) and (max-width: 1080px) {
-    padding: 0 2rem;
-    padding-top: 2rem;
-  }
+  padding: 1rem;
+
+
 `;
 export default RightSidebar;

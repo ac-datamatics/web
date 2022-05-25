@@ -3,18 +3,43 @@ import styled from "styled-components";
 import { BsHouseDoorFill } from "react-icons/bs";
 import { MdLeaderboard } from "react-icons/md";
 import { AiOutlineStar } from "react-icons/ai";
+import { BrowserRouter as Link } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 function Sidebar() {
+  const history = useHistory();
+  const [homeselected, sethomeselected]= React.useState("selected");
+  const [leaderboardselected, setleaderboardselected]= React.useState("");
+  const [trainingboardselected, settrainingselected]= React.useState("");
+
+  function handleHome() {
+    history.push("/home"); 
+    setleaderboardselected("");
+    settrainingselected("");
+    sethomeselected("selected");
+  }
+  function handleLeaderboard() {
+    history.push("/leaderboard");
+    sethomeselected("");
+    settrainingselected("");
+    setleaderboardselected("selected");
+  }
+  function handleTraining() {
+    history.push("/training");
+    sethomeselected("");
+    setleaderboardselected("");
+    settrainingselected("selected");
+  }
   return (
     <Aside id="sidebar">
       <ul className="links">
-        <li className="selected">
-          <BsHouseDoorFill />
+        <li className={homeselected}>
+          <BsHouseDoorFill type="button" onClick={handleHome}/>
         </li>
-        <li>
-          <MdLeaderboard />
+        <li className={leaderboardselected}>
+          <MdLeaderboard type="button" onClick={handleLeaderboard}/>
         </li>
-        <li>
-          <AiOutlineStar />
+        <li className={trainingboardselected}>
+          <AiOutlineStar type="button" onClick={handleTraining}/>
         </li>
       </ul>
     </Aside>
