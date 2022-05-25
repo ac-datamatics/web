@@ -3,7 +3,6 @@ import { Route, Redirect } from "react-router-dom";
 import Home from "./components/Tabs/Home/Home";
 import Leaderboard from "./components/Tabs/Leaderboard";
 import Training from "./components/Tabs/Training/Training";
-import ScreenRecording from "./components/Tabs/ScreenRecording";
 import AmazonConnect from "./components/CCP/AmazonConnect";
 import "./App.css";
 

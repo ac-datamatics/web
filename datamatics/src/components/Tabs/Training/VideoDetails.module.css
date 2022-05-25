@@ -8,6 +8,7 @@
   background-color: #f2f4f4 !important;
   width: 75%;
   height: 75%;
+ 
 }
 
 .cardContents {
@@ -15,9 +16,10 @@
   display: flex;
   width: 100%;
   flex-direction: column;
-  margin: 5%;
-  top: -10%;
+  /* margin: 5%; */
+  /* top: -10%; */
   padding: 2rem;
+  overflow-y: scroll;
 }
 
 .cardTitle {

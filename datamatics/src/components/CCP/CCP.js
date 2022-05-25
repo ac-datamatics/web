@@ -16,6 +16,8 @@ class CCP extends Component {
         "Sorry, browser not supported. Please switch to one of the three latest versions of Chrome or Firefox.";
       return;
     }
+
+    // eslint-disable-next-line no-undef
     connect.core.initCCP(document.getElementById("ccp"), {
       // CONNECT CONFIG
       ccpUrl: this.instanceURL, // Required

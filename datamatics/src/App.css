@@ -1,6 +1,6 @@
 .root {
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 75% 25%;
   overflow: hidden;
 }
 
