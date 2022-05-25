@@ -57,6 +57,7 @@ const Aside = styled.aside`
   justify-content: top;
   svg {font-size: 1.3rem;}
   .links {
+    align-items: center;
     display: flex;
     flex-direction: column;
     gap: 2.5rem;

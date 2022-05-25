@@ -43,6 +43,7 @@ export default function App() {
     <Router>
     <Div>
       <Sidebar />
+      <View>
         <Switch>
           <Route path = "/" exact>
             <Redirect to = "/home"/>
@@ -57,6 +58,7 @@ export default function App() {
             <Training />
           </Route>
         </Switch>
+      </View>
       <RightSidebar />
     </Div>
     </Router>    
@@ -72,4 +74,10 @@ const Div = styled.div`
     grid-template-columns: 1fr;
     height: max-content;
   }
+`;
+
+const View = styled.div`
+width: 100%;
+height: 100vh;
+overflow-y: auto;
 `;
