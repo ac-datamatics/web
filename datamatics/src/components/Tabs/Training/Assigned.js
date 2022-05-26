@@ -5,43 +5,29 @@ import classes from "./Training.module.css";
 const Assigned = () => {
   const videoInfo = [
     {
+      id: "test/outChillAnime",
       thumbnailUrl: "/Images/logo.png",
-      videoUrl: "/Videos/Rec1.mp4",
       supervisorName: "Juan",
       videoTopic: "Account Recovery",
       assignedDate: "16/05/2022",
     },
     {
+      id: "test/outChillAnime",
       thumbnailUrl: "/Images/logo.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Password Change",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo.png",
-      videoUrl: "/Videos/Rec1.mp4",
       supervisorName: "Juan",
       videoTopic: "Account Recovery",
       assignedDate: "16/05/2022",
     },
     {
+      id: "test/outChillAnime",
       thumbnailUrl: "/Images/logo.png",
-      videoUrl: "/Videos/Rec1.mp4",
       supervisorName: "Juan",
       videoTopic: "Account Recovery",
       assignedDate: "16/05/2022",
     },
     {
+      id: "test/outChillAnime",
       thumbnailUrl: "/Images/logo.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo.png",
-      videoUrl: "/Videos/Rec1.mp4",
       supervisorName: "Juan",
       videoTopic: "Account Recovery",
       assignedDate: "16/05/2022",

@@ -3,12 +3,11 @@ import { Route, Redirect } from "react-router-dom";
 import Home from "./components/Tabs/Home";
 import Leaderboard from "./components/Tabs/Leaderboard";
 import Training from "./components/Tabs/Training/Training";
-import ScreenRecording from "./components/Tabs/ScreenRecording";
 
 function App() {
   return (
     <>
-      <Sidebar >
+      <Sidebar>
         <Route path="/" exact>
           <Redirect to="/home" />
         </Route>
@@ -20,9 +19,6 @@ function App() {
         </Route>
         <Route path="/training" exact>
           <Training />
-        </Route> 
-        <Route path="/screen-recording" exact>
-          <ScreenRecording />
         </Route>
       </Sidebar>
     </>
