@@ -1,11 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { BsHouseDoorFill } from "react-icons/bs";
+import { BsHouseDoorFill, BsFillCameraVideoFill } from "react-icons/bs";
 import { MdLeaderboard } from "react-icons/md";
 import { AiOutlineStar } from "react-icons/ai";
 import { BrowserRouter as Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
+import {RiMenuLine, RiLayoutGridFill, RiChat4Fill, RiLogoutCircleRFill} from 'react-icons/ri'
+import {BsFillHouseDoorFill} from 'react-icons/bs'
+
 function Sidebar() {
+  const sidebarCollapsed = localStorage.getItem('sidebar-collapsed');
+  const [isExpanded, setIsExpanded] = useState(sidebarCollapsed ? false : true);
+  const handleToggler = () => {
+    if (isExpanded) {
+      setIsExpanded(false);
+      localStorage.setItem('sidebar-collapsed', true);
+      return;
+    }
+    setIsExpanded(true);
+    localStorage.removeItem('sidebar-collapsed');
+  };
+
   const history = useHistory();
   const [homeselected, sethomeselected]= React.useState("selected");
   const [leaderboardselected, setleaderboardselected]= React.useState("");
@@ -31,17 +46,17 @@ function Sidebar() {
   }
   return (
     <Aside id="sidebar">
-      <ul className="links">
-        <li className={homeselected}>
-          <BsHouseDoorFill type="button" onClick={handleHome}/>
-        </li>
-        <li className={leaderboardselected}>
-          <MdLeaderboard type="button" onClick={handleLeaderboard}/>
-        </li>
-        <li className={trainingboardselected}>
-          <AiOutlineStar type="button" onClick={handleTraining}/>
-        </li>
-      </ul>
+        <ul className="links">
+          <li className={homeselected}>
+            <BsFillHouseDoorFill type="button" onClick={handleHome}/>
+          </li>
+          <li className={leaderboardselected}>
+            <MdLeaderboard type="button" onClick={handleLeaderboard}/>
+          </li>
+          <li className={trainingboardselected}>
+            <BsFillCameraVideoFill type="button" onClick={handleTraining}/>
+          </li>
+        </ul>
     </Aside>
   );
 }
