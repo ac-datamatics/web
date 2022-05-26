@@ -9,7 +9,7 @@ Chart.register(
 function Donut() {
     const [data] = useState({
         datasets: [{
-            data: [10, 20, 30],
+            data: [4, 10, 23],
             backgroundColor: [
                 'rgba(207, 66, 66, 1)',
                 'rgba(229, 161, 19 ,1)',

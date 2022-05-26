@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { BsHouseDoorFill } from "react-icons/bs";
+import { BsHouseDoorFill, BsFillCameraVideoFill } from "react-icons/bs";
 import { MdLeaderboard } from "react-icons/md";
 import { AiOutlineStar } from "react-icons/ai";
 import { BrowserRouter as Link } from "react-router-dom";
@@ -54,7 +54,7 @@ function Sidebar() {
             <MdLeaderboard type="button" onClick={handleLeaderboard}/>
           </li>
           <li className={trainingboardselected}>
-            <AiOutlineStar type="button" onClick={handleTraining}/>
+            <BsFillCameraVideoFill type="button" onClick={handleTraining}/>
           </li>
         </ul>
     </Aside>

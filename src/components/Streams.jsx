@@ -7,97 +7,97 @@ function Streams() {
   const data = [
     {
       hour: '01:00',
-      calls: 6680,
+      calls: 0,
     },
     {
       hour: '02:00',
-      calls: 6500,
+      calls: 0,
     },
     {
       hour: '03:00',
-      calls: 6300,
+      calls: 0,
     },
     {
       hour: '04:00',
-      calls: 5900,
+      calls: 0,
     },
     {
       hour: '05:00',
-      calls: 5700,
+      calls: 0,
     },
     {
       hour: '06:00',
-      calls: 5500,
+      calls: 0,
     },
     {
       hour: '07:00',
-      calls: 5300,
+      calls: 0,
     },
     {
       hour: '08:00',
-      calls: 5100,
+      calls: 1,
     },
     {
       hour: '9:00',
-      calls: 5090,
+      calls: 3,
     },
     {hour: '10:00',
-      calls: 5300,
+      calls: 1,
     },
     {
       hour: '11:00',
-      calls: 5000,
+      calls: 4,
     },
     {
       hour: '12:00',
-      calls: 4700,
+      calls: 6,
     },
     {hour: '13:00',
-      calls: 4400,
+      calls: 2,
     },
     {
       hour: '14:00',
-      calls: 4800,
+      calls: 4,
     },
     {
       hour: '15:00',
-      calls: 5300,
+      calls: 5,
     },
     {
       hour: '16:00',
-      calls: 5800,
+      calls: 2,
     },
     {
       hour: '17:00',
-      calls: 6000,
+      calls: 3,
     },
     {
       hour: '18:00',
-      calls: 6300,
+      calls: 5,
     },
     {
       hour: '19:00',
-      calls: 6580,
+      calls: 1,
     },
     {
       hour: '20:00',
-      calls: 6500,
+      calls: 1,
     },
     {
       hour: '21:00',
-      calls: 6300,
+      calls: 0,
     },
     {
       hour: '22:00',
-      calls: 6500,
+      calls: 0,
     },
     {
       hour: '23:00',
-      calls: 6700,
+      calls: 0,
     },
     {
       hour: '00:00',
-      calls: 6780,
+      calls: 0,
     },
   ];
   const sliderData = [
