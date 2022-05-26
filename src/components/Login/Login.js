@@ -10,29 +10,10 @@ const jump = keyframes`
     transform: translateY(-3px)
   }
 `;
-const Login = styled.h1`
-  display: flex;
-  flex-direction: column;
-  position: relative;
-`;
-
-const GlobalStyle = createGlobalStyle`
-  * {
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
-    background: #FDF9F3;
-  }
-
-  body, html, #root {
-    height: 100%;
-    font-family: -apple-system, Ubuntu , BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;;
-  }
-`;
 
 const Wrapper = styled.section`
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   height: 100%;
   width: 100%;
@@ -46,24 +27,6 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;
-`;
-
-const Input = styled.input`
-  max-width: 100%;
-  padding: 11px 13px;
-  background: #f9f9fa;
-  color: #f03d4e;
-  margin-bottom: 0.9rem;
-  border-radius: 4px;
-  outline: 0;
-  border: 1px solid rgba(245, 245, 245, 0.7);
-  font-size: 14px;
-  transition: all 0.3s ease-out;
-  box-shadow: 0 0 3px rgba(0, 0, 0, 0.1), 0 1px 1px rgba(0, 0, 0, 0.1);
-  :focus,
-  :hover {
-    box-shadow: 0 0 3px rgba(0, 0, 0, 0.15), 0 1px 5px rgba(0, 0, 0, 0.1);
-  }
 `;
 
 const Button = styled.button`
@@ -88,7 +51,7 @@ const Button = styled.button`
 
 const Title = styled.h2`
   font-weight: normal;
-  color: #2a2a29;
+  color: #FFFFFF;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
   text-align: center;
 `;
@@ -97,7 +60,6 @@ function LogIn(props) {
   const { loging } = props;
   return (
     <>
-      <GlobalStyle />
       <Wrapper>
         <Form>
           <Title>Login to Amazon Connect</Title>
