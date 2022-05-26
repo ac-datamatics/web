@@ -5,11 +5,20 @@ import Avatar from "./Avatar";
 import Player from "./Player";
 import AmazonConnect from "./CCP/AmazonConnect";
 
-function RightSidebar() {
+function RightSidebar(props) {
+  const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserInactive } = props;
+
   return (
     <Section id="rightSidebar">
       <div className="amazonConnectContainer">
-        <AmazonConnect />
+        <AmazonConnect
+          userActive={userActive}
+          loging={loging}
+          setUserActive={setUserActive}
+          loginWindow={loginWindow}
+          CloseWindow={CloseWindow}
+          setUserInactive={setUserInactive}
+        />
       </div>
     </Section>
   );

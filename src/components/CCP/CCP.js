@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { Component } from "react";
 import React from "react";
 import "amazon-connect-streams";
@@ -24,7 +25,7 @@ class CCP extends Component {
       ccpSynTimeout: 3000, //optional, defaults to 1000 (ms)
       ccpLoadTimeout: 10000, //optional, defaults to 5000 (ms)
       // LOGIN
-      loginPopup: true, // Show a popup window to authenticate
+      loginPopup: false, // Show a popup window to authenticate
       loginPopupAutoClose: true, // Auto close login popup after auth
       loginOptions: {
         autoClose: true,
@@ -45,6 +46,82 @@ class CCP extends Component {
         enablePhoneTypeSettings: false, //optional, defaults to 'true'
       },
     });
+
+
+    // On ccp instance terminated
+    connect.core.getEventBus().subscribe(connect.EventType.TERMINATED, () => {
+      this.props.setUserInactive();
+      // Callback
+      this.props.onInstanceTerminated?.();
+    });
+
+    // Listen to contacts
+    connect.core
+      .getEventBus()
+      .subscribe(connect.EventType.UPDATE_CONNECTED_CCPS, () => {
+        // Close login window
+        this.props.CloseWindow();
+        this.props.setUserActive();
+        // Callback
+        this.props.onInstanceConnected?.();
+        // Listen to agents
+        connect.agent((agent) => {
+          // Store agent
+          this.agent = agent;
+          // Callback
+          this.props.onAgent?.(agent);
+          // Listen to agent changes
+          agent.onStateChange((state) => {
+            // Avoid duplicate events
+            if (state.newState === state.oldState) return;
+            // Callback
+            this.props.onAgentStateChange?.(state);
+          });
+        });
+        // Listen to contacts
+        connect.contact((contact) => {
+          // Callback
+          this.props.onContact?.(contact);
+          // Store previous state
+          let previousState = contact.getState().type;
+          // Listen to contact changes
+          contact.onRefresh((contact) => {
+            if (contact.getState().type === previousState) return;
+            previousState = contact.getState().type;
+            // eslint-disable-next-line default-case
+            switch (previousState) {
+              case connect.ContactStateType.INCOMING:
+              case connect.ContactStateType.CONNECTING:
+                return this.props.onIncomingContact?.(contact);
+              case connect.ContactStateType.PENDING:
+                return this.props.onPendingContact?.(contact);
+              case connect.ContactStateType.MISSED:
+                return this.props.onMissedContact?.(contact);
+              case connect.ContactStateType.CONNECTED:
+                return this.props.onConnectedContact?.(contact);
+              case connect.ContactStateType.ENDED:
+                return this.props.onEndedContact?.(contact);
+              case connect.ContactStateType.ERROR:
+                return this.props.onErrorContact?.(contact);
+              case connect.ContactStateType.REJECTED:
+                return this.props.onRejectedContact?.(contact);
+            }
+          });
+          // Listen to contact events
+          contact.onACW(() => {
+            if (previousState === "after-call-work") return;
+            previousState = "after-call-work";
+            this.props.onAfterCallWork?.();
+            alert(previousState);
+          });
+          contact.onDestroy(() => {
+            if (previousState === "destroy") return;
+            previousState = "destroy";
+            this.props.onDestroyContact?.(contact);
+            alert(previousState);
+          });
+        });
+      });
   }
 
   render() {

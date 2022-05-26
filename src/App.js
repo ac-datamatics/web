@@ -9,7 +9,7 @@ import Home from "./components/Home/Home";
 import Training from "./components/Training/Training";
 import LogIn from "./components/Login/Login";
 export default function App(props) {
-  const { userActive, loginWindow, loging, CloseWindow, setUserActive } = props.AuthFunction();
+  const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserInactive } = props.AuthFunction();
 
   useEffect(() => {
     const sr = scrollreveal({
@@ -67,7 +67,14 @@ export default function App(props) {
               </Route>
             </Switch>
           </View>
-          <RightSidebar />
+          <RightSidebar 
+            userActive={userActive}
+            loging={loging}
+            setUserActive={setUserActive}
+            loginWindow={loginWindow}
+            CloseWindow={CloseWindow}
+            setUserInactive={setUserInactive}
+          />
         </Router>
       </div >
     </div>
