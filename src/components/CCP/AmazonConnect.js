@@ -9,14 +9,14 @@ const AmazonConnect = (props) => {
   return (
     <div id={"ccp"} className={classes.ccpPosition}>
       {isBrowserCompatible() && (
-        <CCP 
-          instanceURL={"https://ac-datamatics.my.connect.aws/ccp-v2"}
+        <CCP
           userActive={userActive}
           loging={loging}
           setUserActive={setUserActive}
           loginWindow={loginWindow}
           CloseWindow={CloseWindow}
           setUserInactive={setUserInactive}
+          instanceURL={"https://ac-datamatics.my.connect.aws/ccp-v2"}
         />
       )}
     </div>

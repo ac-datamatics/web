@@ -42,21 +42,22 @@ export default function App(props) {
     );
   }, []);
   return (
-    <div>
-      <div id="logIn">
-        <LogIn 
+    <div className="root">
+      <div hidden={userActive}>
+        <LogIn
           loging={loging}
         />
       </div>
-      <div id="mainPage" hidden={true}>
-        <Router>
+      <div hidden={!userActive}>
+        {/* <Router> */}
+        <Div>
           <Sidebar />
           <View>
             <Switch>
-              <Route path="/" exact>
+              <Route path="*">
                 <Redirect to="/home" />
               </Route>
-              <Route path="/home" exact>
+              <Route path="/home">
                 <Home />
               </Route>
               <Route path="/leaderboard">
@@ -67,7 +68,7 @@ export default function App(props) {
               </Route>
             </Switch>
           </View>
-          <RightSidebar 
+          <RightSidebar
             userActive={userActive}
             loging={loging}
             setUserActive={setUserActive}
@@ -75,25 +76,26 @@ export default function App(props) {
             CloseWindow={CloseWindow}
             setUserInactive={setUserInactive}
           />
-        </Router>
-      </div >
+        </Div>
+        {/* </Router> */}
+      </div>
     </div>
   );
 }
 
 const Div = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 12fr 4fr;
-  min-height: 100vh;
-  height: max-content;
-  @media screen and (min-width: 280px) and (max-width: 1080px) {
-    grid-template-columns: 1fr;
-    height: max-content;
+      display: grid;
+      grid-template-columns: 1fr 12fr 4fr;
+      min-height: 100vh;
+      height: max-content;
+      @media screen and (min-width: 280px) and (max-width: 1080px) {
+        grid - template - columns: 1fr;
+      height: max-content;
   }
-`;
+      `;
 
 const View = styled.div`
-width: 100%;
-height: 100vh;
-overflow-y: auto;
-`;
+      width: 100%;
+      height: 100vh;
+      overflow-y: auto;
+      `;
