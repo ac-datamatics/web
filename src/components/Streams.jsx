@@ -1,194 +1,115 @@
 import React from "react";
 import styled from "styled-components";
 import { applyCardStyles } from "components/ReusableStyles";
-import { AreaChart, Area, Tooltip, ResponsiveContainer } from "recharts";
-
-import logo1 from "assets/logo1.png";
-import logo2 from "assets/logo2.png";
-import logo3 from "assets/logo3.png";
-import logo4 from "assets/logo4.png";
+import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer} from "recharts";
 
 function Streams() {
   const data = [
     {
-      data: 6780,
+      hour: '01:00',
+      calls: 6680,
     },
     {
-      data: 6680,
+      hour: '02:00',
+      calls: 6500,
     },
     {
-      data: 6500,
+      hour: '03:00',
+      calls: 6300,
     },
     {
-      data: 6300,
+      hour: '04:00',
+      calls: 5900,
     },
     {
-      data: 5900,
+      hour: '05:00',
+      calls: 5700,
     },
     {
-      data: 5700,
+      hour: '06:00',
+      calls: 5500,
     },
     {
-      data: 5500,
+      hour: '07:00',
+      calls: 5300,
     },
     {
-      data: 5300,
+      hour: '08:00',
+      calls: 5100,
     },
     {
-      data: 5100,
+      hour: '9:00',
+      calls: 5090,
+    },
+    {hour: '10:00',
+      calls: 5300,
     },
     {
-      data: 5090,
+      hour: '11:00',
+      calls: 5000,
     },
     {
-      data: 5300,
+      hour: '12:00',
+      calls: 4700,
     },
-    { data: 4500 },
-    {
-      data: 5000,
-    },
-    {
-      data: 4700,
+    {hour: '13:00',
+      calls: 4400,
     },
     {
-      data: 4400,
+      hour: '14:00',
+      calls: 4800,
     },
     {
-      data: 4800,
+      hour: '15:00',
+      calls: 5300,
     },
     {
-      data: 5300,
+      hour: '16:00',
+      calls: 5800,
     },
     {
-      data: 5800,
+      hour: '17:00',
+      calls: 6000,
     },
     {
-      data: 6000,
+      hour: '18:00',
+      calls: 6300,
     },
     {
-      data: 6300,
+      hour: '19:00',
+      calls: 6580,
     },
     {
-      data: 6580,
+      hour: '20:00',
+      calls: 6500,
     },
     {
-      data: 6500,
+      hour: '21:00',
+      calls: 6300,
     },
     {
-      data: 6300,
+      hour: '22:00',
+      calls: 6500,
     },
     {
-      data: 6500,
+      hour: '23:00',
+      calls: 6700,
     },
     {
-      data: 6700,
-    },
-    {
-      data: 7000,
-    },
-    {
-      data: 7300,
-    },
-    {
-      data: 7500,
-    },
-    {
-      data: 7700,
-    },
-    {
-      data: 8090,
-    },
-    {
-      data: 8190,
-    },
-    {
-      data: 7990,
-    },
-    {
-      data: 5800,
-    },
-    {
-      data: 6000,
-    },
-    {
-      data: 6300,
-    },
-    {
-      data: 6780,
-    },
-
-    {
-      data: 7700,
-    },
-    {
-      data: 7500,
-    },
-    {
-      data: 7300,
-    },
-    {
-      data: 7000,
-    },
-    {
-      data: 6700,
-    },
-    {
-      data: 6500,
-    },
-    {
-      data: 6300,
-    },
-    {
-      data: 6500,
-    },
-    {
-      data: 6780,
-    },
-    {
-      data: 6300,
-    },
-    {
-      data: 6000,
-    },
-    {
-      data: 5800,
-    },
-
-    {
-      data: 5490,
-    },
-    {
-      data: 6000,
-    },
-    {
-      data: 8000,
+      hour: '00:00',
+      calls: 6780,
     },
   ];
   const sliderData = [
-    {
-      image: logo1,
-      serviceName: "Sound Cloud",
-    },
-    {
-      image: logo2,
-      serviceName: "Spotify",
-    },
-    {
-      image: logo3,
-      serviceName: "Youtube Music",
-    },
-    {
-      image: logo4,
-      serviceName: "Apple Music",
-    },
+  
   ];
   return (
     <Section>
       <div className="title-container">
         <div className="title">
-          <h4>Streams</h4>
-          <h1>450,210</h1>
-        </div>
+          <h4>Calls</h4>
+          <h1>37</h1>
+        </div>  
         <div className="slider">
           <div className="services">
             {sliderData.map(({ image, serviceName }) => {
@@ -205,7 +126,7 @@ function Streams() {
       <div className="chart">
         <ResponsiveContainer width="100%" height="100%">
           <AreaChart
-            //  width={500} height={400}
+
             data={data}
           >
             <defs>
@@ -219,15 +140,20 @@ function Streams() {
               </linearGradient>
             </defs>
             <Tooltip />
+
+            
             <Area
-              type="monotone"
-              dataKey="data"
+              type="monoto  ne" 
+              dataKey="calls"
               stroke="var(--primary-color)"
               strokeWidth={2}
               fill="url(#colorview)"
               animationBegin={800}
               animationDuration={2000}
             />
+
+          <XAxis dataKey="hour" />
+        
           </AreaChart>
         </ResponsiveContainer>
       </div>
@@ -238,6 +164,11 @@ function Streams() {
 const Section = styled.section`
   ${applyCardStyles}
   color:white;
+  width: 100%;
+  height: 320px;
+  margin: 1px;
+  background-color: rgb(46,46,46);
+
   .title-container {
     display: flex;
     justify-content: space-between;
@@ -267,7 +198,8 @@ const Section = styled.section`
     }
   }
   .chart {
-    height: 10rem;
+    height: 13rem;
+    margin: 10px;
     .recharts-default-tooltip {
       background-color: var(--dark-background-color) !important;
       border: none !important;
