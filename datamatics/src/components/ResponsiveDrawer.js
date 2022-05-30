@@ -24,7 +24,6 @@ import LeaderboardIcon from "@mui/icons-material/Leaderboard";
 import StarIcon from "@mui/icons-material/Star";
 import { NavLink } from "react-router-dom";
 
-import "@aws-amplify/ui-react/styles.css";
 import classes from "./ResponsiveDrawer.module.css";
 
 const drawerWidth = 240;
