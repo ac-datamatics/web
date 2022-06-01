@@ -3,6 +3,7 @@ import { useState } from "react";
 export default function AuthFunction() {
   const [userActive, setUserActive] = useState(false);
   const [loginWindow, setLoginWindow] = useState(undefined);
+  const [userType, setUserType] = useState("")
   return {
     userActive,
     loginWindow,
@@ -23,6 +24,8 @@ export default function AuthFunction() {
     setUserActive: async () => {
       setUserActive(true);
     },
-
+    setUserType: async (type) => {
+      setUserType(type)
+    } 
   };
 }

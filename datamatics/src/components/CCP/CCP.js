@@ -20,7 +20,7 @@ class CCP extends Component {
     };
     // eslint-disable-next-line no-unused-expressions
   }
-  
+
   componentDidMount() {
     console.log("userActive");
     console.log(this.userActive);
@@ -66,6 +66,7 @@ class CCP extends Component {
     // On ccp instance terminated
     connect.core.getEventBus().subscribe(connect.EventType.TERMINATED, () => {
       this.setState({ initialized: false });
+
       // Callback
       this.props.onInstanceTerminated?.();
     });
@@ -76,6 +77,7 @@ class CCP extends Component {
       .subscribe(connect.EventType.UPDATE_CONNECTED_CCPS, () => {
         this.setState({ initialized: true });
         // Close login window
+        this.props.setUserType(this.getAgentType());
         this.props.CloseWindow();
         this.props.setUserActive();
         // Callback
@@ -96,6 +98,7 @@ class CCP extends Component {
         });
         // Listen to contacts
         connect.contact((contact) => {
+          if(contact.getType() === connect.ContactType.CHAT) return;
           // Callback
           this.props.onContact?.(contact);
           // Store previous state
@@ -137,6 +140,17 @@ class CCP extends Component {
           });
         });
       });
+  }
+  getAgentType() {
+    try {
+      const permissions = this.agent.getPermissions();
+      if (permissions.length == 1) return "Agent";
+      return "Admin";
+    } catch (e) {
+      console.debug(e.message);
+      return "CallCenterManager";
+    }
+
   }
 
   render() {
