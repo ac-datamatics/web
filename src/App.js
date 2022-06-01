@@ -54,7 +54,7 @@ export default function App(props) {
           <Sidebar />
           <View>
             <Switch>
-              <Route path="*">
+              <Route path="/" exact>
                 <Redirect to="/home" />
               </Route>
               <Route path="/home">
