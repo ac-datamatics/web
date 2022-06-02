@@ -122,24 +122,9 @@ function Sidebar({ children }) {
     // window.dispatchEvent(new CustomEvent('resize'))
   };
 
-  const icons = [
-    <HomeIcon />,
-    <LeaderboardIcon />,
-    <StarIcon />,
-    // <VideocamIcon />,
-  ];
-  const tabLabels = [
-    "Home",
-    "Leaderboard",
-    "Training",
-    // "Screen Recording"
-  ];
-  const paths = [
-    "home",
-    "leaderboard",
-    "training",
-    // "screen-recording"
-  ];
+  const icons = [<HomeIcon />, <LeaderboardIcon />, <StarIcon />];
+  const tabLabels = ["Home", "Leaderboard", "Training"];
+  const paths = ["home", "leaderboard", "training"];
 
   const sideBarTabs = (
     <div>
@@ -153,6 +138,7 @@ function Sidebar({ children }) {
             to={paths[index]}
             type="button"
             activeClassName={classes.icon}
+            key={index}
           >
             <ListItemIcon>{icons[index]}</ListItemIcon>
             <ListItemText className={classes.listFonts} primary={text} />
