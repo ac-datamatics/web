@@ -5,7 +5,7 @@ import Leaderboard from "./components/Tabs/Leaderboard";
 import Training from "./components/Tabs/Training/Training";
 import AmazonConnect from "./components/CCP/AmazonConnect";
 import "./App.css";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 function App(props) {
   const {
@@ -22,6 +22,7 @@ function App(props) {
   const [renderCCP, setRenderCCP] = useState(false);
   const [userActive, setUserActive] = useState(false);
   const [loginWindow, setLoginWindow] = useState(null);
+  const agentUsername = useRef("");
 
   useEffect(() => {
     setUserActive(JSON.parse(window.localStorage.getItem("userActive")));
@@ -83,7 +84,7 @@ function App(props) {
               <Leaderboard />
             </Route>
             <Route path="/training" exact>
-              <Training />
+              <Training agentUsername={agentUsername} />
             </Route>
             {/* <Route path="/screen-recording" exact>
             <ScreenRecording />
@@ -93,6 +94,7 @@ function App(props) {
         {renderCCP || userActive ? (
           <div className="amazonConnectContainer" hidden={!userActive}>
             <AmazonConnect
+              agentUsername={agentUsername}
               setUserActive={handleSetUserActive}
               setUserInactive={setUserInactive}
               userActive={userActive}

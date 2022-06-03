@@ -73,6 +73,8 @@ const ConnectCCP = (props) => {
         window.connect.agent((_agent) => {
           // Store agent
           agent.current = _agent;
+          props.agentUsername.current =
+            agent.current.getConfiguration().username;
           console.debug(agent.current.getConfiguration());
           // Callback
           // props.onAgent?.(agent);

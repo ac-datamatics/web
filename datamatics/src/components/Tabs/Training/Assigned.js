@@ -3,7 +3,7 @@ import ThumbCard from "./ThumbCard";
 
 import classes from "./Training.module.css";
 
-const Assigned = () => {
+const Assigned = ({ agentUsername }) => {
   const videoInfo = [
     {
       id: "test/outChillAnime",
@@ -98,15 +98,16 @@ const Assigned = () => {
     },
   ];
 
-  const [data, setData] = useState([])
+  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    fetch(
-      "https://2uxbgsvox5.execute-api.us-east-1.amazonaws.com/Datamatics/video?Contact_ID=[Contact_ID]"
-    )
-      .then((response) => response.json())
-      .then((data) => console.log(data));
-  }, [])
+  // useEffect(() => {
+  //   fetch(
+  //     "https://2uxbgsvox5.execute-api.us-east-1.amazonaws.com/Datamatics/video?agentUsername=" +
+  //       agentUsername.current
+  //   )
+  //     .then((response) => response.json())
+  //     .then((_data) => setData(_data));
+  // }, []);
 
   return (
     <div className={classes.thumbnailCard}>

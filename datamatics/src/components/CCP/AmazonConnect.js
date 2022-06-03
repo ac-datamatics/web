@@ -4,6 +4,7 @@ import TestCCP from "./TestCCP";
 
 const AmazonConnect = (props) => {
   const {
+    agentUsername,
     userActive,
     userType,
     loginWindow,
@@ -30,6 +31,7 @@ const AmazonConnect = (props) => {
         //   instanceURL={"https://ac-datamatics.my.connect.aws/ccp-v2"}
         // />
         <TestCCP
+          agentUsername={agentUsername}
           userActive={userActive}
           onIncomingContact={onIncomingContact}
           userType={userType}

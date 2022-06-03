@@ -4,11 +4,11 @@ import Assigned from "./Assigned";
 import classes from "./Training.module.css";
 import TrainingTabs from "./TrainingTabs";
 
-const Training = () => {
+const Training = ({ agentUsername }) => {
   return (
     <TrainingTabs labels={["Assigned", "General"]}>
       <div className={classes.contentWrap}>
-        <Assigned />
+        <Assigned agentUsername={agentUsername} />
       </div>
     </TrainingTabs>
   );
