@@ -1,4 +1,3 @@
-/* eslint-disable default-case */
 /* eslint-disable no-undef */
 import { Component } from "react";
 import React from "react";
@@ -18,7 +17,6 @@ class CCP extends Component {
     this.state = {
       initialized: false,
     };
-    // eslint-disable-next-line no-unused-expressions
   }
 
   componentDidMount() {
@@ -32,7 +30,6 @@ class CCP extends Component {
       return;
     }
 
-    // eslint-disable-next-line no-undef
     connect.core.initCCP(document.getElementById("ccp"), {
       // CONNECT CONFIG
       ccpUrl: this.instanceURL, // Required
@@ -72,9 +69,11 @@ class CCP extends Component {
     });
 
     // On connected to ccp
+    this.__updateConnectedSubscription?.unsubscribe();
     connect.core
       .getEventBus()
       .subscribe(connect.EventType.UPDATE_CONNECTED_CCPS, () => {
+        if(this.state.initialized) return;
         this.setState({ initialized: true });
         // Close login window
         this.props.setUserType(this.getAgentType());

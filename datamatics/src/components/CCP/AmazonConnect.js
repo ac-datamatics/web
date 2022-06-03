@@ -5,8 +5,8 @@ import classes from "./AmazonConnect.module.css";
 import React from "react"
 
 const AmazonConnect = (props) => {
-  const { userActive, loginWindow, loging, CloseWindow, setUserActive } = props;
-  const {removeStream, getScreen, start, stop } = RecordingFunctions()
+  const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserType } = props;
+  const { removeScreen, getScreen, start, stop } = RecordingFunctions()
   const ccp = React.createRef();
   return (
     <div id={"ccp"} className={classes.ccpPosition}>
@@ -17,12 +17,13 @@ const AmazonConnect = (props) => {
           setUserActive={setUserActive}
           loginWindow={loginWindow}
           CloseWindow={CloseWindow}
+          setUserType={setUserType}
           instanceURL={"https://ac-datamatics.my.connect.aws/ccp-v2"}
           ref={ccp}
           onInstanceTerminated={async () => {
             // Called on instance termination, when an agent logs out
-            // removeStream();
-        }}
+            removeScreen();
+          }}
           onAgent={async (agent) => {
             // Called after initialization, when an agent is assigned to the ccp
             //let type = ccp.current.getAgentType();
@@ -38,9 +39,9 @@ const AmazonConnect = (props) => {
             if (state?.newState === 'Available' && state?.oldState === 'Offline') {
               await getScreen();
             }
-            // if(state?.oldState === 'Available' && state?.newState === 'Offline') {
-            //   removeStream();
-            // }
+            else if (state?.newState === 'Offline') {
+              removeScreen();
+            }
             console.debug(state.newState)
           }}
           onIncomingContact={async (contact) => {

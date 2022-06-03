@@ -11,9 +11,6 @@ export default function RecordingFunction() {
         data,
         stream,
         isRecording,
-        removeStream: async () => {
-            setStream(null)
-        },
         getScreen: async () => {
             if (!stream || !stream.active) {       // Get screen if necessary
                 const mediaStream = await navigator.mediaDevices.getDisplayMedia({
@@ -29,6 +26,10 @@ export default function RecordingFunction() {
                 });
                 console.debug('verbosidad');
             }
+        },
+        removeScreen: async () => {
+            stream.getVideoTracks().forEach( track => track.stop() );
+            setStream(null)
         },
         start: async () => {
             // Start recording
