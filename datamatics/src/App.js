@@ -8,8 +8,8 @@ import "./App.css";
 import React from "react";
 
 function App(props) {
-  const { userActive, loginWindow, loging, CloseWindow, setUserActive } =
-    props.AuthFunction();
+  const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserType } = props.AuthFunction();
+
   // if (!userActive) {
   //   loging();
   // }
@@ -48,6 +48,7 @@ function App(props) {
           loging={loging}
           loginWindow={loginWindow}
           CloseWindow={CloseWindow}
+          setUserType={setUserType}
         />
       </div>
     </div>
