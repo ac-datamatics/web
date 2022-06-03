@@ -1,70 +1,56 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
+import RecordRTC from "recordrtc";
 
 export default function RecordingFunction() {
     const [data, setData] = useState([]);
     const [stream, setStream] = useState(null);
-    const [mediaRecorder, setMediaRecorder] = useState(null);
+    const recorderRef = useRef(null);
     const [isRecording, setIsRecording] = useState(false);
 
     return {
         data,
         stream,
-        mediaRecorder,
         isRecording,
+        removeStream: async () => {
+            setStream(null)
+        },
         getScreen: async () => {
-            if (!stream || !stream.active) {
-                setStream(navigator.mediaDevices.getDisplayMedia({
+            if (!stream || !stream.active) {       // Get screen if necessary
+                const mediaStream = await navigator.mediaDevices.getDisplayMedia({
                     video: {
-                        displaySurface: "monitor"
-                    }
-                }));
-                // Create a media recorder
-                setMediaRecorder(MediaRecorder(this.stream));
-                // Event listener
-                mediaRecorder.addEventListener('stop', e => {
-                    onstop?.(e);
-                })
-                mediaRecorder.addEventListener('dataavailable', e => {
-                    setData([...data, e.data]);
-                })
+                        displaySurface: "monitor",
+                    },
+                    audio: false,
+                });
+
+                setStream(mediaStream);
+                recorderRef.current = new RecordRTC(mediaStream, {
+                    type: "video",
+                });
+                console.debug('verbosidad');
             }
         },
         start: async () => {
-            if (isRecording) throw new Error("[ScrenRecorder] Already recording");
-
             // Start recording
-            setIsRecording(true);
-            mediaRecorder.start();
+            console.debug('passed one')
+            // If isn't recording
+            if (recorderRef.current.getState() == "recording") return;
+            console.debug('passed two');
+            recorderRef.current.startRecording();
             console.debug('started recording');
         },
-        stop: async () => {
-            if (!stream) throw new Error("[ScreenRecorder] Stream not available")
-            if (!isRecording) return;
+        stop: async () => new Promise((resolve, reject) => {
+            if (!recorderRef.current) return;       // Recording doesn't exist
+            if (!isRecording) return;    // Not recording
+
             // Stop all tracks
             setIsRecording(false);
-            stream.getTracks().forEach(track => track.stop());
-            console.debug('stopped recording');
-        },
-        getDataBlob: async () => {
-            let blob = new Blob(data, {
-                type: data[0].type
+            console.debug("stopping")
+            recorderRef.curr_lkjhgftyuiopent.stopRecording(function () {
+                resolve(this.getBlob());
             });
-            console.debug(URL.createObjectURL(blob));
-            return blob;
-        },
-        downloadVideo: async () => {
-            const data = URL.createObjectURL(this.getDataBlob());
-            const link = document.createElement('a');
-            link.href = data;
-            link.download = 'test';
+            console.debug('stopped recording');
+        }),
 
-            link.dispatchEvent(
-                new MouseEvent('click', {
-                    bubbles: true,
-                    cancelable: true,
-                    view: window
-                })
-            );
-        },
     }
 }
