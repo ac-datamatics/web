@@ -12,15 +12,16 @@ const ConnectCCP = (props) => {
     if (typeof window.connect === "undefined")
       throw new Error("global connect missing");
     console.log("init start");
+    console.debug(props.userActive);
     window.connect.core.initCCP(ref.current, {
       // CONNECT CONFIG
       ccpUrl: props.instanceURL, // Required
       region: "us-east-1", // Region of the instance
-      ccpAckTimeout: 5000, //optional, defaults to 3000 (ms)
-      ccpSynTimeout: 3000, //optional, defaults to 1000 (ms)
-      ccpLoadTimeout: 10000, //optional, defaults to 5000 (ms)
+      ccpAckTimeout: 3000, //optional, defaults to 3000 (ms)
+      ccpSynTimeout: 1000, //optional, defaults to 1000 (ms)
+      ccpLoadTimeout: 500, //optional, defaults to 5000 (ms)
       // LOGIN
-      loginPopup: false, // Show a popup window to authenticate
+      loginPopup: !props.userActive, // Show a popup window to authenticate
       loginPopupAutoClose: true, // Auto close login popup after auth
       loginOptions: {
         autoClose: true,
@@ -46,6 +47,7 @@ const ConnectCCP = (props) => {
       .getEventBus()
       .subscribe(window.connect.EventType.TERMINATED, () => {
         setInitialized(false);
+        props.setUserInactive();
         // Callback
         //   props.onInstanceTerminated?.();
       });
@@ -56,14 +58,16 @@ const ConnectCCP = (props) => {
       .subscribe(window.connect.EventType.UPDATE_CONNECTED_CCPS, () => {
         setInitialized(true);
         // Close login window
-        props.CloseWindow();
         props.setUserActive();
+        console.debug("BEFORE CLOSING WINDOW");
+        props.CloseWindow();
         // Callback
         //   this.props.onInstanceConnected?.();
         // Listen to agents
         window.connect.agent((agent) => {
           // Store agent
           setAgent(agent);
+          console.debug(agent.getName());
           // Callback
           // props.onAgent?.(agent);
           // Listen to agent changes

@@ -6,8 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 
 import AuthFunction from "./functions/mainFunction.jsx";
 
-
-
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
