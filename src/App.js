@@ -1,15 +1,22 @@
 import React, { useEffect } from "react";
 import Sidebar from "components/Sidebar";
+import SidebarSUPERV from "components/SidebarSUPERV";
 import RightSidebar from "components/RightSidebar";
-import Dashboard from "components/Dashboard";
+import {Dashboard} from "components/Dashboard";
 import styled from "styled-components";
 import scrollreveal from "scrollreveal";
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
-import Home from "./components/Home/Home";
-import Training from "./components/Training/Training";
+import {Home} from "./components/Home/Home";
+import {HomeSUPERV} from "./components/Home/Home";
+import {Training} from "./components/Training/Training";
 import LogIn from "./components/Login/Login";
+import {DashboardSUPERV} from "components/Dashboard";
+import {TrainingSUPERV} from "./components/Training/Training";
+
 export default function App(props) {
   const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserInactive } = props.AuthFunction();
+
+  const userType = "SUPERV";
 
   useEffect(() => {
     const sr = scrollreveal({
@@ -48,7 +55,7 @@ export default function App(props) {
           loging={loging}
         />
       </div>
-      <div hidden={!userActive}>
+      <div hidden={!userActive && (userType != "Agent")}>
         {/* <Router> */}
         <Div>
           <Sidebar />
@@ -75,10 +82,42 @@ export default function App(props) {
             loginWindow={loginWindow}
             CloseWindow={CloseWindow}
             setUserInactive={setUserInactive}
+            userType = {userType}
+
           />
         </Div>
         {/* </Router> */}
       </div>
+        <div hidden={!userActive && (userType != "SUPERV")}>
+          {/* <Router> */}
+          <Div>
+            <SidebarSUPERV />
+            <View>
+              <Switch>  
+                <Route path="/homeSUPERV">
+                  <HomeSUPERV />
+                </Route>
+                <Route path="/leaderboardSUPERV">
+                  <DashboardSUPERV />
+                </Route>
+                <Route path="/trainingSUPERV">
+                  <TrainingSUPERV />
+                </Route>
+                
+              </Switch>
+            </View>
+            <RightSidebar
+              userActive={userActive}
+              loging={loging}
+              setUserActive={setUserActive}
+              loginWindow={loginWindow}
+              CloseWindow={CloseWindow}
+              setUserInactive={setUserInactive}
+              userType ={userType}
+            />
+          </Div>
+          {/* </Router> */}
+        </div>
     </div>
   );
 }
