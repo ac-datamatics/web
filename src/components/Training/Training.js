@@ -4,7 +4,7 @@ import Assigned from "./Assigned";
 import classes from "./Training.module.css";
 import TrainingTabs from "./TrainingTabs";
 
-const Training = () => {
+export const Training = () => {
   return (
     <div className={classes.newWrap}>
     <TrainingTabs labels={["Assigned", "General"]}>
@@ -16,4 +16,16 @@ const Training = () => {
   );
 };
 
-export default Training;
+export function TrainingSUPERV ()  {
+  return (
+    <div className={classes.newWrap}>
+    <TrainingTabs labels={["General"]}>
+      <div className={classes.contentWrap}>
+        <Assigned />
+      </div>
+    </TrainingTabs> 
+    </div>
+
+  );
+};
+

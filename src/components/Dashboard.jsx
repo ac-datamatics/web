@@ -6,7 +6,8 @@ import Streams from "components/Streams";
 import TargetAudience from "./TargetAudience";
 import TopReleases from "./TopReleases";
 import scrollreveal from "scrollreveal";
-function Dashboard() {
+
+export function Dashboard() {
   useEffect(() => {
     const sr = scrollreveal({
       origin: "bottom",
@@ -38,7 +39,39 @@ function Dashboard() {
   );
 }
 
-const Section = styled.section`
+export function DashboardSUPERV ()  {
+  useEffect(() => {
+    const sr = scrollreveal({
+      origin: "bottom",
+      distance: "80px",
+      duration: 2000,
+      reset: false,
+    });
+    sr.reveal(
+      `
+        nav,
+        .row,
+        .row2
+      `,
+      {
+        opacity: 0,
+        interval: 100,
+      }
+    );
+  }, []);
+  return (
+    <Section>
+      <Navbar />
+      <div className="grid">
+        <div className="row2">
+          <TargetAudience />
+        </div>
+      </div>
+    </Section>
+  );
+};
+
+export const Section = styled.section`
   height: 100%;
   width: 100%;
   background-color: rgba(3, 3, 27, 0.7);
@@ -75,5 +108,3 @@ const Section = styled.section`
     }
   }
 `;
-
-export default Dashboard;
