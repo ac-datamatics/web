@@ -8,8 +8,8 @@ import "./App.css";
 import React from "react";
 
 function App(props) {
-  const { userActive, loginWindow, loging, CloseWindow, setUserActive } = props.AuthFunction();
-
+  const { userActive, loginWindow, loging, CloseWindow, setUserActive } =
+    props.AuthFunction();
   // if (!userActive) {
   //   loging();
   // }

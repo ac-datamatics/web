@@ -1,14 +1,23 @@
 import isBrowserCompatible from "./compatibility";
 import CCP from "./CCP";
+import TestCCP from "./TestCCP";
 
 import classes from "./AmazonConnect.module.css";
 
-const AmazonConnect = (props) => {  
+const AmazonConnect = (props) => {
   const { userActive, loginWindow, loging, CloseWindow, setUserActive } = props;
   return (
     <div id={"ccp"} className={classes.ccpPosition}>
       {isBrowserCompatible() && (
-        <CCP
+        // <CCP
+        //   userActive={userActive}
+        //   loging={loging}
+        //   setUserActive={setUserActive}
+        //   loginWindow={loginWindow}
+        //   CloseWindow={CloseWindow}
+        //   instanceURL={"https://ac-datamatics.my.connect.aws/ccp-v2"}
+        // />
+        <TestCCP
           userActive={userActive}
           loging={loging}
           setUserActive={setUserActive}

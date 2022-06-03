@@ -14,15 +14,15 @@ export default function AuthFunction() {
         "window2",
         "popup=1"
       );
-      setLoginWindow(__loginWindow);  
+      setLoginWindow(__loginWindow);
     },
     CloseWindow: async () => {
-      loginWindow?.close()
-      setLoginWindow(undefined)
+      loginWindow?.close();
+      setLoginWindow(undefined);
     },
     setUserActive: async () => {
       setUserActive(true);
     },
-
+    
   };
 }
