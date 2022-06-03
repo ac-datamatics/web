@@ -12,11 +12,11 @@ const jump = keyframes`
 `;
 
 const Wrapper = styled.section`
-  display: flex;
+  display: grid;
   // justify-content: center;
   align-items: center;
-  height: 100%;
   width: 100%;
+  height: 100vh;
 `;
 
 const Form = styled.form`
@@ -27,6 +27,8 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   position: relative;
+  background-color: rgb(46,46,46);
+  border-radius: 25px;
 `;
 
 const Button = styled.button`
@@ -35,12 +37,12 @@ const Button = styled.button`
   color: rgb(253, 249, 243);
   font-weight: 600;
   text-transform: uppercase;
-  background: #070E4A;
+  background: rgb(227, 151, 64);
   border: none;
   border-radius: 3px;
   outline: 0;
   cursor: pointer;
-  margin-top: 0.6rem;
+  margin-top: 40px;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-out;
   :hover {
@@ -52,21 +54,22 @@ const Button = styled.button`
 const Title = styled.h2`
   font-weight: normal;
   color: #FFFFFF;
+  font-size: 22px;
   text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
   text-align: center;
+  padding-top: 10px;
 `;
 
 function LogIn(props) {
   const { loging } = props;
   return (
-    <>
-      <Wrapper>
-        <Form>
-          <Title>Login to Amazon Connect</Title>
-          <Button onClick={loging}>Login</Button>
-        </Form>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <Form>
+        <img src={'/Images/ .png'}/> 
+        <Title>Login to Amazon Connect</Title>
+        <Button onClick={loging}>Login</Button>
+      </Form>
+    </Wrapper>
   );
 }
 
