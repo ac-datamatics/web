@@ -2,8 +2,6 @@ import isBrowserCompatible from "./compatibility";
 import CCP from "./CCP";
 import TestCCP from "./TestCCP";
 
-import classes from "./AmazonConnect.module.css";
-
 const AmazonConnect = (props) => {
   const {
     userActive,
@@ -15,8 +13,13 @@ const AmazonConnect = (props) => {
     setUserInactive,
     setUserType,
   } = props;
+
+  const onIncomingContact = () => {
+    alert("INCOMING CONTACT");
+  };
+
   return (
-    <div id={"ccp"} className={classes.ccpPosition}>
+    <>
       {isBrowserCompatible() && (
         // <CCP
         //   userActive={userActive}
@@ -28,6 +31,7 @@ const AmazonConnect = (props) => {
         // />
         <TestCCP
           userActive={userActive}
+          onIncomingContact={onIncomingContact}
           userType={userType}
           setUserType={setUserType}
           loging={loging}
@@ -38,7 +42,7 @@ const AmazonConnect = (props) => {
           instanceURL={"https://ac-datamatics.my.connect.aws/ccp-v2"}
         />
       )}
-    </div>
+    </>
   );
 };
 

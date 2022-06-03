@@ -11,9 +11,9 @@ function App(props) {
   const {
     // userActive,
     userType,
-    loginWindow,
+    // loginWindow,
     loging,
-    CloseWindow,
+    // CloseWindow,
     // setUserActive,
     // setUserInactive,
     setUserType,
@@ -21,6 +21,7 @@ function App(props) {
 
   const [renderCCP, setRenderCCP] = useState(false);
   const [userActive, setUserActive] = useState(false);
+  const [loginWindow, setLoginWindow] = useState(null);
 
   useEffect(() => {
     setUserActive(JSON.parse(window.localStorage.getItem("userActive")));
@@ -32,12 +33,24 @@ function App(props) {
 
   const handleLogin = () => {
     localStorage.removeItem("connectPopupManager::connect::loginPopup");
+    let tempWindow = window.open(
+      "https://ac-datamatics.my.connect.aws/ccp-v2",
+      "window2",
+      "popup, width=400, height=700"
+    );
+    setLoginWindow(tempWindow);
     setRenderCCP(true);
     // setUserActive(true);
   };
 
+  const handleCloseWindow = () => {
+    loginWindow?.close();
+    setLoginWindow(null);
+  };
+
   const setUserInactive = () => {
     setUserActive(false);
+    setRenderCCP(false);
   };
 
   const handleSetUserActive = () => {
@@ -45,50 +58,56 @@ function App(props) {
   };
 
   return (
-    <div className="root">
-      <div hidden={userActive}>
-        <p>Loading...</p>
-        <p>Pleas login in Amazon connect</p>
-        <button onClick={handleLogin}> Login </button>
-        <button onClick={() => console.debug(userActive)}> User Active </button>
-      </div>
+    <>
+      {/* {alert("APP")} */}
+      <div className="root">
+        <div hidden={userActive}>
+          <p>Loading...</p>
+          <p>Pleas login in Amazon connect</p>
+          <button onClick={handleLogin}> Login </button>
+          <button onClick={() => console.debug(userActive, renderCCP)}>
+            {" "}
+            User Active{" "}
+          </button>
+        </div>
 
-      <div className="sideBarContainer" hidden={!userActive}>
-        <Sidebar className="sideBar">
-          <Route path="*" exact>
-            <Redirect to="/home" />
-          </Route>
-          <Route path="/home" exact>
-            <Home />
-          </Route>
-          <Route path="/leaderboard" exact>
-            <Leaderboard />
-          </Route>
-          <Route path="/training" exact>
-            <Training />
-          </Route>
-          {/* <Route path="/screen-recording" exact>
+        <div className="sideBarContainer" hidden={!userActive}>
+          <Sidebar className="sideBar">
+            <Route path="*" exact>
+              <Redirect to="/home" />
+            </Route>
+            <Route path="/home" exact>
+              <Home />
+            </Route>
+            <Route path="/leaderboard" exact>
+              <Leaderboard />
+            </Route>
+            <Route path="/training" exact>
+              <Training />
+            </Route>
+            {/* <Route path="/screen-recording" exact>
             <ScreenRecording />
           </Route> */}
-        </Sidebar>
-      </div>
-      {renderCCP || userActive ? (
-        <div className="amazonConnectContainer" hidden={!userActive}>
-          <AmazonConnect
-            setUserActive={handleSetUserActive}
-            setUserInactive={setUserInactive}
-            userActive={userActive}
-            userType={userType}
-            loging={loging}
-            loginWindow={loginWindow}
-            CloseWindow={CloseWindow}
-            setUserType={setUserType}
-          />
+          </Sidebar>
         </div>
-      ) : (
-        <></>
-      )}
-    </div>
+        {renderCCP || userActive ? (
+          <div className="amazonConnectContainer" hidden={!userActive}>
+            <AmazonConnect
+              setUserActive={handleSetUserActive}
+              setUserInactive={setUserInactive}
+              userActive={userActive}
+              userType={userType}
+              loging={loging}
+              loginWindow={loginWindow}
+              CloseWindow={handleCloseWindow}
+              setUserType={setUserType}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
+      </div>
+    </>
   );
 }
 

@@ -11,13 +11,13 @@ export default function AuthFunction() {
     loging: async () => {
       localStorage.removeItem("connectPopupManager::connect::loginPopup");
       // Open login window
-      // setLoginWindow(
-      //   window.open(
-      //     "https://ac-datamatics.my.connect.aws/ccp-v2",
-      //     "window2",
-      //     "popup, width=400, height=700"
-      //   )
-      // );
+      setLoginWindow(
+        window.open(
+          "https://ac-datamatics.my.connect.aws/ccp-v2",
+          "window2",
+          "popup, width=400, height=700"
+        )
+      );
       console.debug(loginWindow);
     },
     CloseWindow: async () => {

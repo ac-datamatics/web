@@ -1,11 +1,13 @@
 import "amazon-connect-streams";
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
+
+import classes from "./AmazonConnect.module.css";
 
 const ConnectCCP = (props) => {
-  const ref = useRef();
+  const initialized = useRef(false);
+  const agent = useRef(null);
 
-  const [initialized, setInitialized] = useState(false);
-  const [agent, setAgent] = useState(null);
+  const ref = useRef();
 
   useEffect(() => {
     if (typeof window === "undefined") throw new Error("window missing");
@@ -19,9 +21,9 @@ const ConnectCCP = (props) => {
       region: "us-east-1", // Region of the instance
       ccpAckTimeout: 3000, //optional, defaults to 3000 (ms)
       ccpSynTimeout: 1000, //optional, defaults to 1000 (ms)
-      ccpLoadTimeout: 500, //optional, defaults to 5000 (ms)
+      ccpLoadTimeout: 1000, //optional, defaults to 5000 (ms)
       // LOGIN
-      loginPopup: !props.userActive, // Show a popup window to authenticate
+      loginPopup: false, // Show a popup window to authenticate
       loginPopupAutoClose: true, // Auto close login popup after auth
       loginOptions: {
         autoClose: true,
@@ -46,8 +48,11 @@ const ConnectCCP = (props) => {
     window.connect.core
       .getEventBus()
       .subscribe(window.connect.EventType.TERMINATED, () => {
-        setInitialized(false);
+        if (!initialized.current) return;
+        initialized.current = false;
+        agent.current = null;
         props.setUserInactive();
+        window.location.reload(true);
         // Callback
         //   props.onInstanceTerminated?.();
       });
@@ -56,22 +61,23 @@ const ConnectCCP = (props) => {
     window.connect.core
       .getEventBus()
       .subscribe(window.connect.EventType.UPDATE_CONNECTED_CCPS, () => {
-        setInitialized(true);
+        if (initialized.current) return;
+        initialized.current = true;
         // Close login window
         props.setUserActive();
-        console.debug("BEFORE CLOSING WINDOW");
+        // console.debug("BEFORE CLOSING WINDOW");
         props.CloseWindow();
         // Callback
         //   this.props.onInstanceConnected?.();
         // Listen to agents
-        window.connect.agent((agent) => {
+        window.connect.agent((_agent) => {
           // Store agent
-          setAgent(agent);
-          console.debug(agent.getName());
+          agent.current = _agent;
+          console.debug(agent.current.getConfiguration());
           // Callback
           // props.onAgent?.(agent);
           // Listen to agent changes
-          agent.onStateChange((state) => {
+          agent.current.onStateChange((state) => {
             // Avoid duplicate events
             if (state.newState == state.oldState) return;
             // Callback
@@ -90,8 +96,8 @@ const ConnectCCP = (props) => {
             previousState = contact.getState().type;
             switch (previousState) {
               case window.connect.ContactStateType.INCOMING:
-              case window.connect.ContactStateType.CONNECTING:
                 return props.onIncomingContact?.(contact);
+              case window.connect.ContactStateType.CONNECTING:
               case window.connect.ContactStateType.PENDING:
                 return props.onPendingContact?.(contact);
               case window.connect.ContactStateType.MISSED:
@@ -129,8 +135,9 @@ const ConnectCCP = (props) => {
   return (
     <div
       ref={ref}
-      style={{ width: "100%", height: "100%", minHeight: 480, minWidth: 400 }}
+      // style={{ width: "100%", height: "100%", minHeight: 480, minWidth: 400 }}
       // style={{ minWidth: 400, minHeight: 480 }}
+      className={classes.ccpPosition}
     />
   );
 };
