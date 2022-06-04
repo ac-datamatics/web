@@ -22,6 +22,7 @@ function App(props) {
   const [renderCCP, setRenderCCP] = useState(false);
   const [userActive, setUserActive] = useState(false);
   const [loginWindow, setLoginWindow] = useState(null);
+  const [blobTest, setBlobTest] = useState(null);
   const agentUsername = useRef("");
 
   useEffect(() => {
@@ -58,6 +59,10 @@ function App(props) {
     setUserActive(true);
   };
 
+  const handleSetBlob = (blob) => {
+    setBlobTest(blob);
+  };
+
   return (
     <>
       {/* {alert("APP")} */}
@@ -78,7 +83,7 @@ function App(props) {
               <Redirect to="/home" />
             </Route>
             <Route path="/home" exact>
-              <Home />
+              <Home blobTest={blobTest} />
             </Route>
             <Route path="/leaderboard" exact>
               <Leaderboard />
@@ -103,6 +108,7 @@ function App(props) {
               loginWindow={loginWindow}
               CloseWindow={handleCloseWindow}
               setUserType={setUserType}
+              setBlob={handleSetBlob}
             />
           </div>
         ) : (

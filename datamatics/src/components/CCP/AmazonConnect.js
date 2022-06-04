@@ -1,8 +1,11 @@
+import { useRef } from "react";
 import isBrowserCompatible from "./compatibility";
-import TestCCP from "./TestCCP";
+import CCP from "./CCP";
+import RecordingFunctions from "../../functions/RecordingFunctions";
 
 const AmazonConnect = (props) => {
   const {
+    setBlob,
     agentUsername,
     userActive,
     userType,
@@ -15,20 +18,11 @@ const AmazonConnect = (props) => {
   } = props;
 
   const { removeScreen, getScreen, start, stop } = RecordingFunctions();
-  const ccp = React.createRef();
 
   return (
     <>
       {isBrowserCompatible() && (
-        // <CCP
-        //   userActive={userActive}
-        //   loging={loging}
-        //   setUserActive={setUserActive}
-        //   loginWindow={loginWindow}
-        //   CloseWindow={CloseWindow}
-        //   instanceURL={"https://ac-datamatics.my.connect.aws/ccp-v2"}
-        // />
-        <TestCCP
+        <CCP
           agentUsername={agentUsername}
           userActive={userActive}
           userType={userType}
@@ -39,7 +33,6 @@ const AmazonConnect = (props) => {
           loginWindow={loginWindow}
           CloseWindow={CloseWindow}
           instanceURL={"https://ac-datamatics.my.connect.aws/ccp-v2"}
-          ref={ccp}
           onInstanceTerminated={async () => {
             // Called on instance termination, when an agent logs out
             removeScreen();
@@ -67,22 +60,20 @@ const AmazonConnect = (props) => {
             } else if (state?.newState === "Offline") {
               removeScreen();
             }
-            console.debug(state.newState);
           }}
           onIncomingContact={async (contact) => {
             // Called when there is an incoming contact (eg, the phone is ringing)
-            console.debug("i am incoming");
             await getScreen(true);
           }}
           onConnectedContact={(contact) => {
             // Called when the contact is connected (the call has started)
             start(contact);
-            console.debug("hello there");
           }}
           onDestroyContact={async (contact) => {
             // Called after acw, when the agent closes the communication with the contact
             // Stop recording
             let heyBlob = await stop();
+            setBlob(heyBlob);
 
             // Here, the stored recording should be uploaded to S3
             // Storage.put(`${contact.getContactId()}.webm`, heyBlob, {
@@ -95,11 +86,12 @@ const AmazonConnect = (props) => {
 
             // Here, a lambda must be called to insert the recording's data into the database
             const data = {
-              agentId: ccp.current.agent.getConfiguration().username,
+              agentId: agentUsername,
               // callStartUTCDate: contact.getQueueTimestamp().toISOString(),
               contactId: contact.getContactId(),
               queueId: contact.getQueue().queueId,
             };
+            console.debug(data, "DATATATATA");
           }}
         />
       )}
