@@ -78,6 +78,8 @@ class CCP extends Component {
         connect.agent((agent) => {
           // Store agent
           this.agent = agent;
+          console.log(agent);
+          this.props.setGlobalTypeUser("Agent");
           // Callback
           this.props.onAgent?.(agent);
           // Listen to agent changes

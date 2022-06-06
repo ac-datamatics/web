@@ -3,9 +3,11 @@ import { useState } from "react";
 export default function AuthFunction() {
   const [userActive, setUserActive] = useState(false);
   const [loginWindow, setLoginWindow] = useState(undefined);
+  const [userType, setUserType] = useState("");
   return {
     userActive,
     loginWindow,
+    userType,
     loging: async () => {
       localStorage.removeItem("connectPopupManager::connect::loginPopup");
       // Open login window
@@ -26,5 +28,8 @@ export default function AuthFunction() {
     setUserInactive: async () => {
       setUserActive(false);
     },
+    setGlobalTypeUser: async (user) => {
+      setUserType(user);
+    }
   };
 }

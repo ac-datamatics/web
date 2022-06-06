@@ -47,14 +47,14 @@ function Sidebar() {
   return (
     <Aside id="sidebar">
         <ul className="links">
-          <li className={homeselected}>
-            <BsFillHouseDoorFill type="button" onClick={handleHome}/>
+          <li className={homeselected} type="button" onClick={handleHome}>
+            <BsFillHouseDoorFill />
           </li>
-          <li className={leaderboardselected}>
-            <MdLeaderboard type="button" onClick={handleLeaderboard}/>
+          <li className={leaderboardselected} type="button" onClick={handleLeaderboard}>
+            <MdLeaderboard />
           </li>
-          <li className={trainingboardselected}>
-            <BsFillCameraVideoFill type="button" onClick={handleTraining}/>
+          <li className={trainingboardselected} type="button" onClick={handleTraining}>
+            <BsFillCameraVideoFill />
           </li>
         </ul>
     </Aside>

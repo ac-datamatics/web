@@ -6,7 +6,7 @@ import Player from "./Player";
 import AmazonConnect from "./CCP/AmazonConnect";
 
 function RightSidebar(props) {
-  const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserInactive } = props;
+  const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserInactive, setGlobalTypeUser } = props;
 
   return (
     <Section id="rightSidebar">
@@ -18,6 +18,7 @@ function RightSidebar(props) {
           loginWindow={loginWindow}
           CloseWindow={CloseWindow}
           setUserInactive={setUserInactive}
+          setGlobalTypeUser={setGlobalTypeUser}
         />
       </div>
     </Section>

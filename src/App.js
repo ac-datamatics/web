@@ -14,9 +14,7 @@ import {DashboardSUPERV} from "components/Dashboard";
 import {TrainingSUPERV} from "./components/Training/Training";
 
 export default function App(props) {
-  const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserInactive } = props.AuthFunction();
-
-  const userType = "SUPERV";
+  const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserInactive, userType, setGlobalTypeUser} = props.AuthFunction();
 
   useEffect(() => {
     const sr = scrollreveal({
@@ -55,55 +53,24 @@ export default function App(props) {
           loging={loging}
         />
       </div>
-      <div hidden={!userActive && (userType != "Agent")}>
-        {/* <Router> */}
-        <Div>
-          <Sidebar />
-          <View>
-            <Switch>
-              <Route path="/" exact>
-                <Redirect to="/home" />
-              </Route>
-              <Route path="/home">
-                <Home />
-              </Route>
-              <Route path="/leaderboard">
-                <Dashboard />
-              </Route>
-              <Route path="/training">
-                <Training />
-              </Route>
-            </Switch>
-          </View>
-          <RightSidebar
-            userActive={userActive}
-            loging={loging}
-            setUserActive={setUserActive}
-            loginWindow={loginWindow}
-            CloseWindow={CloseWindow}
-            setUserInactive={setUserInactive}
-            userType = {userType}
-
-          />
-        </Div>
-        {/* </Router> */}
-      </div>
-        <div hidden={!userActive && (userType != "SUPERV")}>
-          {/* <Router> */}
+      <div hidden={!userActive || (userType != "Agent")}>
+        <Router>
           <Div>
-            <SidebarSUPERV />
+            <Sidebar />
             <View>
-              <Switch>  
-                <Route path="/homeSUPERV">
-                  <HomeSUPERV />
+              <Switch>
+                <Route exact path="/">
+                  <Home />
                 </Route>
-                <Route path="/leaderboardSUPERV">
-                  <DashboardSUPERV />
+                <Route exact path="/home">
+                  <Home />
                 </Route>
-                <Route path="/trainingSUPERV">
-                  <TrainingSUPERV />
+                <Route exact path="/leaderboard">
+                  <Dashboard />
                 </Route>
-                
+                <Route exact path="/training">
+                  <Training />
+                </Route>
               </Switch>
             </View>
             <RightSidebar
@@ -113,10 +80,30 @@ export default function App(props) {
               loginWindow={loginWindow}
               CloseWindow={CloseWindow}
               setUserInactive={setUserInactive}
-              userType ={userType}
+              setGlobalTypeUser = {setGlobalTypeUser}
             />
           </Div>
-          {/* </Router> */}
+        </Router>
+      </div>
+        <div hidden={!userActive || (userType != "SUPERV")}>
+          <Router>
+            <Div>
+              <SidebarSUPERV />
+              <View>
+                <Switch>  
+                  <Route exact path="/homeSUPERV">
+                    <HomeSUPERV />
+                  </Route>
+                  <Route exact path="/leaderboardSUPERV">
+                    <DashboardSUPERV />
+                  </Route>
+                  <Route exact path="/trainingSUPERV">
+                    <TrainingSUPERV />
+                  </Route>
+                </Switch>
+              </View>
+            </Div>
+          </Router>
         </div>
     </div>
   );
