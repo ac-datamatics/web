@@ -61,13 +61,13 @@ const Title = styled.h2`
 `;
 
 function LogIn(props) {
-  const { loging } = props;
+  const { handleLogin } = props;
   return (
     <Wrapper>
       <Form>
         <img src={'/Images/ .png'}/> 
         <Title>Login to Amazon Connect</Title>
-        <Button onClick={loging}>Login</Button>
+        <Button onClick={handleLogin}>Login</Button>
       </Form>
     </Wrapper>
   );

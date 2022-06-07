@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Sidebar from "components/Sidebar";
 import SidebarSUPERV from "components/SidebarSUPERV";
 import RightSidebar from "components/RightSidebar";
@@ -14,46 +14,85 @@ import {DashboardSUPERV} from "components/Dashboard";
 import {TrainingSUPERV} from "./components/Training/Training";
 
 export default function App(props) {
-  const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserInactive, userType, setGlobalTypeUser} = props.AuthFunction();
+  const {userType, setGlobalTypeUser} = props.AuthFunction();
+
+  const [renderCCP, setRenderCCP] = useState(false);
+  const [userActive, setUserActive] = useState(false);
+  const [loginWindow, setLoginWindow] = useState(null);
+  const agentUsername = useRef("");
 
   useEffect(() => {
-    const sr = scrollreveal({
-      origin: "left",
-      distance: "80px",
-      duration: 1000,
-      reset: false,
-    });
-    sr.reveal(
-      `
-       #sidebar
-    `,
-      {
-        opacity: 0,
-      }
-    );
-    const sr2 = scrollreveal({
-      origin: "right",
-      distance: "80px",
-      duration: 1000,
-      reset: false,
-    });
-    sr2.reveal(
-      `
-       #rightSidebar
-    `,
-      {
-        opacity: 0,
-      }
-    );
+    setUserActive(JSON.parse(window.localStorage.getItem("userActive")));
   }, []);
+
+  useEffect(() => {
+    window.localStorage.setItem("userActive", userActive);
+  }, [userActive]);
+
+  const handleLogin = () => {
+    localStorage.removeItem("connectPopupManager::connect::loginPopup");
+    console.log("HOLAAA")
+    let tempWindow = window.open(
+      "https://ac-datamatics.my.connect.aws/ccp-v2",
+      "window2",
+      "popup, width=400, height=700"
+    );
+    setLoginWindow(tempWindow);
+    // setUserActive(true);
+  };
+
+  const handleCloseWindow = () => {
+    loginWindow?.close();
+    setLoginWindow(null);
+  };
+
+  const setUserInactive = () => {
+    setUserActive(false);
+    setRenderCCP(false);
+  };
+
+  const handleSetUserActive = () => {
+    setUserActive(true);
+  };
+
+  // useEffect(() => {
+  //   const sr = scrollreveal({
+  //     origin: "left",
+  //     distance: "80px",
+  //     duration: 1000,
+  //     reset: false,
+  //   });
+  //   sr.reveal(
+  //     `
+  //      #sidebar
+  //   `,
+  //     {
+  //       opacity: 0,
+  //     }
+  //   );
+  //   const sr2 = scrollreveal({
+  //     origin: "right",
+  //     distance: "80px",
+  //     duration: 1000,
+  //     reset: false,
+  //   });
+  //   sr2.reveal(
+  //     `
+  //      #rightSidebar
+  //   `,
+  //     {
+  //       opacity: 0,
+  //     }
+  //   );
+  // }, []);
   return (
     <div className="root">
       <div hidden={userActive}>
         <LogIn
-          loging={loging}
+          handleLogin={handleLogin}
         />
       </div>
-      <div hidden={!userActive || (userType != "Agent")}>
+      <div hidden={!userActive /*|| (userType !== "Agent")*/}>
         <Router>
           <Div>
             <Sidebar />
@@ -74,18 +113,20 @@ export default function App(props) {
               </Switch>
             </View>
             <RightSidebar
-              userActive={userActive}
-              loging={loging}
-              setUserActive={setUserActive}
-              loginWindow={loginWindow}
-              CloseWindow={CloseWindow}
+              agentUsername={agentUsername}
+              setUserActive={handleSetUserActive}
               setUserInactive={setUserInactive}
-              setGlobalTypeUser = {setGlobalTypeUser}
+              userActive={userActive}
+              userType={userType}
+              handleLogin={handleLogin}
+              loginWindow={loginWindow}
+              CloseWindow={handleCloseWindow}
+              setUserType={setGlobalTypeUser}
             />
           </Div>
         </Router>
       </div>
-        <div hidden={!userActive || (userType != "SUPERV")}>
+        <div hidden={!userActive || (userType !== "SUPERV")}>
           <Router>
             <Div>
               <SidebarSUPERV />
