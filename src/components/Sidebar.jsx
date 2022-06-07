@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { BsHouseDoorFill, BsFillCameraVideoFill } from "react-icons/bs";
 import { MdLeaderboard } from "react-icons/md";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiOutlineLogout } from "react-icons/ai";
 import { BrowserRouter as Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import {RiMenuLine, RiLayoutGridFill, RiChat4Fill, RiLogoutCircleRFill} from 'react-icons/ri'
 import {BsFillHouseDoorFill} from 'react-icons/bs'
 
-function Sidebar() {
+function Sidebar(props) {
   const sidebarCollapsed = localStorage.getItem('sidebar-collapsed');
   const [isExpanded, setIsExpanded] = useState(sidebarCollapsed ? false : true);
+  const {setUserInactive} = props
   const handleToggler = () => {
     if (isExpanded) {
       setIsExpanded(false);
@@ -44,6 +45,12 @@ function Sidebar() {
     setleaderboardselected("");
     settrainingselected("selected");
   }
+  function handleLogout() {
+    fetch("https://ac-datamatics.my.connect.aws/connect/logout", { credentials: 'include', mode: 'no-cors'})
+    .then(() => {
+      setUserInactive()
+    });
+  }
   return (
     <Aside id="sidebar">
         <ul className="links">
@@ -55,6 +62,9 @@ function Sidebar() {
           </li>
           <li className={trainingboardselected} type="button" onClick={handleTraining}>
             <BsFillCameraVideoFill />
+          </li>
+          <li type="button" onClick={handleLogout}>
+            <AiOutlineLogout />
           </li>
         </ul>
     </Aside>

@@ -2,16 +2,16 @@ import React, { useEffect, useState, useRef } from "react";
 import Sidebar from "components/Sidebar";
 import SidebarSUPERV from "components/SidebarSUPERV";
 import RightSidebar from "components/RightSidebar";
-import {Dashboard} from "components/Dashboard";
+import { Dashboard } from "components/Dashboard";
 import styled from "styled-components";
 import scrollreveal from "scrollreveal";
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
-import {Home} from "./components/Home/Home";
-import {HomeSUPERV} from "./components/Home/Home";
-import {Training} from "./components/Training/Training";
+import { Home } from "./components/Home/Home";
+import { HomeSUPERV } from "./components/Home/Home";
+import { Training } from "./components/Training/Training";
 import LogIn from "./components/Login/Login";
-import {DashboardSUPERV} from "components/Dashboard";
-import {TrainingSUPERV} from "./components/Training/Training";
+import { DashboardSUPERV } from "components/Dashboard";
+import { TrainingSUPERV } from "./components/Training/Training";
 
 export default function App(props) {
   const {userType, setGlobalTypeUser} = props.AuthFunction();
@@ -95,7 +95,9 @@ export default function App(props) {
       <div hidden={!userActive || (userType !== "Agent")}>
         <Router>
           <Div>
-            <Sidebar />
+            <Sidebar
+              setUserInactive={setUserInactive}
+            />
             <View>
               <Switch>
                 <Route exact path="/">
@@ -123,6 +125,28 @@ export default function App(props) {
               CloseWindow={handleCloseWindow}
               setUserType={setGlobalTypeUser}
             />
+          </Div>
+        </Router>
+      </div>
+      <div hidden={!userActive || (userType != "SUPERV")}>
+        <Router>
+          <Div>
+            <SidebarSUPERV
+              setUserInactive={setUserInactive}
+            />
+            <View>
+              <Switch>
+                <Route exact path="/homeSUPERV">
+                  <HomeSUPERV />
+                </Route>
+                <Route exact path="/leaderboardSUPERV">
+                  <DashboardSUPERV />
+                </Route>
+                <Route exact path="/trainingSUPERV">
+                  <TrainingSUPERV />
+                </Route>
+              </Switch>
+            </View>
           </Div>
         </Router>
       </div>
