@@ -92,7 +92,7 @@ export default function App(props) {
           handleLogin={handleLogin}
         />
       </div>
-      <div hidden={!userActive /*|| (userType !== "Agent")*/}>
+      <div hidden={!userActive || (userType !== "Agent")}>
         <Router>
           <Div>
             <Sidebar />
@@ -126,7 +126,7 @@ export default function App(props) {
           </Div>
         </Router>
       </div>
-        <div hidden={!userActive || (userType !== "SUPERV")}>
+        <div hidden={!userActive || (userType !== "Admin")}>
           <Router>
             <Div>
               <SidebarSUPERV />
