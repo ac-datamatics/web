@@ -21,12 +21,13 @@ function App(props) {
 
   const [renderCCP, setRenderCCP] = useState(false);
   const [userActive, setUserActive] = useState(false);
-  const [loginWindow, setLoginWindow] = useState(null);
   const [blobTest, setBlobTest] = useState(null);
+  const loginWindow = useRef(null);
   const agentUsername = useRef("");
 
   useEffect(() => {
     setUserActive(JSON.parse(window.localStorage.getItem("userActive")));
+    console.debug(renderCCP);
   }, []);
 
   useEffect(() => {
@@ -35,19 +36,18 @@ function App(props) {
 
   const handleLogin = () => {
     localStorage.removeItem("connectPopupManager::connect::loginPopup");
-    let tempWindow = window.open(
+    loginWindow.current = window.open(
       "https://ac-datamatics.my.connect.aws/ccp-v2",
       "window2",
       "popup, width=400, height=700"
     );
-    setLoginWindow(tempWindow);
     setRenderCCP(true);
     // setUserActive(true);
   };
 
   const handleCloseWindow = () => {
-    loginWindow?.close();
-    setLoginWindow(null);
+    loginWindow?.current.close();
+    loginWindow.current = null;
   };
 
   const setUserInactive = () => {
