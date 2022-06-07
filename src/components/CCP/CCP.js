@@ -79,7 +79,7 @@ class CCP extends Component {
           // Store agent
           this.agent = agent;
           console.log(agent);
-          this.props.setGlobalTypeUser("Agent");
+          this.props.setGlobalTypeUser("SUPERV");
           // Callback
           this.props.onAgent?.(agent);
           // Listen to agent changes
