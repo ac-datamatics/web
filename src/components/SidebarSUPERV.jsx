@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { BsHouseDoorFill, BsFillCameraVideoFill } from "react-icons/bs";
 import { MdLeaderboard } from "react-icons/md";
-import { AiOutlineStar } from "react-icons/ai";
+import { AiOutlineLogout } from "react-icons/ai";
 import { BrowserRouter as Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import {RiMenuLine, RiLayoutGridFill, RiChat4Fill, RiLogoutCircleRFill} from 'react-icons/ri'
@@ -55,6 +55,9 @@ function SidebarSUPERV() {
           </li>
           <li className={trainingboardselected}>
             <BsFillCameraVideoFill type="button" onClick={handleTraining}/>
+          </li>
+          <li type="button">
+            <AiOutlineLogout />
           </li>
         </ul>
     </Aside>
