@@ -3,7 +3,7 @@
   margin: 1%;
 }
 .media {
-  height: 180px;
+  height: 8em;
   aspect-ratio: 105/59;
 }
 
@@ -14,5 +14,5 @@
 
 .content {
   background-color: #232f3e;
-  color: #ddd;
+  color: rgb(193, 192, 197);
 }
