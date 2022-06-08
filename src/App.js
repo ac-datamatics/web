@@ -14,7 +14,7 @@ import { DashboardSUPERV } from "components/Dashboard";
 import { TrainingSUPERV } from "./components/Training/Training";
 
 export default function App(props) {
-  const {userType, setGlobalTypeUser} = props.AuthFunction();
+  const { userType, setGlobalTypeUser } = props.AuthFunction();
 
   const [renderCCP, setRenderCCP] = useState(false);
   const [userActive, setUserActive] = useState(false);
@@ -150,26 +150,28 @@ export default function App(props) {
           </Div>
         </Router>
       </div>
-        <div hidden={!userActive || (userType !== "Admin")}>
-          <Router>
-            <Div>
-              <SidebarSUPERV />
-              <View>
-                <Switch>  
-                  <Route exact path="/homeSUPERV">
-                    <HomeSUPERV />
-                  </Route>
-                  <Route exact path="/leaderboardSUPERV">
-                    <DashboardSUPERV />
-                  </Route>
-                  <Route exact path="/trainingSUPERV">
-                    <TrainingSUPERV />
-                  </Route>
-                </Switch>
-              </View>
-            </Div>
-          </Router>
-        </div>
+      <div hidden={!userActive || (userType !== "Admin")}>
+        <Router>
+          <Div>
+            <SidebarSUPERV
+              setUserInactive={setUserInactive}
+            />
+            <View>
+              <Switch>
+                <Route exact path="/homeSUPERV">
+                  <HomeSUPERV />
+                </Route>
+                <Route exact path="/leaderboardSUPERV">
+                  <DashboardSUPERV />
+                </Route>
+                <Route exact path="/trainingSUPERV">
+                  <TrainingSUPERV />
+                </Route>
+              </Switch>
+            </View>
+          </Div>
+        </Router>
+      </div>
     </div>
   );
 }
