@@ -3,9 +3,14 @@ import CCP from "./CCP";
 
 import classes from "./AmazonConnect.module.css";
 import RecordingFunctions from "../../functions/RecordingFunctions";
+
+import Amplify, { Storage } from 'aws-amplify';
+import awsconfig from '../../aws-exports';
+
+Amplify.configure(awsconfig);
+
 const AmazonConnect = (props) => {
   const {
-    setBlob,
     agentUsername,
     userActive,
     userType,
@@ -73,13 +78,16 @@ const AmazonConnect = (props) => {
                 // Called after acw, when the agent closes the communication with the contact
                 // Stop recording
                 let heyBlob = await stop();
-                setBlob(heyBlob);
 
                 // Here, the stored recording should be uploaded to S3
-                // Storage.put(`${contact.getContactId()}.webm`, heyBlob, {
-                //   level: "public",
-                //   contentType: "video/webm",
-                // });
+                Storage.put(`recordings/${contact.getContactId()}.webm`, heyBlob, {
+                  level: "public",
+                  contentType: "video/webm",
+                  progressCallback: (progress) => {
+                    console.log(progress);
+                  },
+                });
+                alert("uploaded")
 
                 // Here, a lambda must be called to insert the recording's data into the database
                 const data = {

@@ -1,0 +1,7 @@
+{
+  "dev": {
+    "configLevel": "project",
+    "useProfile": false,
+    "awsConfigFilePath": "/Users/vpinedagon2000/.amplify/awscloudformation/rK8cICqC81"
+  }
+}
