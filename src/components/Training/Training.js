@@ -36,12 +36,14 @@ export function TrainingSUPERV ()  {
 
   return (
     <div className={classes.newWrap}>
-      <div className={classes.search}>
-        < FiSearch color="white" size="20px"/>
-        <input className={classes.searchBar} placeholder="Search..." onChange={event => setQuery(event.target.value)} />
-      </div>
-      <div className={classes.exampleDiv}>
-        <p className={classes.example}>Date Format: DD/MM/YYYY</p>
+      <div className={classes.searchDiv}>
+        <div className={classes.search}>
+          < FiSearch color="white" size="20px"/>
+          <input className={classes.searchBar} placeholder="Search..." onChange={event => setQuery(event.target.value)} />
+        </div>
+        <div className={classes.exampleDiv}>
+          <p className={classes.example}>Date Format: DD/MM/YYYY</p>
+        </div>
       </div>
       <TrainingTabs labels={["General"]}>
         <div className={classes.contentWrap}>
