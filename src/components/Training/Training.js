@@ -1,6 +1,6 @@
 import ReactPlayer from "react-player";
 import Assigned from "./Assigned";
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import ThumbCard from "./ThumbCard";
 import { FiSearch } from "react-icons/fi";
 
@@ -20,115 +20,19 @@ export const Training = () => {
 };
 
 export function TrainingSUPERV ()  {
-  const videoInfo = [
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Password Change",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-  ];
-
   const [query, setQuery] = useState("");
+  const [videoInfo, setVideoInfo] = useState([]);
+
+  useEffect(() => {
+    fetch("https://2uxbgsvox5.execute-api.us-east-1.amazonaws.com/Datamatics/video", {
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((_data) => {
+        setVideoInfo(_data.videos)
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   return (
     <div className={classes.newWrap}>
@@ -144,11 +48,11 @@ export function TrainingSUPERV ()  {
           {videoInfo.filter(video => {
             if(query === '') {
               return video;
-            } else if (video.videoTopic.toLowerCase().includes(query.toLowerCase())) {
-              return video;
-            } else if (video.assignedDate.toLowerCase().includes(query.toLowerCase())) {
-              return video;
-            } else if (video.supervisorName.toLowerCase().includes(query.toLowerCase())) {
+            // } else if (video.videoTopic.toLowerCase().includes(query.toLowerCase())) {
+            //   return video;
+            // } else if (video.assignedDate.toLowerCase().includes(query.toLowerCase())) {
+            //   return video;
+            } else if (video.agentUsername.toLowerCase().includes(query.toLowerCase())) {
               return video;
             } 
           }).map((video, key) => {
