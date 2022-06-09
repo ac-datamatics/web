@@ -1,119 +1,27 @@
 import ThumbCard from "./ThumbCard";
+import { useEffect, useState } from "react";
 
 import classes from "./Training.module.css";
 
 const Assigned = () => {
-  const videoInfo = [
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Password Change",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-    {
-      thumbnailUrl: "/Images/logo1.png",
-      videoUrl: "/Videos/Rec1.mp4",
-      supervisorName: "Juan",
-      videoTopic: "Account Recovery",
-      assignedDate: "16/05/2022",
-    },
-  ];
+  useEffect(() => {
+    fetch("https://2uxbgsvox5.execute-api.us-east-1.amazonaws.com/Datamatics/video", {
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((_data) => {
+        setData(_data.videos)
+      })
+      .catch((err) => console.error(err));
+  }, []);
+
+  const [data, setData] = useState([]);
+
+  const videoInfo = [];
 
   return (
     <div className={classes.thumbnailCard}>
-      {videoInfo.map((video, key) => {
+      {data.map((video, key) => {
         return <ThumbCard video={video} key={key} />;
       })}
     </div>
