@@ -1,5 +1,5 @@
 import ThumbCard from "./ThumbCard";
-
+import {useState} from "react";
 import classes from "./Training.module.css";
 
 const Assigned = () => {
@@ -110,6 +110,17 @@ const Assigned = () => {
       assignedDate: "16/05/2022",
     },
   ];
+
+  const [query, setQuery] = useState("");
+  const filter = videoInfo.filter(post => {
+    if (query === '') {
+      //if query is empty
+      return post;
+    } else if (post.videoTopic.toLowerCase().includes(query.toLowerCase())) {
+      //returns filtered array
+      return post;
+    }
+  });
 
   return (
     <div className={classes.thumbnailCard}>
