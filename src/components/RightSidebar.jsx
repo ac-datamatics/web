@@ -1,24 +1,29 @@
 import React from "react";
 import styled from "styled-components";
-import ActiveListeners from "./ActiveListeners";
-import Avatar from "./Avatar";
-import Player from "./Player";
 import AmazonConnect from "./CCP/AmazonConnect";
 
 function RightSidebar(props) {
-  const { userActive, loginWindow, loging, CloseWindow, setUserActive, setUserInactive, setGlobalTypeUser } = props;
+  const { agentUsername,
+    userActive,
+    userType,
+    loginWindow,
+    CloseWindow,
+    setUserActive,
+    setUserInactive,
+    setUserType } = props;
 
   return (
     <Section id="rightSidebar">
       <div className="amazonConnectContainer">
         <AmazonConnect
-          userActive={userActive}
-          loging={loging}
+          agentUsername={agentUsername}
           setUserActive={setUserActive}
+          setUserInactive={setUserInactive}
+          userActive={userActive}
+          userType={userType}
           loginWindow={loginWindow}
           CloseWindow={CloseWindow}
-          setUserInactive={setUserInactive}
-          setGlobalTypeUser={setGlobalTypeUser}
+          setUserType={setUserType}
         />
       </div>
     </Section>
@@ -30,7 +35,5 @@ const Section = styled.section`
   width: 100%;
   background-color: var(--dark-background-color);
   padding: 1rem;
-
-
 `;
 export default RightSidebar;

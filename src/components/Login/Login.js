@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
-import styled, { keyframes, createGlobalStyle } from "styled-components";
+import React from "react";
+import styled, { keyframes } from "styled-components";
 
 const jump = keyframes`
   from{
@@ -19,7 +18,7 @@ const Wrapper = styled.section`
   height: 100vh;
 `;
 
-const Form = styled.form`
+const Form = styled.div`
   margin: 0 auto;
   width: 100%;
   max-width: 414px;
@@ -61,13 +60,13 @@ const Title = styled.h2`
 `;
 
 function LogIn(props) {
-  const { loging } = props;
+  const { handleLogin } = props;
   return (
     <Wrapper>
       <Form>
-        <img src={'/Images/ .png'}/> 
+        <img src={'/Images/ .png'} alt='Logo Datamatics'/> 
         <Title>Login to Amazon Connect</Title>
-        <Button onClick={loging}>Login</Button>
+        <Button onClick={handleLogin}>Login</Button>
       </Form>
     </Wrapper>
   );

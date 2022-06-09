@@ -1,37 +1,38 @@
-/* eslint-disable no-undef */
-import { Component } from "react";
-import React from "react";
 import "amazon-connect-streams";
-import isBrowserCompatible from "./compatibility";
-import ScreenRecorder from '../ScreenRecorder';
+import React, { useRef, useEffect } from "react";
 
+import classes from "./AmazonConnect.module.css";
 
-class CCP extends Component {
-  constructor(props) {
-    super(props);
-    this.containerDiv = React.createRef;
-    this.instanceURL = props.instanceURL;
+const ConnectCCP = (props) => {
+  const initialized = useRef(false);
+  const agent = useRef(null);
 
-    const recorder = new ScreenRecorder({
-      onstop: (e) => {
-        let blob = recorder.getDataBlob();
-      }
-    });
-  }
+  const ref = useRef();
 
-  componentDidMount() {
-    if (!isBrowserCompatible) {
-      document.getElementById("ccp").innerHTML =
-        "Sorry, browser not supported. Please switch to one of the three latest versions of Chrome or Firefox.";
-      return;
+  const getAgentType = () => {
+    try{
+        const permissions = agent.current.getPermissions();
+        if(permissions.length === 1) return "Agent";
+        return "Admin";
+    } catch(e){
+        console.debug(e.message);
+        return "CallCenterManager";
     }
-    connect.core.initCCP(document.getElementById("ccp"), {
+  };
+
+  useEffect(() => {
+    if (typeof window === "undefined") throw new Error("window missing");
+    if (typeof window.connect === "undefined")
+      throw new Error("global connect missing");
+    console.log("init start");
+    console.debug(props.userActive);
+    window.connect.core.initCCP(ref.current, {
       // CONNECT CONFIG
-      ccpUrl: this.instanceURL, // Required
+      ccpUrl: props.instanceURL, // Required
       region: "us-east-1", // Region of the instance
-      ccpAckTimeout: 5000, //optional, defaults to 3000 (ms)
-      ccpSynTimeout: 3000, //optional, defaults to 1000 (ms)
-      ccpLoadTimeout: 10000, //optional, defaults to 5000 (ms)
+      ccpAckTimeout: 3000, //optional, defaults to 3000 (ms)
+      ccpSynTimeout: 1000, //optional, defaults to 1000 (ms)
+      ccpLoadTimeout: 1000, //optional, defaults to 5000 (ms)
       // LOGIN
       loginPopup: false, // Show a popup window to authenticate
       loginPopupAutoClose: true, // Auto close login popup after auth
@@ -55,100 +56,106 @@ class CCP extends Component {
       },
     });
 
-
-    // On ccp instance terminated
-    connect.core.getEventBus().subscribe(connect.EventType.TERMINATED, () => {
-      this.setState({ initialized: false });
-      this.props.setUserInactive();
-      // Callback
-      this.props.onInstanceTerminated?.();
-    });
-
-    // Listen to contacts
-    connect.core
+    window.connect.core
       .getEventBus()
-      .subscribe(connect.EventType.UPDATE_CONNECTED_CCPS, () => {
-        this.setState({ initialized: true });
-        // Close login window
-        this.props.CloseWindow();
-        this.props.setUserActive();
+      .subscribe(window.connect.EventType.TERMINATED, () => {
+        if (!initialized.current) return;
+        initialized.current = false;
+        agent.current = null;
+        props.setUserInactive();
+        window.location.reload(true);
         // Callback
-        this.props.onInstanceConnected?.();
+          props.onInstanceTerminated?.();
+      });
+
+    // On connected to ccp
+    window.connect.core
+      .getEventBus()
+      .subscribe(window.connect.EventType.UPDATE_CONNECTED_CCPS, () => {
+        if (initialized.current) return;
+        initialized.current = true;
+        // Close login window
+        props.setUserActive();
+        // console.debug("BEFORE CLOSING WINDOW");
+        props.CloseWindow();
+        // Callback
+        //   this.props.onInstanceConnected?.();
         // Listen to agents
-        connect.agent((agent) => {
+        window.connect.agent((_agent) => {
           // Store agent
-          this.agent = agent;
-          console.log(agent);
-          this.props.setGlobalTypeUser("SUPERV");
+          agent.current = _agent;
+          props.agentUsername.current =
+            agent.current.getConfiguration().username;
+          console.debug(agent.current.getConfiguration());
           // Callback
-          this.props.onAgent?.(agent);
+          props.onAgent?.(agent.current);
+          props.setUserType(getAgentType());
           // Listen to agent changes
-          agent.onStateChange((state) => {
+          agent.current.onStateChange((state) => {
             // Avoid duplicate events
-            if (state.newState === state.oldState) return;
+            if (state.newState == state.oldState) return;
             // Callback
-            this.props.onAgentStateChange?.(state);
+            props.onAgentStateChange?.(state);
           });
         });
         // Listen to contacts
-        connect.contact((contact) => {
+        window.connect.contact((contact) => {
           // Callback
-          this.props.onContact?.(contact);
+          // props.onContact?.(contact);
           // Store previous state
           let previousState = contact.getState().type;
           // Listen to contact changes
           contact.onRefresh((contact) => {
             if (contact.getState().type === previousState) return;
             previousState = contact.getState().type;
-            // eslint-disable-next-line default-case
             switch (previousState) {
-              case connect.ContactStateType.INCOMING:
-              case connect.ContactStateType.CONNECTING:
-                return this.props.onIncomingContact?.(contact);
-              case connect.ContactStateType.PENDING:
-                return this.props.onPendingContact?.(contact);
-              case connect.ContactStateType.MISSED:
-                return this.props.onMissedContact?.(contact);
-              case connect.ContactStateType.CONNECTED:
-                return this.props.onConnectedContact?.(contact);
-              case connect.ContactStateType.ENDED:
-                return this.props.onEndedContact?.(contact);
-              case connect.ContactStateType.ERROR:
-                return this.props.onErrorContact?.(contact);
-              case connect.ContactStateType.REJECTED:
-                return this.props.onRejectedContact?.(contact);
+              case window.connect.ContactStateType.INCOMING:
+                return props.onIncomingContact?.(contact);
+              case window.connect.ContactStateType.CONNECTING:
+              case window.connect.ContactStateType.PENDING:
+                return props.onPendingContact?.(contact);
+              case window.connect.ContactStateType.MISSED:
+                return props.onMissedContact?.(contact);
+              case window.connect.ContactStateType.CONNECTED:
+                return props.onConnectedContact?.(contact);
+              case window.connect.ContactStateType.ENDED:
+                return props.onEndedContact?.(contact);
+              case window.connect.ContactStateType.ERROR:
+                return props.onErrorContact?.(contact);
+              case window.connect.ContactStateType.REJECTED:
+                return props.onRejectedContact?.(contact);
             }
           });
           // Listen to contact events
-          contact.onIncoming(async () => {
-            await recorder.start();
-          })
           contact.onACW(() => {
-            if (previousState === "after-call-work") return;
+            if (previousState == "after-call-work") return;
             previousState = "after-call-work";
-            this.props.onAfterCallWork?.();
+            props.onAfterCallWork?.();
             alert(previousState);
           });
           contact.onDestroy(() => {
-            if (previousState === "destroy") return;
+            if (previousState == "destroy") return;
             previousState = "destroy";
-            const data = {
-              agentId: ccp.current.agent.getConfiguration().username,
-              // callStartUTCDate: contact.getQueueTimestamp().toISOString(),
-              contactId: contact.getContactId()
-            }
-            // Stop recording
-            recorder.stop();
-            this.props.onDestroyContact?.(contact);
+            props.onDestroyContact?.(contact);
             alert(previousState);
           });
         });
       });
-  }
 
-  render() {
-    return <></>;
-  }
-}
+    console.log("init end");
+  }, []);
 
-export default CCP;
+  console.log("render");
+  return (
+    <div
+      ref={ref}
+      // style={{ width: "100%", height: "100%", minHeight: 480, minWidth: 400 }}
+      // style={{ minWidth: 400, minHeight: 480 }}
+      className={classes.ccpPosition}
+    />
+  );
+};
+
+
+
+export default ConnectCCP;

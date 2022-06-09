@@ -5,7 +5,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #f2f4f4 !important;
+  background-color: #151727 !important;
   width: 75%;
   height: 75%;
 }
@@ -22,7 +22,7 @@
 
 .cardTitle {
   justify-content: center;
-  color: #232f3e;
+  color: #c8c9ca;
   font-family: "Rubik";
 }
 
@@ -33,6 +33,6 @@
 }
 
 .videoDescription{
-  color: #232f3e;
+  color: #c8c9ca;
   font-family: "Rubik";
 }
