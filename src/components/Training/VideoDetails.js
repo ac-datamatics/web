@@ -1,11 +1,12 @@
 import * as React from "react";
 import Modal from "@mui/material/Modal";
 import Card from "@mui/material/Card";
-import ReactPlayer from "react-player";
 
 import classes from "./VideoDetails.module.css";
 
 export default function VideoDetails({ open, handleClose, video }) {
+  const link = "https://d13wsb297kr3hd.cloudfront.net/";
+
   return (
     <div>
       <Modal
@@ -16,20 +17,20 @@ export default function VideoDetails({ open, handleClose, video }) {
       >
         <Card className={classes.card}>
           <div className={classes.cardContents}>
-            <h1 className={classes.cardTitle}>{video.videoTopic}</h1>
+            <h1 className={classes.cardTitle}>{video.uploadDate}</h1>
             <div className={classes.videoPlayer}>
-              <ReactPlayer
-                url={video.videoUrl}
-                playing={true}
-                // height="100%"
-                pip={true}
-                controls={true}
-                light={video.thumbnailUrl}
-              />
+            <iframe
+                src={link + video.mergedRecordingURL}
+                width={600}
+                height={400}
+                allowFullScreen={true}
+                title='Video'
+                
+              ></iframe>
             </div>
             <div className={classes.videoDescription}>
               <div>
-                <h3>{video.supervisorName} - {video.assignedDate}</h3>
+                <h3>{video.agentUsername} - {video.sentimentCustomer}</h3>
                 <p>Description</p>
               </div>
             </div>

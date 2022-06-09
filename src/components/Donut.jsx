@@ -28,13 +28,14 @@ function Donut() {
   return (
     <div style={{
         width:'50%', 
-        height:'50%', 
+        height:'520px', 
+        display: 'flex',
         backgroundColor: 'rgb(46,46,46)',
         border: 'none !important',
         borderRadius: '1rem',
         padding: '40px',
         margin: '1px',
-        marginBottom: '10px',
+        alignItems: 'center',
         marginTop: '7px',}}>
         <Doughnut data={data} />
     </div>
