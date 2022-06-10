@@ -7,14 +7,14 @@ import Assigned from "../Training/Assigned";
 import classes from "../Training/Training.module.css";
 import TrainingTabs from "../Training/TrainingTabs";
 
-export function Home ()  {
+export function Home({ username }) {
   return (
     <div className="Home">
       <div style={{
         display: "flex",
         flexDirection: "row",
       }}>
-        <Welcome />
+        <Welcome username={username} />
         <Donut />
       </div>
       <Streams />
@@ -24,7 +24,7 @@ export function Home ()  {
 
 
 
-export function HomeSUPERV ()  {
+export function HomeSUPERV() {
   return (
     <div className="Home">
       <div style={{

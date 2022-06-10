@@ -104,7 +104,7 @@ export default function App(props) {
                   <Home />
                 </Route>
                 <Route exact path="/home">
-                  <Home />
+                  <Home username={agentUsername} />
                 </Route>
                 <Route exact path="/leaderboard">
                   <Dashboard />
