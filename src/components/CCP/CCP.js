@@ -10,13 +10,13 @@ const ConnectCCP = (props) => {
   const ref = useRef();
 
   const getAgentType = () => {
-    try{
-        const permissions = agent.current.getPermissions();
-        if(permissions.length === 1) return "Agent";
-        return "Admin";
-    } catch(e){
-        console.debug(e.message);
-        return "CallCenterManager";
+    try {
+      const permissions = agent.current.getPermissions();
+      if (permissions.length === 1) return "Agent";
+      return "Admin";
+    } catch (e) {
+      console.debug(e.message);
+      return "CallCenterManager";
     }
   };
 
@@ -65,7 +65,7 @@ const ConnectCCP = (props) => {
         props.setUserInactive();
         window.location.reload(true);
         // Callback
-          props.onInstanceTerminated?.();
+        props.onInstanceTerminated?.();
       });
 
     // On connected to ccp
@@ -100,6 +100,7 @@ const ConnectCCP = (props) => {
         });
         // Listen to contacts
         window.connect.contact((contact) => {
+          if (contact.getType() !== window.connect.ContactType.VOICE) return;
           // Callback
           // props.onContact?.(contact);
           // Store previous state
