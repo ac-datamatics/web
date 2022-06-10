@@ -152,7 +152,7 @@ export default function App(props) {
       </div>
       <div hidden={!userActive || (userType !== "Admin")}>
         <Router>
-          <Div>
+          <DivSuperv>
             <SidebarSUPERV
               setUserInactive={setUserInactive}
             />
@@ -169,7 +169,7 @@ export default function App(props) {
                 </Route>
               </Switch>
             </View>
-          </Div>
+          </DivSuperv>
         </Router>
       </div>
     </div>
@@ -184,6 +184,14 @@ const Div = styled.div`
       @media screen and (min-width: 280px) and (max-width: 1080px) {
         grid - template - columns: 1fr;
       height: max-content;
+  }
+      `;
+
+const DivSuperv = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 12fr;
+  min-height: 100vh;
+  height: max-content;
   }
       `;
 

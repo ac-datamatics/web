@@ -17,13 +17,17 @@
 .newWrap {
   display: flex;
   flex-direction: column;
-  padding-left: 5em;
-  
+  padding-left: 5em; 
+  padding-right: 0px; 
 }
 
 .parentContentWrap {
   height: 90%;
   padding: 2rem 0;
+}
+
+.searchDiv {
+  margin-right: 60px;
 }
 
 .searchBar {
@@ -48,6 +52,9 @@
   justify-content: right;
 }
 
+.picker {
+  max-width: 10px;
+}
 .example {
   width: 31%;
   color: #97938F;

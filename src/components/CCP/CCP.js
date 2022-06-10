@@ -1,5 +1,5 @@
 import "amazon-connect-streams";
-import React, { useRef, useEffect } from "react";
+import { useRef, useEffect } from "react";
 
 import classes from "./AmazonConnect.module.css";
 
