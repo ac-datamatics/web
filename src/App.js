@@ -159,7 +159,7 @@ export default function App(props) {
             <View>
               <Switch>
                 <Route exact path="/homeSUPERV">
-                  <HomeSUPERV />
+                  <HomeSUPERV username={agentUsername}/>
                 </Route>
                 <Route exact path="/leaderboardSUPERV">
                   <DashboardSUPERV />

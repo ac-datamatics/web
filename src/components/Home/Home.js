@@ -24,14 +24,14 @@ export function Home({ username }) {
 
 
 
-export function HomeSUPERV() {
+export function HomeSUPERV({username}) {
   return (
     <div className="Home">
       <div style={{
         display: "flex",
         flexDirection: "row",
       }}>
-        <Welcome />
+        <Welcome username={username}/>
         <Donut />
       </div>
       <Streams />
