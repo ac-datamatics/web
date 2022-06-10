@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styled from "styled-components";
 import {Chart, Tooltip, Title, ArcElement, Legend} from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
+import { maxWidth } from '@mui/system';
 Chart.register(
     Tooltip, Title, ArcElement, Legend
 );
@@ -23,6 +24,10 @@ function Donut() {
             '3-2 stars calls',
             '5-4 stars calls',
         ],
+
+        styled: [
+            'maxWidth: 250px'
+        ]
     });
 
   return (
@@ -37,7 +42,7 @@ function Donut() {
         margin: '1px',
         alignItems: 'center',
         marginTop: '7px',}}>
-        <Doughnut data={data} />
+        <Doughnut  data={data} />
     </div>
   );
 }

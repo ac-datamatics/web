@@ -12,13 +12,13 @@
 .contentWrap {
   height: 100%;
   overflow-y: auto;
+  margin-right: 5rem;
 }
 
 .newWrap {
   display: flex;
   flex-direction: column;
-  padding-left: 5em; 
-  padding-right: 0px; 
+  padding-left: 3rem; 
 }
 
 .parentContentWrap {
@@ -27,7 +27,7 @@
 }
 
 .searchDiv {
-  margin-right: 60px;
+  margin-right: 5rem;
 }
 
 .searchBar {
