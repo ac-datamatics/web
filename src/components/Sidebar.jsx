@@ -23,28 +23,48 @@ function Sidebar(props) {
   };
 
   const history = useHistory();
-  const [homeselected, sethomeselected]= React.useState("selected");
-  const [leaderboardselected, setleaderboardselected]= React.useState("");
-  const [trainingboardselected, settrainingselected]= React.useState("");
+  const [homeselected, sethomeselected]= React.useState(window.localStorage.getItem("home"));
+  const [leaderboardselected, setleaderboardselected]= React.useState(window.localStorage.getItem("leaderboard"));
+  const [trainingboardselected, settrainingselected]= React.useState(window.localStorage.getItem("training"));
+
+  if (window.localStorage.getItem("home") == null && window.localStorage.getItem("training") == null && window.localStorage.getItem("leaderboard") == null) {
+    sethomeselected("selected")
+    
+  }
 
   function handleHome() {
+    window.localStorage.setItem("leaderboard", "")
+    window.localStorage.setItem("training", "")
+    window.localStorage.setItem("home", "selected")
+
     history.push("/home"); 
     setleaderboardselected("");
     settrainingselected("");
     sethomeselected("selected");
   }
+
   function handleLeaderboard() {
+    window.localStorage.setItem("leaderboard", "selected")
+    window.localStorage.setItem("training", "")
+    window.localStorage.setItem("home", "")
+
     history.push("/leaderboard");
     sethomeselected("");
     settrainingselected("");
     setleaderboardselected("selected");
   }
+
   function handleTraining() {
+    window.localStorage.setItem("leaderboard", "")
+    window.localStorage.setItem("training", "selected")
+    window.localStorage.setItem("home", "")
+
     history.push("/training");
     sethomeselected("");
     setleaderboardselected("");
     settrainingselected("selected");
   }
+
   function handleLogout() {
     fetch("https://ac-datamatics.my.connect.aws/connect/logout", { credentials: 'include', mode: 'no-cors'})
     .then(() => {

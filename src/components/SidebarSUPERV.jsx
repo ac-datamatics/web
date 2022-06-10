@@ -23,28 +23,48 @@ function SidebarSUPERV(props) {
   };
 
   const history = useHistory();
-  const [homeselected, sethomeselected]= React.useState("selected");
-  const [leaderboardselected, setleaderboardselected]= React.useState("");
-  const [trainingboardselected, settrainingselected]= React.useState("");
+  const [homeselected, sethomeselected]= React.useState(window.localStorage.getItem("homeSUPERV"));
+  const [leaderboardselected, setleaderboardselected]= React.useState(window.localStorage.getItem("leaderboardSUPERV"));
+  const [trainingboardselected, settrainingselected]= React.useState(window.localStorage.getItem("trainingSUPERV"));
+
+  if (window.localStorage.getItem("homeSUPERV") == null && window.localStorage.getItem("trainingSUPERV") == null && window.localStorage.getItem("leaderboardSUPERV") == null) {
+    sethomeselected("selected")
+    
+  }
 
   function handleHome() {
+    window.localStorage.setItem("leaderboardSUPERV", "")
+    window.localStorage.setItem("trainingSUPERV", "")
+    window.localStorage.setItem("homeSUPERV", "selected")
+
     history.push("/homeSUPERV"); 
     setleaderboardselected("");
     settrainingselected("");
     sethomeselected("selected");
   }
+
   function handleLeaderboard() {
+    window.localStorage.setItem("leaderboardSUPERV", "selected")
+    window.localStorage.setItem("trainingSUPERV", "")
+    window.localStorage.setItem("homeSUPERV", "")
+
     history.push("/leaderboardSUPERV");
     sethomeselected("");
     settrainingselected("");
     setleaderboardselected("selected");
   }
+
   function handleTraining() {
+    window.localStorage.setItem("leaderboardSUPERV", "")
+    window.localStorage.setItem("trainingSUPERV", "selected")
+    window.localStorage.setItem("homeSUPERV", "")
+
     history.push("/trainingSUPERV");
     sethomeselected("");
     setleaderboardselected("");
     settrainingselected("selected");
   }
+
   function handleLogout() {
     fetch("https://ac-datamatics.my.connect.aws/connect/logout", { credentials: 'include', mode: 'no-cors'})
     .then(() => {
