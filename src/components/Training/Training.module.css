@@ -48,6 +48,9 @@
   justify-content: right;
 }
 
+.picker {
+  max-width: 10px;
+}
 .example {
   width: 31%;
   color: #97938F;
