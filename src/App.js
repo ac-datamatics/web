@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useRef } from "react";
 import Sidebar from "components/Sidebar";
-import SidebarSUPERV from "components/SidebarSUPERV";
 import RightSidebar from "components/RightSidebar";
 import { Dashboard } from "components/Dashboard";
 import styled from "styled-components";
 import scrollreveal from "scrollreveal";
-import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  Redirect,
+} from "react-router-dom";
 import { Home } from "./components/Home/Home";
 import { HomeSUPERV } from "./components/Home/Home";
 import { Training } from "./components/Training/Training";
 import LogIn from "./components/Login/Login";
 import { DashboardSUPERV } from "components/Dashboard";
 import { TrainingSUPERV } from "./components/Training/Training";
+
+import classes from "./App.module.css";
 
 export default function App(props) {
   const { userType, setGlobalTypeUser } = props.AuthFunction();
@@ -31,7 +38,7 @@ export default function App(props) {
 
   const handleLogin = () => {
     localStorage.removeItem("connectPopupManager::connect::loginPopup");
-    console.log("HOLAAA")
+    console.log("HOLAAA");
     let tempWindow = window.open(
       "https://ac-datamatics.my.connect.aws/ccp-v2",
       "window2",
@@ -86,103 +93,110 @@ export default function App(props) {
   //   );
   // }, []);
   return (
-    <div className="root">
+    <div
+      className={
+        !userActive || userType !== "Agent" ? classes.root : classes.rootAgent
+      }
+    >
       <div hidden={userActive}>
-        <LogIn
+        <LogIn handleLogin={handleLogin} />
+      </div>
+      {userActive && userType === "Agent" ? (
+        <div>
+          <Router>
+            <Div>
+              <Sidebar setUserInactive={setUserInactive} />
+              <View>
+                <Switch>
+                  <Route exact path="/">
+                    <Home />
+                  </Route>
+                  <Route exact path="/home">
+                    <Home username={agentUsername} />
+                  </Route>
+                  <Route exact path="/leaderboard">
+                    <Dashboard />
+                  </Route>
+                  <Route exact path="/training">
+                    <Training />
+                  </Route>
+                </Switch>
+              </View>
+            </Div>
+          </Router>
+        </div>
+      ) : userActive && userType === "SUPERV" ? (
+        <div>
+          <Router>
+            <Div>
+              <Sidebar setUserInactive={setUserInactive} />
+              <View>
+                <Switch>
+                  <Route exact path="/home">
+                    <HomeSUPERV />
+                  </Route>
+                  <Route exact path="/leaderboard">
+                    <DashboardSUPERV />
+                  </Route>
+                  <Route exact path="/training">
+                    <TrainingSUPERV />
+                  </Route>
+                </Switch>
+              </View>
+            </Div>
+          </Router>
+        </div>
+      ) : userActive && userType === "Admin" ? (
+        <div>
+          <Router>
+            <DivSuperv>
+              <Sidebar setUserInactive={setUserInactive} />
+              <View>
+                <Switch>
+                  <Route exact path="/home">
+                    <HomeSUPERV username={agentUsername} />
+                  </Route>
+                  <Route exact path="/leaderboard">
+                    <DashboardSUPERV />
+                  </Route>
+                  <Route exact path="/training">
+                    <TrainingSUPERV />
+                  </Route>
+                </Switch>
+              </View>
+            </DivSuperv>
+          </Router>
+        </div>
+      ) : (
+        <></>
+      )}
+      <AmazonConnectContainer
+        className="amazonConnectContainer"
+        hidden={userType !== "Agent" || !userActive}
+      >
+        <RightSidebar
+          agentUsername={agentUsername}
+          setUserActive={handleSetUserActive}
+          setUserInactive={setUserInactive}
+          userActive={userActive}
+          userType={userType}
           handleLogin={handleLogin}
+          loginWindow={loginWindow}
+          CloseWindow={handleCloseWindow}
+          setUserType={setGlobalTypeUser}
         />
-      </div>
-      <div hidden={!userActive || (userType !== "Agent")}>
-        <Router>
-          <Div>
-            <Sidebar
-              setUserInactive={setUserInactive}
-            />
-            <View>
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route exact path="/home">
-                  <Home username={agentUsername} />
-                </Route>
-                <Route exact path="/leaderboard">
-                  <Dashboard />
-                </Route>
-                <Route exact path="/training">
-                  <Training />
-                </Route>
-              </Switch>
-            </View>
-            <RightSidebar
-              agentUsername={agentUsername}
-              setUserActive={handleSetUserActive}
-              setUserInactive={setUserInactive}
-              userActive={userActive}
-              userType={userType}
-              handleLogin={handleLogin}
-              loginWindow={loginWindow}
-              CloseWindow={handleCloseWindow}
-              setUserType={setGlobalTypeUser}
-            />
-          </Div>
-        </Router>
-      </div>
-      <div hidden={!userActive || (userType != "SUPERV")}>
-        <Router>
-          <Div>
-            <SidebarSUPERV
-              setUserInactive={setUserInactive}
-            />
-            <View>
-              <Switch>
-                <Route exact path="/homeSUPERV">
-                  <HomeSUPERV />
-                </Route>
-                <Route exact path="/leaderboardSUPERV">
-                  <DashboardSUPERV />
-                </Route>
-                <Route exact path="/trainingSUPERV">
-                  <TrainingSUPERV />
-                </Route>
-              </Switch>
-            </View>
-          </Div>
-        </Router>
-      </div>
-      <div hidden={!userActive || (userType !== "Admin")}>
-        <Router>
-          <DivSuperv>
-            <SidebarSUPERV
-              setUserInactive={setUserInactive}
-            />
-            <View>
-              <Switch>
-                <Route exact path="/homeSUPERV">
-                  <HomeSUPERV username={agentUsername}/>
-                </Route>
-                <Route exact path="/leaderboardSUPERV">
-                  <DashboardSUPERV />
-                </Route>
-                <Route exact path="/trainingSUPERV">
-                  <TrainingSUPERV />
-                </Route>
-              </Switch>
-            </View>
-          </DivSuperv>
-        </Router>
-      </div>
+      </AmazonConnectContainer>
     </div>
   );
 }
 
 const Div = styled.div`
-      display: grid;
-      grid-template-columns: 1fr 12fr 4fr;
-      min-height: 100vh;
-      height: max-content;
-      @media screen and (min-width: 280px) and (max-width: 1080px) {
-        grid - template - columns: 1fr;
+display: grid;
+grid-template-columns: 1fr 12fr;
+min-height: 100vh;
+height: max-content;
+@media screen and (min-width: 280px) and (max-width: 1080px) {
+  grid - template - columns: 1fr;
       height: max-content;
   }
       `;
@@ -196,7 +210,12 @@ const DivSuperv = styled.div`
       `;
 
 const View = styled.div`
-      width: 100%;
-      height: 100vh;
-      overflow-y: auto;
-      `;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
+`;
+
+const AmazonConnectContainer = styled.div`
+  position: relative;
+  width: 100%;
+`;

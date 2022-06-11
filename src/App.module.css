@@ -1,0 +1,10 @@
+.rootAgent {
+  display: grid;
+  grid-template-columns: 75% 25%;
+  overflow: hidden;
+}
+.root {
+  display: grid;
+  grid-template-columns: 100%;
+  overflow: hidden;
+}

@@ -3,30 +3,32 @@ import styled from "styled-components";
 import AmazonConnect from "./CCP/AmazonConnect";
 
 function RightSidebar(props) {
-  const { agentUsername,
+  const {
+    agentUsername,
     userActive,
     userType,
     loginWindow,
     CloseWindow,
     setUserActive,
     setUserInactive,
-    setUserType } = props;
+    setUserType,
+  } = props;
 
   return (
-    <Section id="rightSidebar">
-      <div className="amazonConnectContainer">
-        <AmazonConnect
-          agentUsername={agentUsername}
-          setUserActive={setUserActive}
-          setUserInactive={setUserInactive}
-          userActive={userActive}
-          userType={userType}
-          loginWindow={loginWindow}
-          CloseWindow={CloseWindow}
-          setUserType={setUserType}
-        />
-      </div>
-    </Section>
+    // <Section id="rightSidebar">
+    <div className="amazonConnectContainer">
+      <AmazonConnect
+        agentUsername={agentUsername}
+        setUserActive={setUserActive}
+        setUserInactive={setUserInactive}
+        userActive={userActive}
+        userType={userType}
+        loginWindow={loginWindow}
+        CloseWindow={CloseWindow}
+        setUserType={setUserType}
+      />
+    </div>
+    // </Section>
   );
 }
 

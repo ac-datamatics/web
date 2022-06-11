@@ -58,7 +58,9 @@ export default function CustomizedTabs({ labels, children }) {
           aria-label="styled tabs example"
         >
           {labels.map((label, key) => {
-            return <StyledTab label={label} key={key} />;
+            return (
+              <StyledTab label={label} key={key} className={classes.tab} />
+            );
           })}
         </StyledTabs>
       </Box>
