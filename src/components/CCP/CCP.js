@@ -1,5 +1,6 @@
 import "amazon-connect-streams";
 import { useRef, useEffect } from "react";
+import { Redirect } from "react-router-dom";
 
 import classes from "./AmazonConnect.module.css";
 
@@ -35,7 +36,7 @@ const ConnectCCP = (props) => {
       ccpLoadTimeout: 1000, //optional, defaults to 5000 (ms)
       // LOGIN
       loginPopup: false, // Show a popup window to authenticate
-      loginPopupAutoClose: true, // Auto close login popup after auth
+      loginPopupAutoClose: false, // Auto close login popup after auth
       loginOptions: {
         autoClose: true,
         height: 400,
@@ -76,6 +77,7 @@ const ConnectCCP = (props) => {
         initialized.current = true;
         // Close login window
         props.setUserActive();
+
         // console.debug("BEFORE CLOSING WINDOW");
         props.CloseWindow();
         // Callback
@@ -153,10 +155,10 @@ const ConnectCCP = (props) => {
       // style={{ width: "100%", height: "100%", minHeight: 480, minWidth: 400 }}
       // style={{ minWidth: 400, minHeight: 480 }}
       className={classes.ccpPosition}
-    />
+    >
+      {props.userActive ? <Redirect to="/home" /> : <Redirect to="/" />}
+    </div>
   );
 };
-
-
 
 export default ConnectCCP;

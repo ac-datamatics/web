@@ -98,9 +98,11 @@ function Sidebar(props) {
             <BsFillCameraVideoFill type="button" />
           </li>
         </NavLink>
-        <li type="button" onClick={handleLogout}>
-          <AiOutlineLogout />
-        </li>
+        <NavLink to="/">
+          <li type="button" onClick={handleLogout}>
+            <AiOutlineLogout />
+          </li>
+        </NavLink>
       </ul>
     </Aside>
   );

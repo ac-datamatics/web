@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import Sidebar from "components/Sidebar";
-import RightSidebar from "components/RightSidebar";
 import { Dashboard } from "components/Dashboard";
 import styled from "styled-components";
 import scrollreveal from "scrollreveal";
@@ -17,6 +16,7 @@ import { Training } from "./components/Training/Training";
 import LogIn from "./components/Login/Login";
 import { DashboardSUPERV } from "components/Dashboard";
 import { TrainingSUPERV } from "./components/Training/Training";
+import AmazonConnect from "./components/CCP/AmazonConnect";
 
 import classes from "./App.module.css";
 
@@ -25,7 +25,7 @@ export default function App(props) {
 
   const [renderCCP, setRenderCCP] = useState(false);
   const [userActive, setUserActive] = useState(false);
-  const [loginWindow, setLoginWindow] = useState(null);
+  const loginWindow = useRef(null);
   const agentUsername = useRef("");
 
   useEffect(() => {
@@ -37,23 +37,23 @@ export default function App(props) {
   }, [userActive]);
 
   const handleLogin = () => {
+    setRenderCCP(true);
     localStorage.removeItem("connectPopupManager::connect::loginPopup");
     console.log("HOLAAA");
-    let tempWindow = window.open(
+    loginWindow.current = window.open(
       "https://ac-datamatics.my.connect.aws/ccp-v2",
       "window2",
       "popup, width=400, height=700"
     );
-    setLoginWindow(tempWindow);
-    // setUserActive(true);
   };
 
   const handleCloseWindow = () => {
-    loginWindow?.close();
-    setLoginWindow(null);
+    loginWindow?.current.close();
+    loginWindow.current = null;
   };
 
   const setUserInactive = () => {
+    window.location.reload();
     setUserActive(false);
     setRenderCCP(false);
   };
@@ -61,6 +61,11 @@ export default function App(props) {
   const handleSetUserActive = () => {
     setUserActive(true);
   };
+
+  window.addEventListener("beforeunload", function (e) {
+    console.debug(e.type);
+    setUserActive(false);
+  });
 
   // useEffect(() => {
   //   const sr = scrollreveal({
@@ -170,22 +175,25 @@ export default function App(props) {
       ) : (
         <></>
       )}
-      <AmazonConnectContainer
-        className="amazonConnectContainer"
-        hidden={userType !== "Agent" || !userActive}
-      >
-        <RightSidebar
-          agentUsername={agentUsername}
-          setUserActive={handleSetUserActive}
-          setUserInactive={setUserInactive}
-          userActive={userActive}
-          userType={userType}
-          handleLogin={handleLogin}
-          loginWindow={loginWindow}
-          CloseWindow={handleCloseWindow}
-          setUserType={setGlobalTypeUser}
-        />
-      </AmazonConnectContainer>
+      {renderCCP ? (
+        <AmazonConnectContainer
+          className="amazonConnectContainer"
+          hidden={userType !== "Agent" || !userActive}
+        >
+          <AmazonConnect
+            agentUsername={agentUsername}
+            setUserActive={handleSetUserActive}
+            setUserInactive={setUserInactive}
+            userActive={userActive}
+            userType={userType}
+            loginWindow={loginWindow}
+            CloseWindow={handleCloseWindow}
+            setUserType={setGlobalTypeUser}
+          />
+        </AmazonConnectContainer>
+      ) : (
+        <></>
+      )}
     </div>
   );
 }
@@ -205,9 +213,9 @@ const DivSuperv = styled.div`
   display: grid;
   grid-template-columns: 1fr 12fr;
   min-height: 100vh;
+  widthL 100%
   height: max-content;
-  }
-      `;
+`;
 
 const View = styled.div`
   width: 100%;
