@@ -6,7 +6,7 @@ import classes from "./VideoDetails.module.css";
 
 export default function VideoDetails({ open, handleClose, video }) {
   const link = "https://d13wsb297kr3hd.cloudfront.net/";
-
+  console.debug(video.contact_id)
   return (
     <div>
       <Modal
@@ -19,7 +19,30 @@ export default function VideoDetails({ open, handleClose, video }) {
           <div className={classes.cardContents}>
             <h1 className={classes.cardTitle}>{video.uploadDate}</h1>
             <div className={classes.videoPlayer}>
-              <iframe
+              <video width={600} height={400} crossOrigin="anonymous" controls>
+                <source
+                  src={
+                    link +
+                    "connect/ac-datamatics/ScreenRecordings/" +
+                    video.contact_id +
+                    ".webm"
+                  }
+                  type="video/webm"
+                />
+                <track
+                  label="English"
+                  kind="subtitles"
+                  srcLang="en"
+                  default
+                  src={
+                    link +
+                    "connect/ac-datamatics/Captions/" +
+                    video.contact_id +
+                    ".vtt"
+                  }
+                />
+              </video>
+              {/* <iframe
                 src={
                   link +
                   "connect/ac-datamatics/ScreenRecordings/" +
@@ -30,7 +53,7 @@ export default function VideoDetails({ open, handleClose, video }) {
                 height={400}
                 allowFullScreen={true}
                 title="Video"
-              ></iframe>
+              ></iframe> */}
             </div>
             <div className={classes.videoDescription}>
               <div>

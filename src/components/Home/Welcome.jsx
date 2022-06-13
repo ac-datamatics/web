@@ -33,7 +33,7 @@ function Welcome({ username }) {
         color: "white",
       }}
     >
-      <h1>Welcome, {username?.current}!</h1>
+      <h1>Welcome, {username}!</h1>
 
       <div style={{ marginTop: "10px" }}>
         <p>Current Date : {state.curDate}</p>

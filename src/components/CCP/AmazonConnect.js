@@ -9,9 +9,9 @@ import awsconfig from '../../aws-exports';
 
 Amplify.configure(awsconfig);
 
-const AmazonConnect = (props) => {
+const   AmazonConnect = (props) => {
   const {
-    agentUsername,
+    agent,
     userActive,
     userType,
     loginWindow,
@@ -29,7 +29,7 @@ const AmazonConnect = (props) => {
         <div id={"ccp"} className={classes.ccpPosition}>
           {isBrowserCompatible() && (
             <CCP
-              agentUsername={agentUsername}
+              agent={agent}
               userActive={userActive}
               userType={userType}
               setUserType={setUserType}
@@ -88,14 +88,6 @@ const AmazonConnect = (props) => {
                   },
                 });
                 alert("uploaded")
-
-                // Here, a lambda must be called to insert the recording's data into the database
-                const data = {
-                  agentId: agentUsername,
-                  // callStartUTCDate: contact.getQueueTimestamp().toISOString(),
-                  contactId: contact.getContactId(),
-                  queueId: contact.getQueue().queueId,
-                };
               }}
             />
           )}

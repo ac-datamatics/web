@@ -86,8 +86,8 @@ const ConnectCCP = (props) => {
         window.connect.agent((_agent) => {
           // Store agent
           agent.current = _agent;
-          props.agentUsername.current =
-            agent.current.getConfiguration().username;
+          props.agent.current =
+            agent.current.getConfiguration();
           console.debug(agent.current.getConfiguration());
           // Callback
           props.onAgent?.(agent.current);
@@ -134,13 +134,11 @@ const ConnectCCP = (props) => {
             if (previousState == "after-call-work") return;
             previousState = "after-call-work";
             props.onAfterCallWork?.();
-            alert(previousState);
           });
           contact.onDestroy(() => {
             if (previousState == "destroy") return;
             previousState = "destroy";
             props.onDestroyContact?.(contact);
-            alert(previousState);
           });
         });
       });

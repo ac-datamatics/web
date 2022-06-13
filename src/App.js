@@ -26,7 +26,7 @@ export default function App(props) {
   const [renderCCP, setRenderCCP] = useState(false);
   const [userActive, setUserActive] = useState(false);
   const loginWindow = useRef(null);
-  const agentUsername = useRef("");
+  const agent = useRef("");
 
   useEffect(() => {
     setUserActive(JSON.parse(window.localStorage.getItem("userActive")));
@@ -117,34 +117,13 @@ export default function App(props) {
                     <Home />
                   </Route>
                   <Route exact path="/home">
-                    <Home username={agentUsername} />
+                    <Home username={agent.current.username} />
                   </Route>
                   <Route exact path="/leaderboard">
                     <Dashboard />
                   </Route>
                   <Route exact path="/training">
                     <Training />
-                  </Route>
-                </Switch>
-              </View>
-            </Div>
-          </Router>
-        </div>
-      ) : userActive && userType === "SUPERV" ? (
-        <div>
-          <Router>
-            <Div>
-              <Sidebar setUserInactive={setUserInactive} />
-              <View>
-                <Switch>
-                  <Route exact path="/home">
-                    <HomeSUPERV />
-                  </Route>
-                  <Route exact path="/leaderboard">
-                    <DashboardSUPERV />
-                  </Route>
-                  <Route exact path="/training">
-                    <TrainingSUPERV />
                   </Route>
                 </Switch>
               </View>
@@ -159,7 +138,7 @@ export default function App(props) {
               <View>
                 <Switch>
                   <Route exact path="/home">
-                    <HomeSUPERV username={agentUsername} />
+                    <HomeSUPERV username={agent.current.username} />
                   </Route>
                   <Route exact path="/leaderboard">
                     <DashboardSUPERV />
@@ -181,7 +160,7 @@ export default function App(props) {
           hidden={userType !== "Agent" || !userActive}
         >
           <AmazonConnect
-            agentUsername={agentUsername}
+            agent={agent}
             setUserActive={handleSetUserActive}
             setUserInactive={setUserInactive}
             userActive={userActive}
