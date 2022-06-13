@@ -2,7 +2,7 @@ import React from "react";
 
 function Welcome({ username }) {
   const state = {
-    curTime: new Date().toLocaleString(),
+    curDate: new Date().toDateString(),
   };
 
   const ColoredLine = ({ color }) => (
@@ -36,7 +36,7 @@ function Welcome({ username }) {
       <h1>Welcome, {username?.current}!</h1>
 
       <div style={{ marginTop: "10px" }}>
-        <p>Current Time : {state.curTime}</p>
+        <p>Current Date : {state.curDate}</p>
       </div>
 
       <div style={{ marginTop: "70px" }}>

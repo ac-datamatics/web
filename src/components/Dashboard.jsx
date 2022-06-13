@@ -3,7 +3,6 @@ import styled from "styled-components";
 import Earnings from "components/Earnings";
 import Navbar from "./Navbar";
 import Streams from "components/Streams";
-import TargetAudience from "./TargetAudience";
 import TopReleases from "./TopReleases";
 import scrollreveal from "scrollreveal";
 
@@ -32,7 +31,6 @@ export function Dashboard() {
       <Navbar />
       <div className="grid">
         <div className="row2">
-          <TargetAudience />
         </div>
       </div>
     </Section>
@@ -64,7 +62,6 @@ export function DashboardSUPERV ()  {
       <Navbar />
       <div className="grid">
         <div className="row2">
-          <TargetAudience />
         </div>
       </div>
     </Section>

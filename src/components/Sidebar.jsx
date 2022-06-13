@@ -88,11 +88,6 @@ function Sidebar(props) {
             <BsFillHouseDoorFill />
           </li>
         </NavLink>
-        <NavLink to="/leaderboard" activeClassName="selected">
-          <li>
-            <MdLeaderboard type="button" />
-          </li>
-        </NavLink>
         <NavLink to="/training" activeClassName="selected">
           <li>
             <BsFillCameraVideoFill type="button" />
