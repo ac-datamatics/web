@@ -19,18 +19,24 @@ export default function VideoDetails({ open, handleClose, video }) {
           <div className={classes.cardContents}>
             <h1 className={classes.cardTitle}>{video.uploadDate}</h1>
             <div className={classes.videoPlayer}>
-            <iframe
-                src={link + video.mergedRecordingURL}
+              <iframe
+                src={
+                  link +
+                  "connect/ac-datamatics/ScreenRecordings/" +
+                  video.contact_id +
+                  ".webm"
+                }
                 width={600}
                 height={400}
                 allowFullScreen={true}
-                title='Video'
-                
+                title="Video"
               ></iframe>
             </div>
             <div className={classes.videoDescription}>
               <div>
-                <h3>{video.agentUsername} - {video.sentimentCustomer}</h3>
+                <h3>
+                  {video.agentUsername} - {video.sentimentCustomer}
+                </h3>
                 <p>Description</p>
               </div>
             </div>
