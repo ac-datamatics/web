@@ -14,7 +14,7 @@ export function Home({ username }) {
         <Welcome username={username} />
         <Donut />
       </div>
-      <Streams />
+      <Streams username={username} />
     </div>
   );
 };
@@ -31,7 +31,7 @@ export function HomeSUPERV({ username }) {
         <Welcome username={username} />
         <Donut />
       </div>
-      <Streams />
+      <Streams username={username}/>
     </div>
   );
 };
