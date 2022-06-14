@@ -66,25 +66,27 @@ export function TrainingSUPERV ()  {
   return (
     <>
     <div className={classes.newWrap}>
-      <div style={
-        {display: 'flex', 
-        flexDirection: 'row', 
-        justifyContent: 'right',
-        color: 'white',
-        fontFamily: "Rubik",
-        paddingTop: '30px'}}>
-        <div style={{display: 'flex', flexDirection: 'row', paddingRight: '40px'}}>
-          <p style={{paddingRight: '8px'}}>From: </p>
-          <DatePicker selected={startDate} onChange={(startDate) => setStartDate(startDate)} />
+      <div style={{display: 'flex', flexDirection: 'column'}}>
+        <div className={classes.search}>
+          < FiSearch color="white" size="20px"/>
+          <input className={classes.searchBar} placeholder="Search..." onChange={event => setQuery(event.target.value)} />
         </div>
-        <div style={{display: 'flex', flexDirection: 'row', paddingRight: '40px'}}>
-          <p style={{paddingRight: '8px'}}>To: </p>
-          <DatePicker selected={endDate} onChange={(endDate) => setEndDate(endDate)} />
+        <div style={
+          {display: 'flex', 
+          flexDirection: 'row', 
+          justifyContent: 'right',
+          color: 'white',
+          fontFamily: "Rubik",
+          paddingTop: '20px'}}>
+          <div style={{display: 'flex', flexDirection: 'row', paddingRight: '40px'}}>
+            <p style={{paddingRight: '8px'}}>From: </p>
+            <DatePicker selected={startDate} onChange={(startDate) => setStartDate(startDate)} />
+          </div>
+          <div style={{display: 'flex', flexDirection: 'row', paddingRight: '40px'}}>
+            <p style={{paddingRight: '8px'}}>To: </p>
+            <DatePicker selected={endDate} onChange={(endDate) => setEndDate(endDate)} />
+          </div>
         </div>
-      </div>
-      <div className={classes.search}>
-        < FiSearch color="white" size="20px"/>
-        <input className={classes.searchBar} placeholder="Search..." onChange={event => setQuery(event.target.value)} />
       </div>
       <TrainingTabs labels={["General"]}>
         <div className={classes.contentWrap}>
