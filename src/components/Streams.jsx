@@ -2,14 +2,10 @@ import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { applyCardStyles } from "components/ReusableStyles";
 import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer } from "recharts";
-import streamsChart from 'functions/Queries';
+import streamsChart from "functions/Queries";
 
-
-
-function Streams(username) {
-
+function Streams({ username }) {
   const todayDate = new Date();
-
 
   const todayDateZeroHours = todayDate;
   todayDateZeroHours.setHours(0);
@@ -23,20 +19,29 @@ function Streams(username) {
 
   const [data, setData] = useState([]);
 
-  let url = 'https://2uxbgsvox5.execute-api.us-east-1.amazonaws.com/Datamatics/video';
-  url = url + '?agentUsername=' + username + '&=' + todayDateZeroHours.toISOString() + '&=' + todayDateLastSecond.toISOString();
+  let url =
+    "https://2uxbgsvox5.execute-api.us-east-1.amazonaws.com/Datamatics/video";
+  url =
+    url +
+    "?agentUsername=" +
+    username +
+    "&=" +
+    todayDateZeroHours.toISOString() +
+    "&=" +
+    todayDateLastSecond.toISOString();
+
+  console.debug(url);
 
   useEffect(() => {
     fetch(url, {
-      method: 'GET',
-    }).then((response) =>
-      response.json()
-    ).then((_data) => {
-      setData(_data)
-    }).catch((err) =>
-      console.error(err)
-    );
-  })
+      method: "GET",
+    })
+      .then((response) => response.json())
+      .then((_data) => {
+        setData(_data);
+      })
+      .catch((err) => console.error(err));
+  }, []);
 
   const sliderData = [];
   return (
