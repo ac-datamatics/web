@@ -3,6 +3,7 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
+import { BsThreeDots } from "react-icons/bs";
 
 import classes from "./ThumbCard.module.css";
 import VideoDetails from "./VideoDetails";
@@ -17,8 +18,8 @@ const ThumbCard = ({ video }) => {
 
   return (
     <>
-      <Card className={classes.root} raised={true} onClick={handleModalOpen}>
-        <CardActionArea>
+      <Card className={classes.root} raised={true}>
+        <CardActionArea onClick={handleModalOpen}>
           {/* <CardMedia
             component="img"
             image={video.thumbnailUrl}
@@ -49,6 +50,7 @@ const ThumbCard = ({ video }) => {
               {video.assignedDate}
             </Typography>
           </CardContent>
+          
         </CardActionArea>
       </Card>
       <VideoDetails

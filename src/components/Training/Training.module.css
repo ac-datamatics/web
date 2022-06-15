@@ -12,13 +12,13 @@
 .contentWrap {
   height: 100%;
   overflow-y: auto;
+  margin-right: 5rem;
 }
 
 .newWrap {
   display: flex;
   flex-direction: column;
-  padding-left: 5em;
-  padding-right: 0px;
+  padding-left: 3rem; 
 }
 
 .parentContentWrap {
@@ -27,7 +27,7 @@
 }
 
 .searchDiv {
-  margin-right: 60px;
+  margin-right: 5rem;
 }
 
 .searchBar {
@@ -43,18 +43,21 @@
 }
 
 .search {
-  width: 100%;
-  padding-right: 20px;
+  width: 100%; 
+  padding-right: 40px;
   display: flex;
   flex-direction: row;
-  margin: 10px 10px 0px 10px;
+  margin: 20px 10px 0px 10px;
   align-items: center;
   justify-content: right;
 }
 
 .picker {
-  max-width: 20%;
+  justify-content: right; 
+  display: flex;
+  flex-direction: row;
 }
+
 .example {
   width: 31%;
   color: #97938f;

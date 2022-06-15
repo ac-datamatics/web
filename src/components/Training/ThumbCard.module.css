@@ -16,3 +16,11 @@
   background-color: #232f3e;
   color: rgb(193, 192, 197);
 }
+
+.customSelect {
+  position: relative;
+  font-family: Arial;
+  color: orange;
+  background-color: transparent;
+  border: none;
+}
