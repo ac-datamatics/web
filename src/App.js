@@ -123,7 +123,7 @@ export default function App(props) {
                     <Dashboard />
                   </Route>
                   <Route exact path="/training">
-                    <Training />
+                    <Training agent={agent} />
                   </Route>
                 </Switch>
               </View>
@@ -144,7 +144,7 @@ export default function App(props) {
                     <DashboardSUPERV />
                   </Route>
                   <Route exact path="/training">
-                    <TrainingSUPERV />
+                    <TrainingSUPERV agent={agent} />
                   </Route>
                 </Switch>
               </View>
