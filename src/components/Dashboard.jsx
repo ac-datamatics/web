@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Navbar from "./Navbar";
 import scrollreveal from "scrollreveal";
 
 export function Dashboard() {
@@ -25,7 +24,6 @@ export function Dashboard() {
   }, []);
   return (
     <Section>
-      <Navbar />
       <div className="grid">
         <div className="row2">
         </div>
@@ -56,7 +54,6 @@ export function DashboardSUPERV ()  {
   }, []);
   return (
     <Section>
-      <Navbar />
       <div className="grid">
         <div className="row2">
         </div>
