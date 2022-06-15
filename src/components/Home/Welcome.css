@@ -1,0 +1,21 @@
+.searchDiv {
+    margin-right: 5rem;
+  }
+  
+.searchBar {
+    width: 30%;
+    padding: 5px 5px;
+    margin: 8px 10px;
+    border: none;
+    border-bottom: 2px solid orange;
+    background-color: transparent;
+    transition: 0.5s;
+    outline: none;
+    color: white;
+}
+  
+.search {
+    width: 100%; 
+    padding-right: 40px;
+    margin: 20px 10px 0px 10px;
+}

@@ -1,6 +1,10 @@
-import React from "react";
+import './Welcome.css';
+import { FiSearch } from "react-icons/fi";
+import React, { useState } from "react";
 
-function Welcome({ username }) {
+function WelcomeSuperv({ username }) {
+  const [query, setQuery] = useState("");
+  const [videoInfo, setVideoInfo] = useState([]);
 
   const state = {
     curDate: new Date().toDateString(),
@@ -39,7 +43,13 @@ function Welcome({ username }) {
         <p>Current Date : {state.curDate}</p>
       </div>
 
-
+      <div className={"search"}>
+        <FiSearch color="white" size="15px" />
+        <input
+          className={"searchBar"}
+          placeholder="Search agent stats..."
+        />
+      </div>
 
       <div style={{ marginTop: "70px" }}>
         <h2>Total calls: 37</h2>
@@ -54,4 +64,4 @@ function Welcome({ username }) {
   );
 }
 
-export default Welcome;
+export default WelcomeSuperv;

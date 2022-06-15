@@ -25,7 +25,7 @@ function Donut() {
     <div
       style={{
         width: "50%",
-        height: "520px",
+        maxHeight: "520px",
         display: "flex",
         backgroundColor: "rgb(46,46,46)",
         border: "none !important",
@@ -36,7 +36,7 @@ function Donut() {
         marginTop: "7px",
       }}
     >
-      <Doughnut data={data} />
+      <Doughnut data={data} style={{maxHeight: "500px"}}/>
     </div>
   );
 }
