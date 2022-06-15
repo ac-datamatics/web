@@ -6,7 +6,6 @@ import classes from "./VideoDetails.module.css";
 
 export default function VideoDetails({ open, handleClose, video }) {
   const link = "https://d13wsb297kr3hd.cloudfront.net/";
-  console.debug(video.contact_id)
   return (
     <div>
       <Modal
