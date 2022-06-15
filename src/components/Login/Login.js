@@ -64,7 +64,7 @@ function LogIn(props) {
   return (
     <Wrapper>
       <Form>
-        <img src={'/Images/ .png'} alt='Logo Datamatics'/> 
+        <img src={'/Images/logo.png'} alt='Logo Datamatics'/> 
         <Title>Login to Amazon Connect</Title>
         <Button onClick={handleLogin}>Login</Button>
       </Form>
