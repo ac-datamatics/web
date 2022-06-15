@@ -1,9 +1,6 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import Earnings from "components/Earnings";
 import Navbar from "./Navbar";
-import Streams from "components/Streams";
-import TopReleases from "./TopReleases";
 import scrollreveal from "scrollreveal";
 
 export function Dashboard() {
