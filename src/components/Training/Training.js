@@ -1,8 +1,8 @@
 import ReactPlayer from "react-player";
 import Assigned from "./Assigned";
 import {useEffect} from "react";
-import ThumbCard from "./ThumbCard";
-import ThumbCardSuperv from './ThumbCardSUPERV';
+import ThumbCardSuper from "./ThumbCardSuper";
+import ThumbCard from './ThumbCard';
 import { FiSearch } from "react-icons/fi";
 
 import classes from "./Training.module.css";
@@ -37,7 +37,7 @@ export const Training = () => {
             (Date(video.uploadDate).getTime() <= endDate.getTime())) {
               return video;
             }}).map((video, key) => {
-              return <ThumbCardSuperv video={video} key={key} />;
+              return <ThumbCard video={video} key={key} />;
           })}
           {/* <Assigned /> */}
         </div>
@@ -103,7 +103,7 @@ export function TrainingSUPERV ()  {
               return video;
             } 
           }).map((video, key) => {
-            return <ThumbCardSuperv video={video} key={key} />;
+            return <ThumbCardSuper video={video} key={key} />;
           })}
           {/* <Assigned /> */}
         </div>
