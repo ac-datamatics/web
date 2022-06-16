@@ -36,6 +36,7 @@ export default function App(props) {
 
   useEffect(() => {
     if (agent) {
+      console.debug("MADE QUERY", agent);
       GetVideosData(agent.routingProfile.queues);
     }
   }, [agent]);
@@ -96,15 +97,9 @@ export default function App(props) {
               <Sidebar setUserInactive={setUserInactive} />
               <View>
                 <Switch>
-                  <Route exact path="*">
-                    <Redirect to="/home" />
-                  </Route>
                   <Route exact path="/home">
                     <Home username={agent.username} videoInfo={videoInfo} />
                   </Route>
-                  {/* <Route exact path="/leaderboard">
-                    <Dashboard />
-                  </Route> */}
                   <Route exact path="/training">
                     <Training videoInfo={videoInfo} />
                   </Route>
@@ -120,18 +115,12 @@ export default function App(props) {
               <Sidebar setUserInactive={setUserInactive} />
               <View>
                 <Switch>
-                  <Route exact path="*">
-                    <Redirect to="/home" />
-                  </Route>
                   <Route exact path="/home">
                     <HomeSUPERV
                       username={agent.username}
                       videoInfo={videoInfo}
                     />
                   </Route>
-                  {/* <Route exact path="/leaderboard">
-                    <DashboardSUPERV />
-                  </Route> */}
                   <Route exact path="/training">
                     <TrainingSUPERV videoInfo={videoInfo} />
                   </Route>

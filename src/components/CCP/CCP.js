@@ -87,6 +87,7 @@ const ConnectCCP = (props) => {
           // Store agent
           agent.current = _agent;
           props.setAgent(agent.current.getConfiguration());
+          console.debug(props.agent);
           console.debug(agent.current.getConfiguration());
           // Callback
           props.onAgent?.(agent.current);
