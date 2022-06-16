@@ -110,10 +110,6 @@ export function TrainingSUPERV({ agent, videoInfo }) {
   const [endDate, setEndDate] = useState(null);
   const [query, setQuery] = useState("");
 
-  useEffect(() => {
-    console.debug(agent.current);
-  }, []);
-
   return (
     <>
       {/* <div className={classes.newWrap}> */}

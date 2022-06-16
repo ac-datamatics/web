@@ -23,7 +23,7 @@ import { setHours } from "date-fns";
 
 export default function App(props) {
   const { userType, setGlobalTypeUser } = props.AuthFunction();
-  const { videoInfo, GetVideosData } = Queries();
+  const { videoSupervInfo, videoAgentInfo, GetVideosData } = Queries();
 
   const [renderCCP, setRenderCCP] = useState(false);
   const [userActive, setUserActive] = useState(false);
@@ -98,10 +98,10 @@ export default function App(props) {
               <View>
                 <Switch>
                   <Route exact path="/home">
-                    <Home username={agent.username} videoInfo={videoInfo} />
+                    <Home username={agent.username} />
                   </Route>
                   <Route exact path="/training">
-                    <Training videoInfo={videoInfo} />
+                    <Training videoInfo={videoAgentInfo} />
                   </Route>
                 </Switch>
               </View>
@@ -118,11 +118,11 @@ export default function App(props) {
                   <Route exact path="/home">
                     <HomeSUPERV
                       username={agent.username}
-                      videoInfo={videoInfo}
+                      videoInfo={videoSupervInfo}
                     />
                   </Route>
                   <Route exact path="/training">
-                    <TrainingSUPERV videoInfo={videoInfo} />
+                    <TrainingSUPERV videoInfo={videoSupervInfo} />
                   </Route>
                 </Switch>
               </View>

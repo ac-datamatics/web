@@ -14,7 +14,8 @@ export default function Queries() {
   const [data, setData] = useState([]);
   const [rateData, setRateData] = useState([]);
   const [sliderData, setSliderData] = useState([]);
-  const [videoInfo, setVideoInfo] = useState([]);
+  const [videoAgentInfo, setVideoAgentInfo] = useState([]);
+  const [videoSupervInfo, setVideoSupervInfo] = useState([]);
 
   let url =
     "https://2uxbgsvox5.execute-api.us-east-1.amazonaws.com/Datamatics/video";
@@ -23,7 +24,8 @@ export default function Queries() {
     data,
     rateData,
     sliderData,
-    videoInfo,
+    videoSupervInfo,
+    videoAgentInfo,
     GetVideosData: (agentQueues) => {
       const queues = agentQueues.map((queue) => {
         return queue.name;
@@ -36,13 +38,20 @@ export default function Queries() {
       )
         .then((response) => response.json())
         .then((_data) => {
-          setVideoInfo(
-            _data.videos.filter((video) => {
-              if (queues.includes(video.queue_name)) {
-                return video;
+          console.debug(_data);
+          let agentInfo = [];
+          let supervInfo = [];
+          for (const element of _data.videos) {
+            if (queues.includes(element.queue_name)) {
+              supervInfo.push(element);
+              if (element.is_assigned === "true") {
+                agentInfo.push(element);
               }
-            })
-          );
+            }
+          }
+
+          setVideoAgentInfo(agentInfo);
+          setVideoSupervInfo(supervInfo);
         })
         .catch((err) => console.error(err));
     },
