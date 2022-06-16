@@ -1,7 +1,6 @@
 import React from "react";
 
-function Welcome({ username }) {
-
+function Welcome({ username, data }) {
   const state = {
     curDate: new Date().toDateString(),
   };
@@ -42,12 +41,12 @@ function Welcome({ username }) {
 
 
       <div style={{ marginTop: "70px" }}>
-        <h2>Total calls: 37</h2>
+        <h2>Total calls: {data.count }</h2>
         <ColoredLine color="rgb(227, 151, 64)" />
         <div style={{ marginTop: "40px", fontFamily: "Arial" }}>
-          <h3>Calls of 5-4 stars: 23</h3>
-          <h3 style={{ marginTop: "10px" }}>Calls of 2-3 stars: 10</h3>
-          <h3 style={{ marginTop: "10px" }}>Calls of 1-0 stars: 4</h3>
+          <h3>Calls of 5-4 stars: {data.info[2]}</h3>
+          <h3 style={{ marginTop: "10px" }}>Calls of 2-3 stars: {data.info[1]}</h3>
+          <h3 style={{ marginTop: "10px" }}>Calls of 1-0 stars: {data.info[0]}</h3>
         </div>
       </div>
     </div>

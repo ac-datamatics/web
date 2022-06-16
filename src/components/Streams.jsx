@@ -1,108 +1,16 @@
-import React from "react";
 import styled from "styled-components";
 import { applyCardStyles } from "components/ReusableStyles";
 import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-function Streams() {
-  const data = [
-    {
-      hour: "01:00",
-      calls: 0,
-    },
-    {
-      hour: "02:00",
-      calls: 0,
-    },
-    {
-      hour: "03:00",
-      calls: 0,
-    },
-    {
-      hour: "04:00",
-      calls: 0,
-    },
-    {
-      hour: "05:00",
-      calls: 0,
-    },
-    {
-      hour: "06:00",
-      calls: 0,
-    },
-    {
-      hour: "07:00",
-      calls: 0,
-    },
-    {
-      hour: "08:00",
-      calls: 1,
-    },
-    {
-      hour: "9:00",
-      calls: 3,
-    },
-    { hour: "10:00", calls: 1 },
-    {
-      hour: "11:00",
-      calls: 4,
-    },
-    {
-      hour: "12:00",
-      calls: 6,
-    },
-    { hour: "13:00", calls: 2 },
-    {
-      hour: "14:00",
-      calls: 4,
-    },
-    {
-      hour: "15:00",
-      calls: 5,
-    },
-    {
-      hour: "16:00",
-      calls: 2,
-    },
-    {
-      hour: "17:00",
-      calls: 3,
-    },
-    {
-      hour: "18:00",
-      calls: 5,
-    },
-    {
-      hour: "19:00",
-      calls: 1,
-    },
-    {
-      hour: "20:00",
-      calls: 1,
-    },
-    {
-      hour: "21:00",
-      calls: 0,
-    },
-    {
-      hour: "22:00",
-      calls: 0,
-    },
-    {
-      hour: "23:00",
-      calls: 0,
-    },
-    {
-      hour: "00:00",
-      calls: 0,
-    },
-  ];
+function Streams({ data }) {
   const sliderData = [];
+
   return (
     <Section>
       <div className="title-container">
         <div className="title">
           <h4>Calls</h4>
-          <h1>37</h1>
+          <h1>{data.count}</h1>
         </div>
         <div className="slider">
           <div className="services">
@@ -119,7 +27,7 @@ function Streams() {
       </div>
       <div className="chart">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data}>
+          <AreaChart data={data.info}>
             <defs>
               <linearGradient id="colorview" x1="0" y1="0" x2="0" y2="1">
                 <stop
