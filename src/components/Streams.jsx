@@ -1,55 +1,16 @@
-import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { applyCardStyles } from "components/ReusableStyles";
 import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer } from "recharts";
-import streamsChart from "functions/Queries";
 
-function Streams({ username }) {
-  const todayDate = new Date();
-
-  const todayDateZeroHours = todayDate;
-  todayDateZeroHours.setHours(0);
-  todayDateZeroHours.setMinutes(0);
-  todayDateZeroHours.setMilliseconds(0);
-
-  const todayDateLastSecond = todayDate;
-  todayDateLastSecond.setHours(23);
-  todayDateLastSecond.setMinutes(59);
-  todayDateLastSecond.setMilliseconds(59);
-
-  const [data, setData] = useState([]);
-
-  let url =
-    "https://2uxbgsvox5.execute-api.us-east-1.amazonaws.com/Datamatics/video";
-  url =
-    url +
-    "?agentUsername=" +
-    username +
-    "&=" +
-    todayDateZeroHours.toISOString() +
-    "&=" +
-    todayDateLastSecond.toISOString();
-
-  console.debug(url);
-
-  useEffect(() => {
-    fetch(url, {
-      method: "GET",
-    })
-      .then((response) => response.json())
-      .then((_data) => {
-        setData(_data);
-      })
-      .catch((err) => console.error(err));
-  }, []);
-
+function Streams({ data }) {
   const sliderData = [];
+
   return (
     <Section>
       <div className="title-container">
         <div className="title">
           <h4>Calls</h4>
-          <h1>{data?.length}</h1>
+          <h1>{data.count}</h1>
         </div>
         <div className="slider">
           <div className="services">
@@ -66,7 +27,7 @@ function Streams({ username }) {
       </div>
       <div className="chart">
         <ResponsiveContainer width="100%" height="100%">
-          <AreaChart data={data}>
+          <AreaChart data={data.info}>
             <defs>
               <linearGradient id="colorview" x1="0" y1="0" x2="0" y2="1">
                 <stop

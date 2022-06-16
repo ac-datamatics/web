@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import Streams from "../Streams";
 import Donut from "../Donut";
 import "./Home.css";
@@ -7,7 +7,7 @@ import Queries from "../../functions/Queries"
 
 export function Home({ username }) {
   const { data, rateData, sliderData, GetGraphData } = Queries()
-  useEffect(() => {GetGraphData(username)}, [])
+  useEffect(() => { GetGraphData(username) }, [])
 
   return (
     <div className="Home">
@@ -18,7 +18,7 @@ export function Home({ username }) {
         <Welcome username={username} data={{ count: data.length, info: rateData }} />
         <Donut data={rateData} />
       </div>
-      <Streams data={data} />
+      <Streams data={{ count: data.length, info: sliderData }} />
     </div>
   );
 };
@@ -26,8 +26,8 @@ export function Home({ username }) {
 
 
 export function HomeSUPERV({ username }) {
-  const { data, rateData, GetGraphData } = Queries()
-  useEffect(() => {GetGraphData(username)}, [])
+  const { data, rateData, sliderData, GetGraphData } = Queries()
+  useEffect(() => { GetGraphData(username) }, [])
 
   return (
     <div className="Home">
@@ -38,7 +38,7 @@ export function HomeSUPERV({ username }) {
         <Welcome username={username} data={{ count: data.length, info: rateData }} />
         <Donut data={rateData} />
       </div>
-      <Streams data={data} />
+      <Streams data={{ count: data.length, info: sliderData }} />
     </div>
   );
 };
