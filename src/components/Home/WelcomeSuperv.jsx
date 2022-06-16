@@ -1,10 +1,15 @@
-import './Welcome.css';
-import { FiSearch } from "react-icons/fi";
 import React, { useState } from "react";
+import Select from "react-dropdown-select";
 
 function WelcomeSuperv({ username }) {
-  const [query, setQuery] = useState("");
-  const [videoInfo, setVideoInfo] = useState([]);
+
+  const [options, setOptions] = useState( [
+    { id: 1, country: "America" },
+    { id: 2, country: "India" }, 
+    { id: 3, country: "Africa" },
+  ])
+
+  const [selectedOptions, setSelectedOptions] = useState( [ ] )
 
   const state = {
     curDate: new Date().toDateString(),
@@ -43,15 +48,18 @@ function WelcomeSuperv({ username }) {
         <p>Current Date : {state.curDate}</p>
       </div>
 
-      <div className={"search"}>
-        <FiSearch color="white" size="15px" />
-        <input
-          className={"searchBar"}
-          placeholder="Search agent stats..."
-        />
+      <div style={{width:'250px', marginTop:'30px', backgroundColor:"white"}} >
+          <Select 
+            style={{color:'black'}} 
+            options={ options.map( ( item, index ) => { 
+              return { value: item.id, label: item.country }
+            })} 
+            values={selectedOptions} 
+            onChange={ ( values ) => setSelectedOptions([...values]) } 
+          />
       </div>
 
-      <div style={{ marginTop: "70px" }}>
+      <div style={{ marginTop: "50px" }}>
         <h2>Total calls: 37</h2>
         <ColoredLine color="rgb(227, 151, 64)" />
         <div style={{ marginTop: "40px", fontFamily: "Arial" }}>
