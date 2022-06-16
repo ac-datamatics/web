@@ -9,9 +9,10 @@ import RecordingFunctions from "../../functions/RecordingFunctions";
 
 //Amplify.configure(awsconfig);
 
-const   AmazonConnect = (props) => {
+const AmazonConnect = (props) => {
   const {
     agent,
+    setAgent,
     userActive,
     userType,
     loginWindow,
@@ -30,6 +31,7 @@ const   AmazonConnect = (props) => {
           {isBrowserCompatible() && (
             <CCP
               agent={agent}
+              setAgent={setAgent}
               userActive={userActive}
               userType={userType}
               setUserType={setUserType}
@@ -80,14 +82,18 @@ const   AmazonConnect = (props) => {
                 let heyBlob = await stop();
 
                 // Here, the stored recording should be uploaded to S3
-                Storage.put(`recordings/${contact.getContactId()}.webm`, heyBlob, {
-                  level: "public",
-                  contentType: "video/webm",
-                  progressCallback: (progress) => {
-                    console.log(progress);
-                  },
-                });
-                alert("uploaded")
+                Storage.put(
+                  `recordings/${contact.getContactId()}.webm`,
+                  heyBlob,
+                  {
+                    level: "public",
+                    contentType: "video/webm",
+                    progressCallback: (progress) => {
+                      console.log(progress);
+                    },
+                  }
+                );
+                alert("uploaded");
               }}
             />
           )}

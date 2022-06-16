@@ -12,14 +12,21 @@ export function Home({ username }) {
 
   return (
     <div className="Home">
-      <div style={{
-        display: "flex",
-        flexDirection: "row",
-      }}>
-        <Welcome username={username} data={{ count: data.length, info: rateData }} />
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+        }}
+      >
+        <Welcome
+          username={username}
+          data={{ count: data.length, info: rateData }}
+        />
         <Donut data={rateData} />
       </div>
-      <Streams data={{ count: data.length, info: sliderData }} />
+      <div>
+        <Streams data={{ count: data.length, info: sliderData }} />
+      </div>
     </div>
   );
 };

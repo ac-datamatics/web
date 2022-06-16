@@ -20,24 +20,11 @@ const ThumbCard = ({ video }) => {
     <>
       <Card className={classes.root} raised={true}>
         <CardActionArea onClick={handleModalOpen}>
-          {/* <CardMedia
-            component="img"
-            image={video.thumbnailUrl}
-            alt="Video Thumbnail"
-            className={classes.media}
-          /> */}
           <CardContent className={classes.content}>
             <Typography
               className={classes.description}
               gutterBottom
               variant="h5"
-              component="div"
-            >
-              {video.uploadDate}
-            </Typography>
-            <Typography
-              className={classes.description}
-              variant="body2"
               component="div"
             >
               {video.agentUsername}
@@ -47,10 +34,16 @@ const ThumbCard = ({ video }) => {
               variant="body2"
               component="div"
             >
+              {video.uploadDate}
+            </Typography>
+            <Typography
+              className={classes.description}
+              variant="body2"
+              component="div"
+            >
               {video.assignedDate}
             </Typography>
           </CardContent>
-          
         </CardActionArea>
       </Card>
       <VideoDetails

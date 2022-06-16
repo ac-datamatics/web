@@ -6,6 +6,7 @@ import classes from "./VideoDetails.module.css";
 
 export default function VideoDetails({ open, handleClose, video }) {
   const link = "https://d13wsb297kr3hd.cloudfront.net/";
+  const uploadDate = new Date(video.uploadDate);
   return (
     <div>
       <Modal
@@ -16,9 +17,16 @@ export default function VideoDetails({ open, handleClose, video }) {
       >
         <Card className={classes.card}>
           <div className={classes.cardContents}>
-            <h1 className={classes.cardTitle}>{video.uploadDate}</h1>
+            {/* <h1 className={classes.cardTitle}>
+              {video.agentUsername} - {video.rating}
+            </h1> */}
             <div className={classes.videoPlayer}>
-              <video width={600} height={400} crossOrigin="anonymous" controls>
+              <video
+                width="100%"
+                height="auto"
+                crossOrigin="anonymous"
+                controls
+              >
                 <source
                   src={
                     link +
@@ -41,25 +49,15 @@ export default function VideoDetails({ open, handleClose, video }) {
                   }
                 />
               </video>
-              {/* <iframe
-                src={
-                  link +
-                  "connect/ac-datamatics/ScreenRecordings/" +
-                  video.contact_id +
-                  ".webm"
-                }
-                width={600}
-                height={400}
-                allowFullScreen={true}
-                title="Video"
-              ></iframe> */}
             </div>
             <div className={classes.videoDescription}>
               <div>
-                <h3>
-                  {video.agentUsername} - {video.sentimentCustomer}
-                </h3>
-                <p>Description</p>
+                <br />
+                <h1>{video.agentUsername}</h1>
+                <br />
+                <h2>{uploadDate.toLocaleString()}</h2>
+                <br />
+                <h2>Rating: {video.rating}</h2>
               </div>
             </div>
           </div>

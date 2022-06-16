@@ -9,10 +9,9 @@ function Streams({ data }) {
     <Section>
       <div className="title-container">
         <div className="title">
-          <h4>Calls</h4>
-          <h1>{data.count}</h1>
+          <h2>Calls / Hour</h2>
         </div>
-        <div className="slider">
+        {/* <div className="slider">
           <div className="services">
             {sliderData.map(({ image, serviceName }) => {
               return (
@@ -23,7 +22,7 @@ function Streams({ data }) {
               );
             })}
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="chart">
         <ResponsiveContainer width="100%" height="100%">

@@ -7,7 +7,6 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
   Redirect,
 } from "react-router-dom";
 import { Home } from "./components/Home/Home";
@@ -17,20 +16,29 @@ import LogIn from "./components/Login/Login";
 import { DashboardSUPERV } from "components/Dashboard";
 import { TrainingSUPERV } from "./components/Training/Training";
 import AmazonConnect from "./components/CCP/AmazonConnect";
+import Queries from "functions/Queries";
 
 import classes from "./App.module.css";
+import { setHours } from "date-fns";
 
 export default function App(props) {
   const { userType, setGlobalTypeUser } = props.AuthFunction();
+  const { videoInfo, GetVideosData } = Queries();
 
   const [renderCCP, setRenderCCP] = useState(false);
   const [userActive, setUserActive] = useState(false);
+  const [agent, setAgent] = useState(null);
   const loginWindow = useRef(null);
-  const agent = useRef("");
 
   useEffect(() => {
     setUserActive(JSON.parse(window.localStorage.getItem("userActive")));
   }, []);
+
+  useEffect(() => {
+    if (agent) {
+      GetVideosData(agent.routingProfile.queues);
+    }
+  }, [agent]);
 
   useEffect(() => {
     window.localStorage.setItem("userActive", userActive);
@@ -52,10 +60,15 @@ export default function App(props) {
     loginWindow.current = null;
   };
 
+  const handleSetAgent = (_agent) => {
+    setAgent(_agent);
+  };
+
   const setUserInactive = () => {
     window.location.reload();
     setUserActive(false);
     setRenderCCP(false);
+    setAgent(null);
   };
 
   const handleSetUserActive = () => {
@@ -67,36 +80,6 @@ export default function App(props) {
     setUserActive(false);
   });
 
-  // useEffect(() => {
-  //   const sr = scrollreveal({
-  //     origin: "left",
-  //     distance: "80px",
-  //     duration: 1000,
-  //     reset: false,
-  //   });
-  //   sr.reveal(
-  //     `
-  //      #sidebar
-  //   `,
-  //     {
-  //       opacity: 0,
-  //     }
-  //   );
-  //   const sr2 = scrollreveal({
-  //     origin: "right",
-  //     distance: "80px",
-  //     duration: 1000,
-  //     reset: false,
-  //   });
-  //   sr2.reveal(
-  //     `
-  //      #rightSidebar
-  //   `,
-  //     {
-  //       opacity: 0,
-  //     }
-  //   );
-  // }, []);
   return (
     <div
       className={
@@ -113,17 +96,17 @@ export default function App(props) {
               <Sidebar setUserInactive={setUserInactive} />
               <View>
                 <Switch>
-                  <Route exact path="/">
-                    <Home />
+                  <Route exact path="*">
+                    <Redirect to="/home" />
                   </Route>
                   <Route exact path="/home">
-                    <Home username={agent.current.username} />
+                    <Home username={agent.username} videoInfo={videoInfo} />
                   </Route>
-                  <Route exact path="/leaderboard">
+                  {/* <Route exact path="/leaderboard">
                     <Dashboard />
-                  </Route>
+                  </Route> */}
                   <Route exact path="/training">
-                    <Training agent={agent} />
+                    <Training videoInfo={videoInfo} />
                   </Route>
                 </Switch>
               </View>
@@ -137,14 +120,20 @@ export default function App(props) {
               <Sidebar setUserInactive={setUserInactive} />
               <View>
                 <Switch>
+                  <Route exact path="*">
+                    <Redirect to="/home" />
+                  </Route>
                   <Route exact path="/home">
-                    <HomeSUPERV username={agent.current.username} />
+                    <HomeSUPERV
+                      username={agent.username}
+                      videoInfo={videoInfo}
+                    />
                   </Route>
-                  <Route exact path="/leaderboard">
+                  {/* <Route exact path="/leaderboard">
                     <DashboardSUPERV />
-                  </Route>
+                  </Route> */}
                   <Route exact path="/training">
-                    <TrainingSUPERV agent={agent} />
+                    <TrainingSUPERV videoInfo={videoInfo} />
                   </Route>
                 </Switch>
               </View>
@@ -161,6 +150,7 @@ export default function App(props) {
         >
           <AmazonConnect
             agent={agent}
+            setAgent={handleSetAgent}
             setUserActive={handleSetUserActive}
             setUserInactive={setUserInactive}
             userActive={userActive}
