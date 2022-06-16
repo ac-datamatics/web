@@ -14,12 +14,16 @@ export default function Queries() {
     todayDateLastSecond.setMilliseconds(59);
 
     const [data, setData] = useState([]);
+    const [rateData, setRateData] = useState([])
+    const [sliderData, setSliderData] = useState([])
 
     let url = "https://2uxbgsvox5.execute-api.us-east-1.amazonaws.com/Datamatics/video";
 
     return {
         data,
-        GetGraphData:  (username) => {
+        rateData,
+        sliderData,
+        GetGraphData: (username) => {
             url = url +
                 "?agentUsername=" +
                 username +
@@ -28,9 +32,25 @@ export default function Queries() {
                 "&=" +
                 todayDateLastSecond.toISOString();
 
+            let badRate = 0;
+            let avgRate = 0;
+            let goodRate = 0;
+
             fetch(url, { method: "GET" })
                 .then((response) => response.json())
-                .then((_data) => { setData(_data)})
+                .then((_data) => {
+                    setData(_data)
+                    for (const element of _data) {
+                        if (element.rating < -2) {
+                            badRate++;
+                        } else if (element.rating < 2) {
+                            avgRate++;
+                        } else {
+                            goodRate++;
+                        }
+                    }
+                    setRateData([badRate, avgRate, goodRate])
+                })
                 .catch((err) => console.error(err));
         }
     }
