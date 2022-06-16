@@ -1,22 +1,25 @@
-import React, {useState} from "react";
-import { FiSearch } from "react-icons/fi";
+import React, { useEffect } from "react";
 import Streams from "../Streams";
 import Donut from "../Donut";
 import "./Home.css";
 import Welcome from "./Welcome"
 import WelcomeSuperv from "./WelcomeSuperv"
+import Queries from "../../functions/Queries"
 
 export function Home({ username }) {
+  const { data, rateData, sliderData, GetGraphData } = Queries()
+  useEffect(() => { GetGraphData(username) }, [])
+
   return (
     <div className="Home">
       <div style={{
         display: "flex",
         flexDirection: "row",
       }}>
-        <Welcome username={username} />
-        <Donut />
+        <Welcome username={username} data={{ count: data.length, info: rateData }} />
+        <Donut data={rateData} />
       </div>
-      <Streams />
+      <Streams data={{ count: data.length, info: sliderData }} />
     </div>
   );
 };
@@ -24,19 +27,20 @@ export function Home({ username }) {
 
 
 export function HomeSUPERV({ username }) {
+  const { data, rateData, sliderData, GetGraphData } = Queries()
+  useEffect(() => { GetGraphData(username) }, [])
+
   return (
-    <>
-      <div className="Home">
-        <div style={{
-          display: "flex",
-          flexDirection: "row",
-        }}>
-          <WelcomeSuperv username={username} />
-          <Donut />
-        </div>
-        <Streams />
+    <div className="Home">
+      <div style={{
+        display: "flex",
+        flexDirection: "row",
+      }}>
+        <WelcomeSuperv username={username} /*data={{ count: data.length, info: rateData }}*/ />
+        <Donut data={rateData} />
+      </div>
+      <Streams data={{ count: data.length, info: sliderData }} />
     </div>
-    </>
   );
 };
 
