@@ -2,14 +2,16 @@ import styled from "styled-components";
 import { applyCardStyles } from "components/ReusableStyles";
 import { AreaChart, Area, XAxis, Tooltip, ResponsiveContainer } from "recharts";
 
-function Streams({ data }) {
+function Streams({ data, selectedName }) {
   const sliderData = [];
 
   return (
     <Section>
       <div className="title-container">
         <div className="title">
-          <h2>Calls / Hour</h2>
+          <h2>
+            {selectedName ? selectedName + "'s Calls / Hour" : "Calls / Hour"}
+          </h2>
         </div>
         {/* <div className="slider">
           <div className="services">

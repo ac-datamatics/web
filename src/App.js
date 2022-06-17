@@ -87,9 +87,13 @@ export default function App(props) {
         !userActive || userType !== "Agent" ? classes.root : classes.rootAgent
       }
     >
-      <div hidden={userActive}>
-        <LogIn handleLogin={handleLogin} />
-      </div>
+      {!userActive ? (
+        <div>
+          <LogIn handleLogin={handleLogin} />
+        </div>
+      ) : (
+        <></>
+      )}
       {userActive && userType === "Agent" ? (
         <div>
           <Router>

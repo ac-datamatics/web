@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Streams from "../Streams";
 import Donut from "../Donut";
 import "./Home.css";
@@ -33,11 +33,35 @@ export function Home({ username, videoInfo }) {
   );
 }
 
-export function HomeSUPERV({ username }) {
+export function HomeSUPERV({ username, videoInfo }) {
   const { data, rateData, sliderData, GetGraphData } = Queries();
+  const [selectedOption, setSelectedOption] = useState();
+  const [options, setOptions] = useState([]);
+
   useEffect(() => {
-    GetGraphData(username);
-  }, []);
+    if (selectedOption) {
+      GetGraphData(selectedOption.label);
+    }
+  }, [selectedOption]);
+
+  useEffect(() => {
+    let agentNames = [];
+    videoInfo.map((element, index) => {
+      if (!agentNames.includes(element.agentUsername)) {
+        agentNames.push(element.agentUsername);
+      }
+    });
+
+    setOptions(
+      agentNames.map((element, index) => {
+        return { id: index, name: element };
+      })
+    );
+  }, [videoInfo]);
+
+  const handleSelectedOption = (option) => {
+    setSelectedOption(option[0]);
+  };
 
   return (
     <div className="Home">
@@ -48,11 +72,18 @@ export function HomeSUPERV({ username }) {
         }}
       >
         <WelcomeSuperv
-          username={username} /*data={{ count: data.length, info: rateData }}*/
+          username={username}
+          options={options}
+          selectedOption={selectedOption}
+          handleSelectedOption={handleSelectedOption}
+          data={{ count: data.length, info: rateData }}
         />
-        <Donut data={rateData} />
+        <Donut selectedName={selectedOption?.label} data={rateData} />
       </div>
-      <Streams data={{ count: data.length, info: sliderData }} />
+      <Streams
+        selectedName={selectedOption?.label}
+        data={{ count: data.length, info: sliderData }}
+      />
     </div>
   );
 }

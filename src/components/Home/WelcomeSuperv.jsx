@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import Select from "react-dropdown-select";
 
-function WelcomeSuperv({ username }) {
-
-  const [options, setOptions] = useState( [
-    { id: 1, country: "America" },
-    { id: 2, country: "India" }, 
-    { id: 3, country: "Africa" },
-  ])
-
-  const [selectedOptions, setSelectedOptions] = useState( [ ] )
-
+function WelcomeSuperv({
+  username,
+  selectedOption,
+  handleSelectedOption,
+  options,
+  data,
+}) {
   const state = {
     curDate: new Date().toDateString(),
   };
@@ -48,24 +45,28 @@ function WelcomeSuperv({ username }) {
         <p>Current Date : {state.curDate}</p>
       </div>
 
-      <div style={{width:'250px', marginTop:'30px', backgroundColor:"white"}} >
-          <Select 
-            style={{color:'black'}} 
-            options={ options.map( ( item, index ) => { 
-              return { value: item.id, label: item.country }
-            })} 
-            values={selectedOptions} 
-            onChange={ ( values ) => setSelectedOptions([...values]) } 
-          />
+      <div
+        style={{ width: "250px", marginTop: "30px", backgroundColor: "white" }}
+      >
+        <Select
+          style={{ color: "black" }}
+          options={options.map((item, index) => {
+            return { value: item.id, label: item.name };
+          })}
+          values={selectedOption}
+          onChange={(value) => handleSelectedOption(value)}
+        />
       </div>
 
       <div style={{ marginTop: "50px" }}>
-        <h2>Total calls: 37</h2>
+        <h2>Total calls: {data.count}</h2>
         <ColoredLine color="rgb(227, 151, 64)" />
         <div style={{ marginTop: "40px", fontFamily: "Arial" }}>
-          <h3>Calls of 5-4 stars: 23</h3>
-          <h3 style={{ marginTop: "10px" }}>Calls of 2-3 stars: 10</h3>
-          <h3 style={{ marginTop: "10px" }}>Calls of 1-0 stars: 4</h3>
+          <h3>High rated calls: {data.info[2]}</h3>
+          <h3 style={{ marginTop: "10px" }}>
+            Average rated calls: {data.info[1]}
+          </h3>
+          <h3 style={{ marginTop: "10px" }}>Low rated calls: {data.info[0]}</h3>
         </div>
       </div>
     </div>

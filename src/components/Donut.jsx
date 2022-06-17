@@ -4,8 +4,7 @@ import { Chart, Tooltip, Title, ArcElement, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
 Chart.register(Tooltip, Title, ArcElement, Legend);
 
-function Donut({ data }) {
-
+function Donut({ data, selectedName }) {
   const [donutData, setDonutData] = useState({
     datasets: [
       {
@@ -19,8 +18,8 @@ function Donut({ data }) {
       },
     ],
 
-      labels: ["1-0 stars calls", "3-2 stars calls", "5-4 stars calls"],
-  })
+    labels: ["1-0 stars calls", "3-2 stars calls", "5-4 stars calls"],
+  });
 
   useEffect(() => {
     setDonutData({
@@ -35,11 +34,10 @@ function Donut({ data }) {
           borderColor: "black",
         },
       ],
-  
-        labels: ["1-0 stars calls", "3-2 stars calls", "5-4 stars calls"],
-    })
-  }, [data])
-  
+
+      labels: ["Low", "Average", "High"],
+    });
+  }, [data]);
 
   return (
     <div
@@ -50,13 +48,19 @@ function Donut({ data }) {
         backgroundColor: "rgb(46,46,46)",
         border: "none !important",
         borderRadius: "1rem",
-        padding: "40px",
+        padding: "10px",
         margin: "1px",
         alignItems: "center",
         marginTop: "7px",
+        flexDirection: "column",
+        color: "white",
       }}
     >
-      <Doughnut redraw= "true" data={donutData} style={{maxHeight: "500px"}}/>
+      <h1>{selectedName ? selectedName + "'s Ratings" : "Ratings"}</h1>
+      <Doughnut
+        data={donutData}
+        style={{ maxHeight: "90%", maxWidth: "90%" }}
+      />
     </div>
   );
 }

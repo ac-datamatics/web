@@ -4,10 +4,10 @@ import CCP from "./CCP";
 import classes from "./AmazonConnect.module.css";
 import RecordingFunctions from "../../functions/RecordingFunctions";
 
-//import Amplify, { Storage } from 'aws-amplify';
-//import awsconfig from '../../aws-exports';
+import Amplify, { Storage } from 'aws-amplify';
+import awsconfig from '../../aws-exports';
 
-//Amplify.configure(awsconfig);
+Amplify.configure(awsconfig);
 
 const AmazonConnect = (props) => {
   const {
