@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import Select from "react-dropdown-select";
+import DatePicker from "react-datepicker";
+
+import classes from "./WelcomeSuperv.module.css";
 
 function WelcomeSuperv({
   username,
@@ -7,6 +10,8 @@ function WelcomeSuperv({
   handleSelectedOption,
   options,
   data,
+  date,
+  handleDate,
 }) {
   const state = {
     curDate: new Date().toDateString(),
@@ -44,18 +49,36 @@ function WelcomeSuperv({
       <div style={{ marginTop: "10px" }}>
         <p>Current Date : {state.curDate}</p>
       </div>
-
-      <div
-        style={{ width: "250px", marginTop: "30px", backgroundColor: "white" }}
-      >
-        <Select
-          style={{ color: "black" }}
-          options={options.map((item, index) => {
-            return { value: item.id, label: item.name };
-          })}
-          values={selectedOption}
-          onChange={(value) => handleSelectedOption(value)}
-        />
+      <div style={{ display: "flex", flexDirection: "row" }}>
+        <div
+          style={{
+            width: "250px",
+            marginTop: "30px",
+            backgroundColor: "white",
+          }}
+        >
+          <Select
+            style={{ color: "black" }}
+            options={options.map((item, index) => {
+              return { value: item.id, label: item.name };
+            })}
+            values={selectedOption}
+            onChange={(value) => handleSelectedOption(value)}
+          />
+        </div>
+        <div
+          style={{
+            marginTop: "30px",
+            height: "100%",
+            paddingLeft: "10px",
+          }}
+        >
+          <DatePicker
+            wrapperClassName={classes.datePicker}
+            selected={date}
+            onChange={(value) => handleDate(value)}
+          />
+        </div>
       </div>
 
       <div style={{ marginTop: "50px" }}>

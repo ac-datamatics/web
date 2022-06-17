@@ -10,6 +10,7 @@ import { useState } from "react";
 const ThumbCardSuper = ({ video }) => {
   const [open, setOpen] = useState(false);
   const [isAssigned, setIsAssigned] = useState(video.is_assigned);
+  const uploadDate = new Date(video.uploadDate);
 
   const handleModalOpen = () => {
     setOpen(true);
@@ -75,14 +76,14 @@ const ThumbCardSuper = ({ video }) => {
               variant="body2"
               component="div"
             >
-              Rating: {video.rating}
+              {uploadDate.toLocaleString()}
             </Typography>
             <Typography
               className={classes.description}
               variant="body2"
               component="div"
             >
-              {video.uploadDate}
+              Rating: {video.rating}
             </Typography>
           </CardContent>
         </CardActionArea>

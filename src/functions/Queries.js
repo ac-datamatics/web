@@ -1,16 +1,6 @@
 import { useState } from "react";
 
 export default function Queries() {
-  const todayDateZeroHours = new Date();
-  todayDateZeroHours.setHours(0);
-  todayDateZeroHours.setMinutes(0);
-  todayDateZeroHours.setMilliseconds(0);
-
-  const todayDateLastSecond = new Date();
-  todayDateLastSecond.setHours(23);
-  todayDateLastSecond.setMinutes(59);
-  todayDateLastSecond.setMilliseconds(59);
-
   const [data, setData] = useState([]);
   const [rateData, setRateData] = useState([]);
   const [sliderData, setSliderData] = useState([]);
@@ -55,7 +45,17 @@ export default function Queries() {
         })
         .catch((err) => console.error(err));
     },
-    GetGraphData: (username) => {
+    GetGraphData: (username, date) => {
+      const todayDateZeroHours = new Date(date);
+      todayDateZeroHours.setHours(0);
+      todayDateZeroHours.setMinutes(0);
+      todayDateZeroHours.setMilliseconds(0);
+
+      const todayDateLastSecond = new Date(date);
+      todayDateLastSecond.setHours(23);
+      todayDateLastSecond.setMinutes(59);
+      todayDateLastSecond.setMilliseconds(59);
+
       url =
         url +
         "?agentUsername=" +

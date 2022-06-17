@@ -37,12 +37,13 @@ export function HomeSUPERV({ username, videoInfo }) {
   const { data, rateData, sliderData, GetGraphData } = Queries();
   const [selectedOption, setSelectedOption] = useState();
   const [options, setOptions] = useState([]);
+  const [date, setDate] = useState(new Date());
 
   useEffect(() => {
     if (selectedOption) {
-      GetGraphData(selectedOption.label);
+      GetGraphData(selectedOption.label, date);
     }
-  }, [selectedOption]);
+  }, [selectedOption, date]);
 
   useEffect(() => {
     let agentNames = [];
@@ -63,6 +64,10 @@ export function HomeSUPERV({ username, videoInfo }) {
     setSelectedOption(option[0]);
   };
 
+  const handleDate = (date) => {
+    setDate(date);
+  };
+
   return (
     <div className="Home">
       <div
@@ -77,6 +82,8 @@ export function HomeSUPERV({ username, videoInfo }) {
           selectedOption={selectedOption}
           handleSelectedOption={handleSelectedOption}
           data={{ count: data.length, info: rateData }}
+          date={date}
+          handleDate={handleDate}
         />
         <Donut selectedName={selectedOption?.label} data={rateData} />
       </div>
