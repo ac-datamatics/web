@@ -1,0 +1,77 @@
+.thumbnailCard {
+  display: flex;
+  /* justify-content: center; */
+  flex-wrap: wrap;
+}
+
+.titleColor {
+  color: #232f3e;
+  font-family: "Rubik";
+}
+
+.contentWrap {
+  height: 100%;
+  overflow-y: auto;
+  margin-right: 5rem;
+}
+
+.newWrap {
+  display: flex;
+  flex-direction: column;
+  padding-left: 3rem;
+}
+
+.parentContentWrap {
+  height: 90%;
+  padding: 2rem 0;
+}
+
+.searchDiv {
+  margin-right: 5rem;
+}
+
+.searchBar {
+  width: 30%;
+  padding: 5px 5px;
+  margin: 8px 10px;
+  border: none;
+  border-bottom: 2px solid orange;
+  background-color: transparent;
+  transition: 0.5s;
+  outline: none;
+  color: white;
+}
+
+.search {
+  width: 100%;
+  padding-right: 40px;
+  display: flex;
+  flex-direction: row;
+  margin: 20px 10px 0px 10px;
+  align-items: center;
+  justify-content: right;
+  overflow-x: hidden !important;
+}
+
+.picker {
+  justify-content: right;
+  display: flex;
+  flex-direction: row;
+}
+
+.example {
+  width: 31%;
+  color: #97938f;
+  font-family: "Rubik";
+  font-size: 13px;
+}
+
+.exampleDiv {
+  display: flex;
+  width: 100%;
+  justify-content: right;
+}
+
+.tab {
+  pointer-events: none;
+}

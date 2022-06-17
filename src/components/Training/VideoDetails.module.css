@@ -1,0 +1,40 @@
+.card {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #151727 !important;
+  width: 60%;
+  height: 90%;
+}
+
+.cardContents {
+  position: relative;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  margin: 5%;
+  top: -10%;
+  padding: 2rem;
+  margin-top: 6rem;
+}
+
+.cardTitle {
+  display: flex;
+  justify-content: center;
+  color: #c8c9ca;
+  font-family: "Rubik";
+}
+
+.videoPlayer {
+  display: flex;
+  justify-content: center;
+  border: 1cm;
+}
+
+.videoDescription {
+  color: #c8c9ca;
+  font-family: "Rubik";
+}

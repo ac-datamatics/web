@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Exo:wght@300;400;500&display=swap");
+
+:root {
+  --primary-color: #ff9900;
+  --background-color: #05a0d1;
+  --dark-background-color: #232f3e;
+  --font: "Exo", "Lato";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-image: url("assets/background.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  font-family: var(--font);
+  height: max-content;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+}
+
+::-webkit-scrollbar-thumb {
+}

@@ -1,0 +1,29 @@
+.root {
+  min-width: 345px;
+  margin: 1%;
+  border-radius: 1rem !important;
+
+  background-color: #232f3e !important;
+}
+.media {
+  height: 8em;
+  aspect-ratio: 105/59;
+}
+
+.description {
+  display: flex;
+  justify-content: space-between;
+}
+
+.content {
+  background-color: #232f3e;
+  color: rgb(193, 192, 197);
+}
+
+.customSelect {
+  position: relative;
+  font-family: Arial;
+  color: orange;
+  background-color: transparent;
+  border: none;
+}

@@ -1,0 +1,28 @@
+#layout {
+    background-color: rgba(3, 3, 27, 0.6);
+
+    height: 100%;
+    width: 100%;
+
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+
+
+    grid-template-areas:
+    "one one"
+    "two three" 
+}
+
+  #one {
+    background-color: rgba(250, 0, 0, 0.7);
+    grid-area: one;
+    color: white; 
+  }
+
+  #two {
+    grid-area: two;
+  }
+
+  #three {
+    grid-area: three;
+  }
