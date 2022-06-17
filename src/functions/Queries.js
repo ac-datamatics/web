@@ -40,8 +40,8 @@ export default function Queries() {
             }
           }
 
-          setVideoAgentInfo(agentInfo);
-          setVideoSupervInfo(supervInfo);
+          setVideoAgentInfo(agentInfo.reverse());
+          setVideoSupervInfo(supervInfo.reverse());
         })
         .catch((err) => console.error(err));
     },
