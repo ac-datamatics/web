@@ -64,40 +64,42 @@ export const Training = ({ videoInfo }) => {
         </div>
         <TrainingTabs labels={["General"]}>
           <div className={classes.contentWrap}>
-            {videoInfo
-              .filter((video) => {
-                let uploadDate = new Date(video.uploadDate);
-                if (
-                  video.agentUsername
-                    .toLowerCase()
-                    .includes(query.toLowerCase())
-                ) {
-                  if (!startDate && !endDate) {
-                    return video;
+            <div className={classes.thumbnailCard}>
+              {videoInfo
+                .filter((video) => {
+                  let uploadDate = new Date(video.uploadDate);
+                  if (
+                    video.agentUsername
+                      .toLowerCase()
+                      .includes(query.toLowerCase())
+                  ) {
+                    if (!startDate && !endDate) {
+                      return video;
+                    }
+                    if (startDate && endDate) {
+                      if (
+                        uploadDate.getDate() >= startDate.getDate() &&
+                        uploadDate.getDate() <= endDate.getDate()
+                      ) {
+                        return video;
+                      }
+                    } else if (!startDate) {
+                      if (uploadDate.getDate() === endDate.getDate()) {
+                        //Check this equal
+                        return video;
+                      }
+                    } else if (!endDate) {
+                      if (uploadDate.getDate() === startDate.getDate()) {
+                        //Check this equal
+                        return video;
+                      }
+                    }
                   }
-                  if (startDate && endDate) {
-                    if (
-                      uploadDate.getDate() >= startDate.getDate() &&
-                      uploadDate.getDate() <= endDate.getDate()
-                    ) {
-                      return video;
-                    }
-                  } else if (!startDate) {
-                    if (uploadDate.getDate() === endDate.getDate()) {
-                      //Check this equal
-                      return video;
-                    }
-                  } else if (!endDate) {
-                    if (uploadDate.getDate() === startDate.getDate()) {
-                      //Check this equal
-                      return video;
-                    }
-                  }
-                }
-              })
-              .map((video, key) => {
-                return <ThumbCard video={video} key={key} />;
-              })}
+                })
+                .map((video, key) => {
+                  return <ThumbCard video={video} key={key} />;
+                })}
+            </div>
           </div>
         </TrainingTabs>
       </div>
@@ -161,40 +163,42 @@ export function TrainingSUPERV({ agent, videoInfo }) {
         </div>
         <TrainingTabs labels={["General"]}>
           <div className={classes.contentWrap}>
-            {videoInfo
-              .filter((video) => {
-                let uploadDate = new Date(video.uploadDate);
-                if (
-                  video.agentUsername
-                    .toLowerCase()
-                    .includes(query.toLowerCase())
-                ) {
-                  if (!startDate && !endDate) {
-                    return video;
+            <div className={classes.thumbnailCard}>
+              {videoInfo
+                .filter((video) => {
+                  let uploadDate = new Date(video.uploadDate);
+                  if (
+                    video.agentUsername
+                      .toLowerCase()
+                      .includes(query.toLowerCase())
+                  ) {
+                    if (!startDate && !endDate) {
+                      return video;
+                    }
+                    if (startDate && endDate) {
+                      if (
+                        uploadDate.getDate() >= startDate.getDate() &&
+                        uploadDate.getDate() <= endDate.getDate()
+                      ) {
+                        return video;
+                      }
+                    } else if (!startDate) {
+                      if (uploadDate.getDate() === endDate.getDate()) {
+                        //Check this equal
+                        return video;
+                      }
+                    } else if (!endDate) {
+                      if (uploadDate.getDate() === startDate.getDate()) {
+                        //Check this equal
+                        return video;
+                      }
+                    }
                   }
-                  if (startDate && endDate) {
-                    if (
-                      uploadDate.getDate() >= startDate.getDate() &&
-                      uploadDate.getDate() <= endDate.getDate()
-                    ) {
-                      return video;
-                    }
-                  } else if (!startDate) {
-                    if (uploadDate.getDate() === endDate.getDate()) {
-                      //Check this equal
-                      return video;
-                    }
-                  } else if (!endDate) {
-                    if (uploadDate.getDate() === startDate.getDate()) {
-                      //Check this equal
-                      return video;
-                    }
-                  }
-                }
-              })
-              .map((video, key) => {
-                return <ThumbCardSuper video={video} key={key} />;
-              })}
+                })
+                .map((video, key) => {
+                  return <ThumbCardSuper video={video} key={key} />;
+                })}
+            </div>
           </div>
         </TrainingTabs>
       </div>

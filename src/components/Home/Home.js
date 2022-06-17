@@ -9,7 +9,7 @@ import Queries from "../../functions/Queries";
 export function Home({ username, videoInfo }) {
   const { data, rateData, sliderData, GetGraphData } = Queries();
   useEffect(() => {
-    GetGraphData(username);
+    GetGraphData(username, new Date());
   }, []);
 
   return (

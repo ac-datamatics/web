@@ -1,6 +1,9 @@
 .root {
   min-width: 345px;
   margin: 1%;
+  border-radius: 1rem !important;
+
+  background-color: #232f3e !important;
 }
 .media {
   height: 8em;
